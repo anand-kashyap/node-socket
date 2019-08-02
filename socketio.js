@@ -19,8 +19,12 @@ const socketHandle = (io) => {
         socket.broadcast.to(user.room).emit('newMessage', `<a target='_blank' href='https://www.google.com/maps?q=${data.lat},${data.long}'>Location</a>`, user.username);
       });
 
+      socket.on('logout', () => {
+        socket.disconnect();
+      });
+
       socket.on('disconnect', () => {
-        removeUser({id: socket.id, ...options});
+        removeUser({...options});
         io.to(user.room).emit('clientLeft', `${user.username} has left`);
       });
 

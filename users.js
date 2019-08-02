@@ -13,7 +13,7 @@ const addUser = ({id, username, room}) => {
   return {user};
 }
 
-const removeUser = ({id, username, room}) => {
+const removeUser = ({username, room}) => {
   const eid = findUserIndex(username, room);
   if (eid == -1) {
     return {
