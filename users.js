@@ -1,7 +1,15 @@
 const users = [];
+const fs = require('fs');
 
 const addUser = ({id, username, room}) => {
   const eid = findUserIndex(username, room);
+  console.log('users', users);
+  let dmsg = new Date().toString();
+  dmsg +=' users: '+users;
+  fs.appendFile('debug.txt', dmsg+'\n', function (err) {
+    if (err) throw err;
+    console.log('Saved!');
+  });
   if (eid !== -1) {
     return {
       error: 'Username already in use!'
