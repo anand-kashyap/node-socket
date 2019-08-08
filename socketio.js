@@ -4,6 +4,8 @@ const socketHandle = (io) => {
   io.on('connection', (socket) => {
 
     socket.on('join', (options, callback) => {
+      options.username = options.username.trim().toLowerCase();
+      options.room = options.room.trim().toLowerCase();
       const {error, user} = addUser({id: socket.id, ...options});
       if (error) {
         return callback(error);

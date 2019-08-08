@@ -32,8 +32,6 @@ const removeUser = ({username, room}) => {
 }
 
 const findUserIndex = (username, room) => {
-  username = username.trim().toLowerCase();
-  room = room.trim().toLowerCase();
   return users.findIndex(user => user.username === username && user.room === room);
 }
 
