@@ -14,11 +14,11 @@ const socketHandle = (io) => {
       socket.broadcast.to(user.room).emit('newClient', `${user.username} has joined`);
 
       socket.on('newMessage', (msg) => {
-        io.to(user.room).emit('newMessage', msg, user.username);
+        io.to(user.room).emit('newMessage', msg, user.username, new Date());
       });
 
       socket.on('sendLocation', (data) => {
-        socket.broadcast.to(user.room).emit('newMessage', `<a target='_blank' href='https://www.google.com/maps?q=${data.lat},${data.long}'>Location</a>`, user.username);
+        socket.broadcast.to(user.room).emit('newMessage', `<a target='_blank' href='https://www.google.com/maps?q=${data.lat},${data.long}'>Location</a>`, user.username, new Date());
       });
 
       socket.on('logout', () => {
