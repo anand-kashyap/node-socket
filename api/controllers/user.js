@@ -17,7 +17,7 @@ const getUsers = (req, res, next) => {
 };
 
 const createUser = (req, res, next) => {  
-  // if(checkValidation(req, res)) return;
+  if(checkValidation(req, res)) return;
   body = req.body;
   User = userModel.User;
   User.findOne({email: body.email}).then((oldUser) => {
@@ -25,9 +25,6 @@ const createUser = (req, res, next) => {
       const hashPassword = bcrypt.hashSync(body.password, process.env.salt);
       if (!body.hasOwnProperty('isAdmin')) {
         body.isAdmin = false;
-      }
-      if (body.isAdmin) {
-        body.priceGroup = '';
       }
       
       const plainCreds = {email:body.email, password:body.password};
@@ -38,7 +35,6 @@ const createUser = (req, res, next) => {
         isAdmin: body.isAdmin,
         email: body.email,
         phone: body.phone,
-        priceGroup: body.priceGroup,
         // imageUrl: body.imageUrl,
         active: true,
         isVerified: false,
@@ -63,7 +59,7 @@ const createUser = (req, res, next) => {
 };
 
 const authUser = (req, res, next) => {
-  // if(checkValidation(req, res)) return;
+  if(checkValidation(req, res)) return;
   body = req.body;
   User = userModel.User;
   User.findOne({email: body.email}).then((oldUser) => {
@@ -103,7 +99,7 @@ const authUser = (req, res, next) => {
 };
 
 const forgotPassword = (req, res, next) => {
-  // if(checkValidation(req, res)) return;
+  if(checkValidation(req, res)) return;
   user = userModel.User;
   user.findOne({email: req.body.email }).then((userDoc) => {
     if (userDoc) {
@@ -142,7 +138,7 @@ const forgotPassword = (req, res, next) => {
 }
 
 const resetPassword = (req, res, next) => {
-  // if(checkValidation(req, res)) return;
+  if(checkValidation(req, res)) return;
   user = userModel.User;
   query = user.findOne({email: req.body.email });
   query.exec(function (err, userDoc) {
@@ -172,7 +168,7 @@ const resetPassword = (req, res, next) => {
 }
 
 const updatePassword = (req, res, next) => {
-  // if(checkValidation(req, res)) return;
+  if(checkValidation(req, res)) return;
   body = req.body;
   User = userModel.User;
   User.findOne({email: body.email}).then((oldUser) => {
