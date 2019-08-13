@@ -1,9 +1,10 @@
 const dotenv = require('dotenv').config(); //for getting env file variables
-const path = require('path');
-const cors = require('cors');
-const express = require('express');
-const http = require('http');
-const socketio = require('socket.io');
+// const path = require('path');
+const cors = require('cors'),
+express = require('express'),
+http = require('http'),
+bodyParser = require('body-parser'),
+socketio = require('socket.io');
 
 const app = express();
 const server = http.createServer(app);
@@ -11,6 +12,8 @@ const io = socketio(server);
 
 const port = process.env.PORT || 3000;
 // const publicDirPath = path.join(__dirname, 'public');
+//imports
+const mongoose = require('./config/dbconnection');
 
 //routes
 const user = require('./api/routes/user');
@@ -23,8 +26,12 @@ const corsOptions = {
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
+//body-parser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.use(cors(corsOptions));
-/* app.use(express.static(publicDirPath));
+// app.use(express.static(publicDirPath));
 //test db connection
 app.use('/*', function(req, res, next) {
   // console.log(mongoose.connection.readyState);
@@ -33,7 +40,7 @@ app.use('/*', function(req, res, next) {
       .json({success: false, message: 'Unable to connect to database'});
   }
   next();
-}); */
+});
 
 app.use('/user', user);
 
