@@ -22,7 +22,7 @@ const socketHandle = require('./socketio');
 socketHandle(io);
 
 const corsOptions = {
-  origin: process.env.ALLOWED_CORS_URL,
+  origin: [process.env.ALLOWED_CORS_URL, process.env.ALLOWED_CORS_URL_PROD],
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 

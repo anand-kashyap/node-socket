@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const mail = require('../../services/sendmail');
+const checkValidation = require('../../services/expressValidation');
 
 const userModel = require('../models/user');
 
@@ -16,7 +17,22 @@ const getUsers = (req, res, next) => {
   }); */
 };
 
-const createUser = (req, res, next) => {  
+const userToken = (oldUser) => {
+  let payload = {
+    email: oldUser.email,
+    fullName: oldUser.fullName,
+    isAdmin: oldUser.isAdmin,
+    active: oldUser.active,
+    priceGroup: oldUser.priceGroup,
+    isVerified: oldUser.isVerified
+  };
+  let token = jwt.sign(payload, process.env.JWT_SECRET, {
+  expiresIn: '24h' // expires in 24 hours 24h
+  });
+  return token;
+}
+
+const registerUser = (req, res, next) => {  
   if(checkValidation(req, res)) return;
   body = req.body;
   User = userModel.User;
@@ -26,8 +42,7 @@ const createUser = (req, res, next) => {
       if (!body.hasOwnProperty('isAdmin')) {
         body.isAdmin = false;
       }
-      
-      const plainCreds = {email:body.email, password:body.password};
+
       newUser = new userModel.User({
         // userId: body.userId,
         firstName: body.firstName,
@@ -37,7 +52,6 @@ const createUser = (req, res, next) => {
         phone: body.phone,
         // imageUrl: body.imageUrl,
         active: true,
-        isVerified: false,
         password: hashPassword,
       });
       newUser.save().then((newUserDoc, err) => {
@@ -45,11 +59,12 @@ const createUser = (req, res, next) => {
           console.log(err);
         }
         console.log(newUserDoc.email);
-        mail.sendActivateAccountMail(process.env.NODEMAILER_AUTH_USER, newUserDoc.email, plainCreds, function (err, info) {
+        mail.sendWelcomeMail(newUserDoc.email, function (err, info) {
           if (err) return next(err);
           console.log('info from mail');
           console.log(info);
-          return res.status(201).send({ success: true, message: 'User created successfully!' });
+          const token = userToken(newUserDoc);
+          return res.status(201).send({token, success: true, message: 'User created successfully!' });
         });
       });
     } else {
@@ -70,19 +85,7 @@ const authUser = (req, res, next) => {
         return res.status(403).json({ success: false, message: 'Account not active' });
       }
       if (isCorrect) {
-        let payload = {
-          email: oldUser.email,
-          fullName: oldUser.fullName,
-          isAdmin: oldUser.isAdmin,
-          active: oldUser.active,
-          priceGroup: oldUser.priceGroup,
-          isVerified: oldUser.isVerified
-        }
-        let token = jwt.sign(payload,
-          process.env.JWT_SECRET,
-          { expiresIn: '24h' // expires in 24 hours 24h
-          }
-        );
+        let token = userToken(oldUser);
         // return the JWT token for the future API calls
         return res.status(200).json({
           success: true,
@@ -98,12 +101,24 @@ const authUser = (req, res, next) => {
   });
 };
 
+const generateOTP = () => { 
+          
+  // Declare a digits variable  
+  // which stores all digits 
+  let digits = '0123456789'; 
+  let OTP = ''; 
+  for (let i = 0; i < 6; i++ ) { 
+      OTP += digits[Math.floor(Math.random() * 10)]; 
+  } 
+  return OTP; 
+};
+
 const forgotPassword = (req, res, next) => {
   if(checkValidation(req, res)) return;
   user = userModel.User;
   user.findOne({email: req.body.email }).then((userDoc) => {
     if (userDoc) {
-      const someCode = (Math.floor(Math.random() * 10000) + 10000).toString().substring(1);
+      const someCode = generateOTP();
       const payload = {
         'email': req.body.email,
         'otp': someCode
@@ -119,6 +134,40 @@ const forgotPassword = (req, res, next) => {
             .json({
               success: true,
               message: "A reset password link is sent to your mail"
+            });
+          });
+        }
+      });
+    } else {
+      res.status(404)
+        .json({
+          success: false,
+          message: "User not found",
+        });
+    }
+  },
+    (err) => {
+      console.log(err);
+      return next(err)
+    });
+}
+
+const verifyAccount = (req, res, next) => {
+  if(checkValidation(req, res)) return;
+  user = userModel.User;
+  user.findOne({email: req.body.email }).then((userDoc) => {
+    if (userDoc) {
+      const otp = generateOTP();
+      mail.sendVerifyOTP(otp, req.body.email, function (err, info) {
+        if (err) return next(err);
+        if (info) {
+          user.findOneAndUpdate({ email: userDoc.email }, { otp, lastVerified: new Date() }, { new: true }).then((doc) => {
+            res.status(200)
+            .json({
+              otp: doc.otp,
+              lastVerified: doc.lastVerified,
+              success: true,
+              message: "An OTP has been sent to your mail"
             });
           });
         }
@@ -199,9 +248,10 @@ const updatePassword = (req, res, next) => {
 
 module.exports = {
   getUsers,
-  createUser,
+  registerUser,
   authUser,
   forgotPassword,
   resetPassword,
   updatePassword,
+  verifyAccount
 };

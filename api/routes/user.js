@@ -13,9 +13,9 @@ const validationArray = [
 
 router.get('/', user.getUsers);
 
-router.post('/create-user', [check('firstName').exists().withMessage('First Name is a required value').isLength({ min: 3 }).withMessage('First Name must be at least 3 chars long'),
-check('priceGroup').exists().withMessage('Price Group is a required value'),
-...validationArray], user.createUser);
+router.post('/register', [
+  check('firstName').exists().withMessage('First Name is a required value').isLength({ min: 3 }).withMessage('First Name must be at least 3 chars long'),
+...validationArray], user.registerUser);
 
 router.post('/authenticate',[
   ...validationArray
@@ -23,6 +23,10 @@ router.post('/authenticate',[
 
 router.post('/forgot-password', [validationArray[0],
 check('baseUrl').exists().withMessage('baseUrl is a required value')], user.forgotPassword);
+
+router.post('/verify-account', [
+  validationArray[0],
+], user.verifyAccount);
 
 router.put('/reset-password',[
   ...validationArray,

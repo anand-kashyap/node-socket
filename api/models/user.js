@@ -5,7 +5,7 @@ const userSchema = Schema({
   // userId: { type: String, unique: true, required: true },
   firstName: {type: String, required: true},
   lastName: String,
-  isAdmin: {type: Boolean, required: true},
+  isAdmin: {type: Boolean, default: false},
   session: String,
   email: { type: String, unique: true, required: true },
   phone: String,
@@ -14,7 +14,9 @@ const userSchema = Schema({
   imageUrl: String,
   active: Boolean,
   password: String,
-  isVerified: Boolean,
+  isVerified: {type: Boolean, default: false},
+  otp: {type: String, default: ''},
+  lastVerified: {type: Date, default: ''}
 }, {
   toObject: {
       virtuals: true
