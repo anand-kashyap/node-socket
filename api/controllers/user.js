@@ -180,11 +180,10 @@ const forgotPassword = (req, res, next) => {
   );
 };
 
-const isRecentOTP = otpGenDate => {
-  console.log(typeof otpGenDate);
+const isRecentOTP = (otpGenDate, minutes = 2) => {
   const diff =
-    (new Date().getTime() - new Date(otpGenDate).getTime()) / (1000 * 60);
-  return diff <= 2 ? true : false;
+    (new Date().getTime() - otpGenDate.getTime()) / (1000 * 60);
+  return diff <= minutes ? true : false;
 };
 
 const verifyAccount = (req, res, next) => {
@@ -223,6 +222,47 @@ const verifyAccount = (req, res, next) => {
           });
          }
       }); 
+      } else {
+        res.status(404).json({
+          success: false,
+          message: "User not found"
+        });
+      }
+    },
+    err => {
+      console.log(err);
+      return next(err);
+    }
+  );
+};
+
+const confirmOtp = (req, res, next) => {
+  if (checkValidation(req, res)) return;
+  user = userModel.User;
+  user.findOne({ email: req.body.email }).then(
+    userDoc => {
+      if (userDoc) {
+        if (
+          userDoc.lastVerified !== null &&
+          isRecentOTP(userDoc.lastVerified, 15)
+        ) {
+          user.findOneAndUpdate(
+            { email: userDoc.email },
+            { otp: '', lastVerified: null, isVerified: true },
+            { new: true }
+          )
+          .then(doc => {
+            return res.status(200).json({
+              success: true,
+              message: "OTP correct. Account verified!"
+            });
+          }); 
+        } else {
+          return res.status(401).json({
+            success: false,
+            message: "OTP expired. Please generate a new one."
+          });
+        }
       } else {
         res.status(404).json({
           success: false,
@@ -340,5 +380,6 @@ module.exports = {
   forgotPassword,
   resetPassword,
   updatePassword,
-  verifyAccount
+  verifyAccount,
+  confirmOtp
 };

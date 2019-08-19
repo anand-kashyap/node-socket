@@ -28,6 +28,11 @@ router.post('/verify-account', [
   validationArray[0],
 ], user.verifyAccount);
 
+router.post('/confirm-otp', [
+  validationArray[0],
+  check('otp').exists().withMessage('OTP is a required value')
+], user.confirmOtp);
+
 router.put('/reset-password',[
   ...validationArray,
   check('token').exists().withMessage('token is a required value')
