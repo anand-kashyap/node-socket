@@ -16,7 +16,7 @@ const userSchema = Schema({
   password: String,
   isVerified: {type: Boolean, default: false},
   otp: {type: String, default: ''},
-  lastVerified: {type: Date, default: ''}
+  lastVerified: {type: Date, default: null}
 }, {
   toObject: {
       virtuals: true
