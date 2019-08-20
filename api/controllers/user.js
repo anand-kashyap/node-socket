@@ -181,7 +181,7 @@ const forgotPassword = (req, res, next) => {
 };
 
 const isRecentOTP = (otpArr, recOtp, minutes = 2) => {
-  const f = otpArr.find(recOtp); 
+  const f = otpArr.find(aOtp => aOtp.otp === recOtp); 
   if (f) {
   const diff =
     (new Date().getTime() - f.createdDate.getTime()) / (1000 * 60);
@@ -211,9 +211,9 @@ const emptyOtps = (email) => {
   }, convertToMs(24));  
 };
 
-const verifyAccount = (req, res, next) => {
+const sendOtp = (req, res, next) => {
   if (checkValidation(req, res)) return;
-  // console.log('verifyAccount');
+  // console.log('sendOtp');
   user = userModel.User;
   user.findOne({ email: req.body.email }).then(
     userDoc => {
@@ -223,13 +223,13 @@ const verifyAccount = (req, res, next) => {
         ) {
           return res.status(400).json({
             success: false,
-            message: "Max number(3) of OTPs sent."
+            message: "Max number(3) of OTPs sent. Please try again after 24 hours."
           });
         }
         const otp = generateOTP();
         mail.sendVerifyOTP(otp, req.body.email, function (err, info) {
         if (err) return next(err);
-        if (info) { 
+        if (info) {   
         user.findOneAndUpdate(
             { email: userDoc.email },
             { $push: {otps: {otp}} },
@@ -242,11 +242,12 @@ const verifyAccount = (req, res, next) => {
             return res.status(200).json({
               otp: doc.otps[doc.otps.length-1].otp,
               success: true,
+              attempt: doc.otps.length,
               message: `An OTP has been sent to your mail. Attempt ${doc.otps.length}.`
             });
-           });
-         } 
-      }); 
+            });
+          } 
+      });  
       } else {
         res.status(404).json({
           success: false,
@@ -272,7 +273,7 @@ const confirmOtp = (req, res, next) => {
         ) {
           user.findOneAndUpdate(
             { email: userDoc.email },
-            { otp: [], lastVerified: Date.now(), isVerified: true },
+            { otps: [], lastVerified: Date.now(), isVerified: true },
             { new: true }
           )
           .then(doc => {
@@ -284,7 +285,7 @@ const confirmOtp = (req, res, next) => {
         } else {
           return res.status(401).json({
             success: false,
-            message: "OTP expired. Please generate a new one."
+            message: "OTP incorrect/expired. Please generate a new one or recheck."
           });
         }
       } else {
@@ -404,6 +405,6 @@ module.exports = {
   forgotPassword,
   resetPassword,
   updatePassword,
-  verifyAccount,
+  sendOtp,
   confirmOtp
 };

@@ -24,9 +24,9 @@ router.post('/authenticate',[
 router.post('/forgot-password', [validationArray[0],
 check('baseUrl').exists().withMessage('baseUrl is a required value')], user.forgotPassword);
 
-router.post('/verify-account', [
+router.post('/send-otp', [
   validationArray[0],
-], user.verifyAccount);
+], user.sendOtp);
 
 router.post('/confirm-otp', [
   validationArray[0],
