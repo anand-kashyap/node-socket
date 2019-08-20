@@ -180,10 +180,35 @@ const forgotPassword = (req, res, next) => {
   );
 };
 
-const isRecentOTP = (otpGenDate, minutes = 2) => {
+const isRecentOTP = (otpArr, recOtp, minutes = 2) => {
+  const f = otpArr.find(recOtp); 
+  if (f) {
   const diff =
-    (new Date().getTime() - otpGenDate.getTime()) / (1000 * 60);
-  return diff <= minutes ? true : false;
+    (new Date().getTime() - f.createdDate.getTime()) / (1000 * 60);
+    return diff <= minutes ? true : false;
+  } else {
+    return false;
+  }
+};
+
+const convertToMs = (val, unit = 'h') => {
+  if (unit === "s") {
+    return val * 1000;
+  } else if (unit === "m") {
+    return val * 60 * 1000;
+  } else if (unit === "h") {
+    return val * 60 * 60 * 1000;
+  }
+};
+
+const emptyOtps = (email) => {
+  console.log('timer started');
+  setTimeout(() => {
+    user = userModel.User;
+    return user.findOneAndUpdate({ email }, {otps: []}).then(res => {
+      console.log('cleared array');
+    });
+  }, convertToMs(24));  
 };
 
 const verifyAccount = (req, res, next) => {
@@ -194,33 +219,33 @@ const verifyAccount = (req, res, next) => {
     userDoc => {
       if (userDoc) {
         if (
-          userDoc.lastVerified !== null &&
-          isRecentOTP(userDoc.lastVerified)
+          userDoc.otps.length >=3
         ) {
-          return res.status(201).json({
-            success: true,
-            message: "OTP already sent!"
+          return res.status(400).json({
+            success: false,
+            message: "Max number(3) of OTPs sent."
           });
         }
         const otp = generateOTP();
         mail.sendVerifyOTP(otp, req.body.email, function (err, info) {
         if (err) return next(err);
         if (info) { 
-        user
-          .findOneAndUpdate(
+        user.findOneAndUpdate(
             { email: userDoc.email },
-            { otp, lastVerified: new Date() },
+            { $push: {otps: {otp}} },
             { new: true }
           )
           .then(doc => {
-            res.status(200).json({
-              otp: doc.otp,
-              lastVerified: doc.lastVerified,
+            if (doc.otps.length === 3) {
+              emptyOtps(req.body.email);
+            }
+            return res.status(200).json({
+              otp: doc.otps[doc.otps.length-1].otp,
               success: true,
-              message: "An OTP has been sent to your mail"
+              message: `An OTP has been sent to your mail. Attempt ${doc.otps.length}.`
             });
-          });
-         }
+           });
+         } 
       }); 
       } else {
         res.status(404).json({
@@ -243,12 +268,11 @@ const confirmOtp = (req, res, next) => {
     userDoc => {
       if (userDoc) {
         if (
-          userDoc.lastVerified !== null &&
-          isRecentOTP(userDoc.lastVerified, 15)
+          isRecentOTP(userDoc.otps, req.body.otp, 15)
         ) {
           user.findOneAndUpdate(
             { email: userDoc.email },
-            { otp: '', lastVerified: null, isVerified: true },
+            { otp: [], lastVerified: Date.now(), isVerified: true },
             { new: true }
           )
           .then(doc => {

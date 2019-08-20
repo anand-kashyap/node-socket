@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const otpSchema = Schema({otp: String, createdDate: {type: Date, default: Date.now()}});
+
 const userSchema = Schema({
   // userId: { type: String, unique: true, required: true },
   firstName: {type: String, required: true},
@@ -15,7 +17,7 @@ const userSchema = Schema({
   active: Boolean,
   password: String,
   isVerified: {type: Boolean, default: false},
-  otp: {type: String, default: ''},
+  otps: [otpSchema],
   lastVerified: {type: Date, default: null}
 }, {
   toObject: {
