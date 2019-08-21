@@ -4,7 +4,6 @@ const cors = require('cors'),
 express = require('express'),
 http = require('http'),
 bodyParser = require('body-parser'),
-slashes = require("connect-slashes"),
 socketio = require('socket.io');
 
 const app = express();
@@ -40,7 +39,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(cors(corsOptions));
-app.use(slashes(false));
 // app.use(express.static(publicDirPath));
 //test db connection
 app.use('/*', function(req, res, next) {
