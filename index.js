@@ -21,8 +21,16 @@ const user = require('./api/routes/user');
 const socketHandle = require('./socketio');
 socketHandle(io);
 
+const whitelist = [process.env.ALLOWED_CORS_URL, process.env.ALLOWED_CORS_URL_PROD];
+
 const corsOptions = {
-  origin: [process.env.ALLOWED_CORS_URL, process.env.ALLOWED_CORS_URL_PROD],
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
