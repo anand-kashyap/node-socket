@@ -107,7 +107,7 @@ const authUser = (req, res, next) => {
           .status(403)
           .json({
             success: false,
-            message: "Incorrect Email/Password entered"
+            message: "Incorrect Password entered"
           });
       }
     } else {

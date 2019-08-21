@@ -2,13 +2,13 @@ const transport = require('../config/mail');
 const ejs = require('ejs');
 const jwt = require('jsonwebtoken');
 
-sendTokenForgotPassword = (token, fromMail, toMail, baseUrl, callback) => {
+sendTokenForgotPassword = (token, toMail, baseUrl, callback) => {
   
   ejs.renderFile(__dirname + '/../views/reset-password-mail.ejs', {email: toMail, token: token, baseUrl: baseUrl}, function(err, str) {
     if(err) callback(err);
     // setup email data with unicode symbols
     let mailOptions = {
-      from: fromMail, // sender address
+      from: process.env.NODEMAILER_AUTH_MAIL, // sender address
       to: toMail, // list of receivers
       subject: 'Reset Password', // Subject line
       html: str
@@ -29,7 +29,7 @@ sendVerifyOTP = (otp, toMail, callback) => {
     if(err) callback(err);
     // setup email data with unicode symbols
     let mailOptions = {
-      from: process.env.NODEMAILER_AUTH_USER, // sender address
+      from: process.env.NODEMAILER_AUTH_MAIL, // sender address
       to: toMail, // list of receivers
       subject: 'Login OTP', // Subject line
       html: str
@@ -49,7 +49,7 @@ sendWelcomeMail = (toMail, callback) => {
     if(err) callback(err);
     // setup email data with unicode symbols
     let mailOptions = {
-      from: process.env.NODEMAILER_AUTH_USER, // sender address
+      from: process.env.NODEMAILER_AUTH_MAIL, // sender address
       to: toMail, // list of receivers
       subject: 'New Account Ready! - Chat App', // Subject line
       html: str
