@@ -1,6 +1,7 @@
 const dotenv = require('dotenv').config(); //for getting env file variables
 // const path = require('path');
 const cors = require('cors'),
+compression = require('compression'),
 express = require('express'),
 http = require('http'),
 bodyParser = require('body-parser'),
@@ -37,6 +38,7 @@ const corsOptions = {
 //body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(compression());
 
 app.use(cors(corsOptions));
 // app.use(express.static(publicDirPath));

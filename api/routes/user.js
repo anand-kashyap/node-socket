@@ -25,10 +25,12 @@ router.post('/forgot-password', [validationArray[0],
 check('baseUrl').exists().withMessage('Base Url is a required value')], user.forgotPassword);
 
 router.post('/send-otp', [
+  [middleware.checkToken],
   validationArray[0],
 ], user.sendOtp);
 
 router.post('/confirm-otp', [
+  [middleware.checkToken],
   validationArray[0],
   check('otp').exists().withMessage('OTP is a required value')
 ], user.confirmOtp);
