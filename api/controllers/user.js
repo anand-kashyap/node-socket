@@ -17,9 +17,41 @@ const getUsers = (req, res, next) => {
   }); */
 };
 
+const getUserDetails = (req, res, next) => {
+  // return res.status(200).json({ users: "test" });
+  User = userModel.User;
+  User.findOne({email: req.query.email.trim()}).then((user) => {
+    console.log(user);
+    if (user) {
+      return res.status(200).json({success: true, message: 'User details found', data: user});
+    }
+    return res.status(404).json({success: true, message: 'User not found', data: {}});
+  }, err => {
+    console.log(err);
+    return res.status(400).json({success: false, message: err.message, data: {}});
+  });
+};
+
+const checkUserName = (req, res, next) => {
+  console.log('req.query', req.query);
+  const userInput = req.query.userinput.trim();
+  user = userModel.User;
+  user.findOne({username: userInput}).then(resp => {
+    console.log(resp);
+    if (resp) {
+      return res.status(200).json({ success: true, exists: true });
+    }
+    return res.status(200).json({ success: true, exists: false });
+  }, err => {
+    console.log(err);
+    return res.status(406).json({ message: err.message });
+  });
+}
+
 const userToken = oldUser => {
   let payload = {
     email: oldUser.email,
+    username: oldUser.username,
     fullName: oldUser.fullName,
     isAdmin: oldUser.isAdmin,
     active: oldUser.active,
@@ -110,6 +142,35 @@ const authUser = (req, res, next) => {
             message: "Incorrect Password entered"
           });
       }
+    } else {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+  });
+};
+
+const updateProfile = (req, res, next) => {
+  if (checkValidation(req, res)) return;
+  body = req.body;
+  User = userModel.User;
+  const updateJson = {
+    username: body.username,
+    firstName: body.firstName,
+    lastName: body.lastName
+  };
+  User.findOne({ email: body.email }).then(oldUser => {
+    if (oldUser) {
+      console.log(oldUser);
+      User.findOneAndUpdate({email: body.email}, updateJson).then(updatedUser => {
+        return res
+        .status(200)
+        .json({ success: true, message: 'User details updated successfully.', data: updatedUser });  
+      }, err => {
+        return res
+        .status(500)
+        .json({ success: false, message: err.message });  
+      });
     } else {
       return res
         .status(404)
@@ -400,8 +461,11 @@ const updatePassword = (req, res, next) => {
 
 module.exports = {
   getUsers,
+  checkUserName,
+  getUserDetails,
   registerUser,
   authUser,
+  updateProfile,
   forgotPassword,
   resetPassword,
   updatePassword,

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const otpSchema = Schema({otp: String, createdDate: {type: Date, default: Date.now()}});
 
 const userSchema = Schema({
-  // userId: { type: String, unique: true, required: true },
+  username: { type: String, unique: true, default: '' },
   firstName: {type: String, required: true},
   lastName: String,
   isAdmin: {type: Boolean, default: false},

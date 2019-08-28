@@ -13,6 +13,10 @@ const validationArray = [
 
 router.get('/', user.getUsers);
 
+router.get('/check-username', [middleware.checkToken], user.checkUserName);
+router.get('/user-details', [middleware.checkToken], user.getUserDetails);
+router.patch('/update-profile', [middleware.checkToken], user.updateProfile);
+
 router.post('/register', [
   check('firstName').exists().withMessage('First Name is a required value').isLength({ min: 3 }).withMessage('First Name must be at least 3 chars long'),
 ...validationArray], user.registerUser);
