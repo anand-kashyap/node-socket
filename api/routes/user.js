@@ -11,9 +11,14 @@ const validationArray = [
   check('password').exists().withMessage('Password is a required value').isLength({ min: 5 }).withMessage('Password must be at least 5 chars long'),
 ];
 
+const queryValidations = [
+  check('email').exists().withMessage('Email is a required value').isEmail().withMessage('Email must be valid'),
+  check('username').exists().withMessage('Username is a required value').isLength({ min: 5 }).withMessage('Username must be at least 5 chars long')
+];
+
 router.get('/', user.getUsers);
 
-router.get('/check-username', [middleware.checkToken], user.checkUserName);
+router.get('/check-username', [middleware.checkToken, ...queryValidations], user.checkUserName);
 router.get('/user-details', [middleware.checkToken], user.getUserDetails);
 router.patch('/update-profile', [middleware.checkToken], user.updateProfile);
 

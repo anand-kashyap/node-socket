@@ -18,6 +18,7 @@ const getUsers = (req, res, next) => {
 };
 
 const getUserDetails = (req, res, next) => {
+  if (checkValidation(req, res)) return;
   // return res.status(200).json({ users: "test" });
   User = userModel.User;
   User.findOne({email: req.query.email.trim()}).then((user) => {
@@ -33,12 +34,14 @@ const getUserDetails = (req, res, next) => {
 };
 
 const checkUserName = (req, res, next) => {
+  if (checkValidation(req, res)) return;
   console.log('req.query', req.query);
   const userInput = req.query.userinput.trim();
+  const email = req.query.email;
   user = userModel.User;
   user.findOne({username: userInput}).then(resp => {
     console.log(resp);
-    if (resp) {
+    if (resp && resp.email !== email) {
       return res.status(200).json({ success: true, exists: true });
     }
     return res.status(200).json({ success: true, exists: false });
