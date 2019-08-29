@@ -13,7 +13,7 @@ const validationArray = [
 
 const queryValidations = [
   check('email').exists().withMessage('Email is a required value').isEmail().withMessage('Email must be valid'),
-  check('username').exists().withMessage('Username is a required value').isLength({ min: 5 }).withMessage('Username must be at least 5 chars long')
+  check('userinput').exists().withMessage('Userinput is a required value').isLength({ min: 5 }).withMessage('Userinput must be at least 5 chars long')
 ];
 
 router.get('/', user.getUsers);
