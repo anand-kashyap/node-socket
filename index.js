@@ -1,5 +1,5 @@
 const dotenv = require('dotenv').config(); //for getting env file variables
-// const path = require('path');
+const path = require('path');
 const cors = require('cors'),
 compression = require('compression'),
 express = require('express'),
@@ -12,7 +12,7 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 const port = process.env.PORT || 3000;
-// const publicDirPath = path.join(__dirname, 'public');
+const publicDirPath = path.join(__dirname, 'public');
 //imports
 const mongoose = require('./config/dbconnection');
 
@@ -40,8 +40,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(compression());
 
-app.use(cors(corsOptions));
-// app.use(express.static(publicDirPath));
+// app.use(cors(corsOptions));
+app.use(express.static(publicDirPath));
 //test db connection
 app.use('/*', function(req, res, next) {
   // console.log(mongoose.connection.readyState);
