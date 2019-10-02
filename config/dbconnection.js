@@ -13,7 +13,7 @@ mongoose.connection.on('connecting', function() {
 });
 
 mongoose.connection.on('error', function(err) {
-  console.log('error in mongo connection' + err);
+  console.log('error in mongo connection' + err.message);
   mongoose.disconnect();
 });
 

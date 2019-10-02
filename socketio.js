@@ -2,11 +2,11 @@ const {addUser, removeUser, findUsers} = require('./users');
 
 const socketHandle = (io) => {
   io.on('connection', (socket) => {
-
+    // console.log('id', socket.handshake.session.id) // same value on every connection
     socket.on('join', (options, callback) => {
       options.username = options.username.trim().toLowerCase();
       options.room = options.room.trim().toLowerCase();
-      const {error, user} = addUser({id: socket.id, ...options});
+      const {error, user} = addUser({id: socket.handshake.session.id, ...options});
       if (error) {
         return callback(error);
       }

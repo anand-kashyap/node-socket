@@ -1,8 +1,11 @@
-const dotenv = require('dotenv').config(); //for getting env file variables
-const path = require('path');
-const cors = require('cors'),
+const dotenv = require('dotenv').config(), //for getting env file variables
+path = require('path'),
+cors = require('cors'),
+eSession = require('express-session'),
+MongoStore = require('connect-mongo')(eSession),
 compression = require('compression'),
 express = require('express'),
+sharedsession = require('express-socket.io-session'),
 http = require('http'),
 bodyParser = require('body-parser'),
 socketio = require('socket.io');
@@ -22,7 +25,7 @@ const user = require('./api/routes/user');
 const socketHandle = require('./socketio');
 socketHandle(io);
 
-const whitelist = [process.env.ALLOWED_CORS_URL, process.env.ALLOWED_CORS_URL_PROD];
+/* const whitelist = [process.env.ALLOWED_CORS_URL, process.env.ALLOWED_CORS_URL_PROD];
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -33,8 +36,20 @@ const corsOptions = {
     }
   },
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
+}; */
 
+const mStore = new MongoStore({ mongooseConnection: mongoose.connection });
+const session = eSession({
+  secret: 'my-secret',
+  resave: true,
+  saveUninitialized: true,
+  store: mStore
+});
+
+app.use(session);
+io.use(sharedsession(session,{autoSave:true}));
+
+// socketHandle(io);
 //body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -54,4 +69,8 @@ app.use('/*', function(req, res, next) {
 
 app.use('/user', user);
 
+
+app.all("/*", function(req, res, next) {
+  res.sendFile("index.html", { root: __dirname + "/public" });
+});
 server.listen(port, () => console.log(`listening on http://localhost:${port}`));

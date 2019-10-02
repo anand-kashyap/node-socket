@@ -131,6 +131,7 @@ const authUser = (req, res, next) => {
       }
       if (isCorrect) {
         let token = userToken(oldUser);
+        // console.log(req.session.id, 'from route');        
         // return the JWT token for the future API calls
         return res.status(200).json({
           success: true,
@@ -209,7 +210,6 @@ const forgotPassword = (req, res, next) => {
         });
         mail.sendTokenForgotPassword(
           token,
-          process.env.NODEMAILER_AUTH_USER,
           req.body.email,
           req.body.baseUrl,
           function(err, info) {
@@ -239,6 +239,10 @@ const forgotPassword = (req, res, next) => {
     },
     err => {
       console.log(err);
+      res.status(403).json({
+        success: false,
+        message: err.message
+      });
       return next(err);
     }
   );

@@ -49,6 +49,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/forgot-password/forgot-password.component.html":
+/*!******************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/forgot-password/forgot-password.component.html ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-fluid view-area\">\n  <div class=\"row mt-4\">\n    <div class=\"col-md-6 m-auto\">\n      <div class=\"card\">\n        <div class=\"card-header bg-primary text-light\">\n          Forgot Password\n        </div>\n        <div class=\"card-body\">\n          <form [formGroup]=\"forgotForm\" (ngSubmit)=\"sendMail()\">\n            <div class=\"form-group\">\n              <label>Email</label>\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': isInvalid('email')}\"\n                formControlName=\"email\" placeholder=\"Your Login Email\" autocomplete=\"email\">\n              <div class=\"invalid-feedback\" *ngIf=\"isInvalid('email')\">\n                {{getErrors('email')}}\n              </div>\n            </div>\n            <div>\n              <button type=\"submit\" [disabled]=\"loader\" class=\"btn btn-primary d-inline-block\"> <span\n                  class=\"spinner-border spinner-border-sm\" *ngIf=\"loader\" role=\"status\">\n                  <span class=\"sr-only\">Loading...</span>\n                </span> Submit</button>\n            </div>\n            <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\n          </form>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n");
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/header/header.component.html":
 /*!************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/header/header.component.html ***!
@@ -84,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<alert type=\"danger\" [isOpen]=\"error\" [dismissOnTimeout]=\"errTimeout\">\r\n  <span>{{errMsg}}</span>\r\n</alert>\r\n<div class=\"container-fluid view-area\">\r\n  <div class=\"row mt-4\">\r\n    <div class=\"col-md-6 m-auto\">\r\n      <div class=\"card\">\r\n        <div class=\"card-header bg-primary text-light\">\r\n          Login 22379\r\n        </div>\r\n        <div class=\"card-body\">\r\n          <form [formGroup]=\"loginForm\" (ngSubmit)=\"login()\">\r\n            <div class=\"form-group\">\r\n              <label>Email</label>\r\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('email')}\"\r\n                formControlName=\"email\" placeholder=\"Your Login Email\" autocomplete=\"email\">\r\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('email')\">\r\n                {{getErrors('email')}}\r\n              </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label>Password</label>\r\n              <input type=\"password\" class=\"form-control\" autocomplete=\"password\"\r\n                [ngClass]=\"{'is-invalid': getInvalidCondition('password')}\" formControlName=\"password\"\r\n                placeholder=\"Password\">\r\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('password')\">\r\n                {{getErrors('password')}}\r\n              </div>\r\n            </div>\r\n            <div>\r\n              <div class=\"btn-group\" role=\"login\" aria-label=\"Login Register\">\r\n                <button type=\"submit\" [disabled]=\"loader\" class=\"btn btn-primary d-inline-block\"> <span class=\"spinner-border spinner-border-sm\" *ngIf=\"loader\" role=\"status\">\r\n                    <span class=\"sr-only\">Loading...</span>\r\n                  </span> Login</button>\r\n                <button type=\"button\" [disabled]=\"loader\" [routerLink]=\"['/register']\"\r\n                  class=\"btn btn-outline-primary d-inline-block ml-1\">Sign Up</button>\r\n              </div>\r\n              <a class=\"float-right\" [routerLink]=\"['/forgot-password']\">Forgot Password?</a>\r\n            </div>\r\n            <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<alert type=\"danger\" [isOpen]=\"error\" [dismissOnTimeout]=\"errTimeout\">\r\n  <span>{{errMsg}}</span>\r\n</alert>\r\n<div class=\"container-fluid view-area\">\r\n  <div class=\"row mt-4\">\r\n    <div class=\"col-md-6 m-auto\">\r\n      <div class=\"card\">\r\n        <div class=\"card-header bg-primary text-light\">\r\n          Login\r\n        </div>\r\n        <div class=\"card-body\">\r\n          <form [formGroup]=\"loginForm\" (ngSubmit)=\"login()\">\r\n            <div class=\"form-group\">\r\n              <label>Email</label>\r\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('email')}\"\r\n                formControlName=\"email\" placeholder=\"Your Login Email\" autocomplete=\"email\">\r\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('email')\">\r\n                {{getErrors('email')}}\r\n              </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label>Password</label>\r\n              <input type=\"password\" class=\"form-control\" autocomplete=\"password\"\r\n                [ngClass]=\"{'is-invalid': getInvalidCondition('password')}\" formControlName=\"password\"\r\n                placeholder=\"Password\">\r\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('password')\">\r\n                {{getErrors('password')}}\r\n              </div>\r\n            </div>\r\n            <div>\r\n              <div class=\"btn-group\" role=\"login\" aria-label=\"Login Register\">\r\n                <button type=\"submit\" [disabled]=\"loader\" class=\"btn btn-primary d-inline-block\"> <span class=\"spinner-border spinner-border-sm\" *ngIf=\"loader\" role=\"status\">\r\n                    <span class=\"sr-only\">Loading...</span>\r\n                  </span> Login</button>\r\n                <button type=\"button\" [disabled]=\"loader\" [routerLink]=\"['/register']\"\r\n                  class=\"btn btn-outline-primary d-inline-block ml-1\">Sign Up</button>\r\n              </div>\r\n              <a class=\"float-right\" [routerLink]=\"['/forgot-password']\">Forgot Password?</a>\r\n            </div>\r\n            <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n");
 
 /***/ }),
 
@@ -356,6 +369,101 @@ function __importDefault(mod) {
 
 /***/ }),
 
+/***/ "./src/app/api.service.ts":
+/*!********************************!*\
+  !*** ./src/app/api.service.ts ***!
+  \********************************/
+/*! exports provided: ApiService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApiService", function() { return ApiService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _chat_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chat.service */ "./src/app/chat.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
+
+
+
+
+
+
+let ApiService = class ApiService {
+    constructor(httpClient, router, chatService) {
+        this.httpClient = httpClient;
+        this.router = router;
+        this.chatService = chatService;
+        this.apiUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].socketUrl;
+    }
+    login(loginInput) {
+        const loginUrl = this.apiUrl + '/user/authenticate';
+        return this.httpClient.post(loginUrl, loginInput);
+    }
+    logout() {
+        this.chatService.clearUser();
+        this.router.navigate(['/']);
+    }
+    register(registerInput) {
+        const registerUrl = this.apiUrl + '/user/register';
+        return this.httpClient.post(registerUrl, registerInput);
+    }
+    forgotPass(email) {
+        const forgotUrl = this.apiUrl + '/user/forgot-password';
+        return this.httpClient.post(forgotUrl, { email, baseUrl: _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].baseUrl });
+    }
+    addXToken() {
+        return new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'x-access-token': this.chatService.getFromLocal('token')
+        });
+    }
+    sendOtp() {
+        const verifyUrl = this.apiUrl + '/user/send-otp';
+        const headers = this.addXToken();
+        const email = this.chatService.getUserInfo().email;
+        return this.httpClient.post(verifyUrl, { email }, { headers });
+    }
+    confirmOtp(otpInput) {
+        const confirmOtpUrl = this.apiUrl + '/user/confirm-otp';
+        const headers = this.addXToken();
+        return this.httpClient.post(confirmOtpUrl, otpInput, { headers });
+    }
+    checkIfUserExists(userString) {
+        const checkUserUrl = this.apiUrl + '/user/check-username';
+        const params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"]().set('userinput', userString).set('email', this.chatService.getUserInfo().email);
+        const headers = this.addXToken();
+        return this.httpClient.get(checkUserUrl, { headers, params });
+    }
+    getUserDetails() {
+        const getUserDetailsUrl = this.apiUrl + '/user/user-details';
+        const params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"]().set('email', this.chatService.getUserInfo().email);
+        const headers = this.addXToken();
+        return this.httpClient.get(getUserDetailsUrl, { headers, params });
+    }
+    updateProfile(userInfo) {
+        const updateProfileUrl = this.apiUrl + '/user/update-profile';
+        userInfo.email = this.chatService.getUserInfo().email;
+        const headers = this.addXToken();
+        return this.httpClient.patch(updateProfileUrl, userInfo, { headers });
+    }
+};
+ApiService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _chat_service__WEBPACK_IMPORTED_MODULE_1__["ChatService"] }
+];
+ApiService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
+        providedIn: 'root'
+    })
+], ApiService);
+
+
+
+/***/ }),
+
 /***/ "./src/app/app-routing.module.ts":
 /*!***************************************!*\
   !*** ./src/app/app-routing.module.ts ***!
@@ -377,6 +485,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _verify_account_verify_account_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./verify-account/verify-account.component */ "./src/app/verify-account/verify-account.component.ts");
 /* harmony import */ var _auth_guard__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./auth.guard */ "./src/app/auth.guard.ts");
 /* harmony import */ var _profile_profile_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./profile/profile.component */ "./src/app/profile/profile.component.ts");
+/* harmony import */ var _forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./forgot-password/forgot-password.component */ "./src/app/forgot-password/forgot-password.component.ts");
+
 
 
 
@@ -391,6 +501,7 @@ __webpack_require__.r(__webpack_exports__);
 const routes = [
     { path: '', component: _login_login_component__WEBPACK_IMPORTED_MODULE_6__["LoginComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]], data: { checkloggedIn: true } },
     { path: 'register', component: _register_register_component__WEBPACK_IMPORTED_MODULE_7__["RegisterComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]], data: { checkloggedIn: true } },
+    { path: 'forgot-password', component: _forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_11__["ForgotPasswordComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]], data: { checkloggedIn: true } },
     { path: 'verify', component: _verify_account_verify_account_component__WEBPACK_IMPORTED_MODULE_8__["VerifyAccountComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]], data: { checkVerified: true } },
     { path: 'update-profile', component: _profile_profile_component__WEBPACK_IMPORTED_MODULE_10__["ProfileComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
     { path: 'join', component: _joinchat_joinchat_component__WEBPACK_IMPORTED_MODULE_1__["JoinchatComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]], data: { checkjoin: true, checkUsername: true } },
@@ -485,6 +596,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _verify_account_verify_account_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./verify-account/verify-account.component */ "./src/app/verify-account/verify-account.component.ts");
 /* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./header/header.component */ "./src/app/header/header.component.ts");
 /* harmony import */ var _profile_profile_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./profile/profile.component */ "./src/app/profile/profile.component.ts");
+/* harmony import */ var _forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./forgot-password/forgot-password.component */ "./src/app/forgot-password/forgot-password.component.ts");
+
 
 
 
@@ -517,7 +630,8 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _login_login_component__WEBPACK_IMPORTED_MODULE_14__["LoginComponent"],
             _verify_account_verify_account_component__WEBPACK_IMPORTED_MODULE_16__["VerifyAccountComponent"],
             _header_header_component__WEBPACK_IMPORTED_MODULE_17__["HeaderComponent"],
-            _profile_profile_component__WEBPACK_IMPORTED_MODULE_18__["ProfileComponent"]
+            _profile_profile_component__WEBPACK_IMPORTED_MODULE_18__["ProfileComponent"],
+            _forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_19__["ForgotPasswordComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -683,6 +797,10 @@ let ChatService = class ChatService {
             }
         }
     }
+    isInvalid(formgroup, formControl) {
+        return (formgroup.get(formControl).invalid &&
+            formgroup.get(formControl).dirty);
+    }
     markFieldsAsDirty(formGroup) {
         Object.keys(formGroup.controls).forEach(formControl => {
             const control = formGroup.get(formControl);
@@ -715,97 +833,6 @@ ChatService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         providedIn: 'root'
     })
 ], ChatService);
-
-
-
-/***/ }),
-
-/***/ "./src/app/chatapi.service.ts":
-/*!************************************!*\
-  !*** ./src/app/chatapi.service.ts ***!
-  \************************************/
-/*! exports provided: ChatapiService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChatapiService", function() { return ChatapiService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _chat_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chat.service */ "./src/app/chat.service.ts");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
-
-
-
-
-
-
-let ChatapiService = class ChatapiService {
-    constructor(httpClient, router, chatService) {
-        this.httpClient = httpClient;
-        this.router = router;
-        this.chatService = chatService;
-        this.apiUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].socketUrl;
-    }
-    login(loginInput) {
-        const loginUrl = this.apiUrl + '/user/authenticate';
-        return this.httpClient.post(loginUrl, loginInput);
-    }
-    logout() {
-        this.chatService.clearUser();
-        this.router.navigate(['/']);
-    }
-    register(registerInput) {
-        const registerUrl = this.apiUrl + '/user/register';
-        return this.httpClient.post(registerUrl, registerInput);
-    }
-    addXToken() {
-        return new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
-            'x-access-token': this.chatService.getFromLocal('token')
-        });
-    }
-    sendOtp() {
-        const verifyUrl = this.apiUrl + '/user/send-otp';
-        const headers = this.addXToken();
-        const email = this.chatService.getUserInfo().email;
-        return this.httpClient.post(verifyUrl, { email }, { headers });
-    }
-    confirmOtp(otpInput) {
-        const confirmOtpUrl = this.apiUrl + '/user/confirm-otp';
-        const headers = this.addXToken();
-        return this.httpClient.post(confirmOtpUrl, otpInput, { headers });
-    }
-    checkIfUserExists(userString) {
-        const checkUserUrl = this.apiUrl + '/user/check-username';
-        const params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"]().set('userinput', userString).set('email', this.chatService.getUserInfo().email);
-        const headers = this.addXToken();
-        return this.httpClient.get(checkUserUrl, { headers, params });
-    }
-    getUserDetails() {
-        const getUserDetailsUrl = this.apiUrl + '/user/user-details';
-        const params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"]().set('email', this.chatService.getUserInfo().email);
-        const headers = this.addXToken();
-        return this.httpClient.get(getUserDetailsUrl, { headers, params });
-    }
-    updateProfile(userInfo) {
-        const updateProfileUrl = this.apiUrl + '/user/update-profile';
-        userInfo.email = this.chatService.getUserInfo().email;
-        const headers = this.addXToken();
-        return this.httpClient.patch(updateProfileUrl, userInfo, { headers });
-    }
-};
-ChatapiService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
-    { type: _chat_service__WEBPACK_IMPORTED_MODULE_1__["ChatService"] }
-];
-ChatapiService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
-        providedIn: 'root'
-    })
-], ChatapiService);
 
 
 
@@ -995,6 +1022,93 @@ ChatroomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/forgot-password/forgot-password.component.scss":
+/*!****************************************************************!*\
+  !*** ./src/app/forgot-password/forgot-password.component.scss ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2ZvcmdvdC1wYXNzd29yZC9mb3Jnb3QtcGFzc3dvcmQuY29tcG9uZW50LnNjc3MifQ== */");
+
+/***/ }),
+
+/***/ "./src/app/forgot-password/forgot-password.component.ts":
+/*!**************************************************************!*\
+  !*** ./src/app/forgot-password/forgot-password.component.ts ***!
+  \**************************************************************/
+/*! exports provided: ForgotPasswordComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ForgotPasswordComponent", function() { return ForgotPasswordComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _chat_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../chat.service */ "./src/app/chat.service.ts");
+/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
+
+
+
+
+
+let ForgotPasswordComponent = class ForgotPasswordComponent {
+    constructor(chatService, apiService) {
+        this.chatService = chatService;
+        this.apiService = apiService;
+        this.loader = false;
+        this.forgotForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required)
+        });
+        this.forgotValidations = {
+            email: [{
+                    type: 'required',
+                    message: 'Email is required'
+                }]
+        };
+    }
+    ngOnInit() {
+    }
+    isInvalid(control) {
+        return this.chatService.isInvalid(this.forgotForm, control);
+    }
+    getErrors(formcontrol) {
+        return this.chatService.getValidationErrors(formcontrol, this.forgotForm, this.forgotValidations);
+    }
+    sendMail() {
+        if (this.forgotForm.valid) {
+            const email = this.forgotForm.value.email;
+            this.forgotForm.disable();
+            this.apiService.forgotPass(email).subscribe(res => {
+                this.errorMessage = res.message;
+            }, err => this.errorMessage = this.chatService.showResponseError(err)).add(() => {
+                this.forgotForm.enable();
+            });
+        }
+        else {
+            this.chatService.markFieldsAsDirty(this.forgotForm);
+        }
+    }
+};
+ForgotPasswordComponent.ctorParameters = () => [
+    { type: _chat_service__WEBPACK_IMPORTED_MODULE_3__["ChatService"] },
+    { type: _api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"] }
+];
+ForgotPasswordComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-forgot-password',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./forgot-password.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/forgot-password/forgot-password.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./forgot-password.component.scss */ "./src/app/forgot-password/forgot-password.component.scss")).default]
+    })
+], ForgotPasswordComponent);
+
+
+
+/***/ }),
+
 /***/ "./src/app/header/header.component.scss":
 /*!**********************************************!*\
   !*** ./src/app/header/header.component.scss ***!
@@ -1019,7 +1133,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderComponent", function() { return HeaderComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _chatapi_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../chatapi.service */ "./src/app/chatapi.service.ts");
+/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
 /* harmony import */ var _chat_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../chat.service */ "./src/app/chat.service.ts");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 
@@ -1027,9 +1141,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let HeaderComponent = class HeaderComponent {
-    constructor(chatService, chatapiService) {
+    constructor(chatService, apiService) {
         this.chatService = chatService;
-        this.chatapiService = chatapiService;
+        this.apiService = apiService;
     }
     ngOnInit() {
     }
@@ -1037,12 +1151,12 @@ let HeaderComponent = class HeaderComponent {
         return this.chatService.isLoggedIn();
     }
     logout() {
-        this.chatapiService.logout();
+        this.apiService.logout();
     }
 };
 HeaderComponent.ctorParameters = () => [
     { type: _chat_service__WEBPACK_IMPORTED_MODULE_2__["ChatService"] },
-    { type: _chatapi_service__WEBPACK_IMPORTED_MODULE_1__["ChatapiService"] }
+    { type: _api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"] }
 ];
 HeaderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
@@ -1191,7 +1305,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginComponent", function() { return LoginComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _chatapi_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../chatapi.service */ "./src/app/chatapi.service.ts");
+/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var jwt_decode__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jwt-decode */ "./node_modules/jwt-decode/lib/index.js");
@@ -1206,9 +1320,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let LoginComponent = class LoginComponent {
-    constructor(chatService, chatapiService, router) {
+    constructor(chatService, apiService, router) {
         this.chatService = chatService;
-        this.chatapiService = chatapiService;
+        this.apiService = apiService;
         this.router = router;
         this.error = false;
         this.errMsg = '';
@@ -1258,7 +1372,7 @@ let LoginComponent = class LoginComponent {
             // return;
             this.loader = true;
             this.loginForm.disable();
-            this.chatapiService.login(this.loginForm.value).subscribe(response => {
+            this.apiService.login(this.loginForm.value).subscribe(response => {
                 this.loader = false;
                 this.loginForm.enable();
                 const token = jwt_decode__WEBPACK_IMPORTED_MODULE_4___default()(response.token);
@@ -1296,7 +1410,7 @@ let LoginComponent = class LoginComponent {
 };
 LoginComponent.ctorParameters = () => [
     { type: _chat_service__WEBPACK_IMPORTED_MODULE_6__["ChatService"] },
-    { type: _chatapi_service__WEBPACK_IMPORTED_MODULE_1__["ChatapiService"] },
+    { type: _api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] }
 ];
 LoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1335,7 +1449,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProfileComponent", function() { return ProfileComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _chatapi_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../chatapi.service */ "./src/app/chatapi.service.ts");
+/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _chat_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../chat.service */ "./src/app/chat.service.ts");
@@ -1347,9 +1461,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ProfileComponent = class ProfileComponent {
-    constructor(chatService, chatapiService, router) {
+    constructor(chatService, apiService, router) {
         this.chatService = chatService;
-        this.chatapiService = chatapiService;
+        this.apiService = apiService;
         this.router = router;
         this.loader = false;
         this.profileForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
@@ -1424,7 +1538,7 @@ let ProfileComponent = class ProfileComponent {
         this.setUserValues();
     }
     setUserValues() {
-        this.chatapiService.getUserDetails().subscribe(res => {
+        this.apiService.getUserDetails().subscribe(res => {
             const controlkeys = { username: 'username', email: 'email', firstName: 'firstName', lastName: 'lastName' };
             if (res.data.username !== '') {
                 this.profileForm.controls[controlkeys.username].setValue(res.data.username);
@@ -1444,7 +1558,7 @@ let ProfileComponent = class ProfileComponent {
                 // return if another validator has already found an error on the usernameControl
                 return;
             }
-            this.chatapiService.checkIfUserExists(usernameControl.value).subscribe(res => {
+            this.apiService.checkIfUserExists(usernameControl.value).subscribe(res => {
                 // set error on usernameControl if user exists
                 if (res.exists) {
                     usernameControl.setErrors({ unique: true });
@@ -1484,7 +1598,7 @@ let ProfileComponent = class ProfileComponent {
             console.log(this.profileForm.value);
             this.loader = true;
             this.profileForm.disable();
-            this.chatapiService.updateProfile(this.profileForm.value).subscribe(res => {
+            this.apiService.updateProfile(this.profileForm.value).subscribe(res => {
                 this.loader = false;
                 this.profileForm.enable();
                 const user = this.chatService.getUserInfo();
@@ -1504,7 +1618,7 @@ let ProfileComponent = class ProfileComponent {
 };
 ProfileComponent.ctorParameters = () => [
     { type: _chat_service__WEBPACK_IMPORTED_MODULE_4__["ChatService"] },
-    { type: _chatapi_service__WEBPACK_IMPORTED_MODULE_1__["ChatapiService"] },
+    { type: _api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] }
 ];
 ProfileComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1583,7 +1697,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegisterComponent", function() { return RegisterComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _chatapi_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../chatapi.service */ "./src/app/chatapi.service.ts");
+/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var jwt_decode__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jwt-decode */ "./node_modules/jwt-decode/lib/index.js");
@@ -1598,10 +1712,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let RegisterComponent = class RegisterComponent {
-    constructor(chatService, router, chatapiService) {
+    constructor(chatService, router, apiService) {
         this.chatService = chatService;
         this.router = router;
-        this.chatapiService = chatapiService;
+        this.apiService = apiService;
         this.loader = false;
         this.registerForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
             email: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].email]),
@@ -1692,7 +1806,7 @@ let RegisterComponent = class RegisterComponent {
             // return;
             this.loader = true;
             this.registerForm.disable();
-            this.chatapiService.register(this.registerForm.value).subscribe(response => {
+            this.apiService.register(this.registerForm.value).subscribe(response => {
                 this.loader = false;
                 this.registerForm.enable();
                 const token = jwt_decode__WEBPACK_IMPORTED_MODULE_4___default()(response.token);
@@ -1718,7 +1832,7 @@ let RegisterComponent = class RegisterComponent {
 RegisterComponent.ctorParameters = () => [
     { type: _chat_service__WEBPACK_IMPORTED_MODULE_6__["ChatService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
-    { type: _chatapi_service__WEBPACK_IMPORTED_MODULE_1__["ChatapiService"] }
+    { type: _api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"] }
 ];
 RegisterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
@@ -1862,7 +1976,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VerifyAccountComponent", function() { return VerifyAccountComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _chatapi_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../chatapi.service */ "./src/app/chatapi.service.ts");
+/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
@@ -1874,9 +1988,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let VerifyAccountComponent = class VerifyAccountComponent {
-    constructor(chatService, chatapiService, /* private renderer: Renderer2, */ router) {
+    constructor(chatService, apiService, /* private renderer: Renderer2, */ router) {
         this.chatService = chatService;
-        this.chatapiService = chatapiService;
+        this.apiService = apiService;
         this.router = router;
         this.otpSent = false;
         this.loader = false;
@@ -1919,7 +2033,7 @@ let VerifyAccountComponent = class VerifyAccountComponent {
     }
     sendOtp() {
         this.isResend = false;
-        this.chatapiService.sendOtp().subscribe(res => {
+        this.apiService.sendOtp().subscribe(res => {
             this.successMsg = res.message;
             this.otpSent = true;
             if (res.attempt < 3) {
@@ -1949,7 +2063,7 @@ let VerifyAccountComponent = class VerifyAccountComponent {
                 email: this.chatService.getUserInfo().email,
                 otp: this.verifyForm.value.otp
             };
-            this.chatapiService.confirmOtp(otpInput).subscribe(res => {
+            this.apiService.confirmOtp(otpInput).subscribe(res => {
                 this.successMsg = 'otp confirmed';
                 this.otpSent = false;
                 const user = this.chatService.getUserInfo();
@@ -1968,7 +2082,7 @@ let VerifyAccountComponent = class VerifyAccountComponent {
 };
 VerifyAccountComponent.ctorParameters = () => [
     { type: _chat_service__WEBPACK_IMPORTED_MODULE_5__["ChatService"] },
-    { type: _chatapi_service__WEBPACK_IMPORTED_MODULE_1__["ChatapiService"] },
+    { type: _api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
 ];
 VerifyAccountComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -2000,7 +2114,8 @@ __webpack_require__.r(__webpack_exports__);
 
 const environment = {
     production: false,
-    socketUrl: 'http://localhost:3000'
+    socketUrl: 'http://localhost:3000',
+    baseUrl: 'http://localhost:3000'
 };
 /*
  * For easier debugging in development mode, you can import the following file
