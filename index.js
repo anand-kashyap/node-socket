@@ -16,6 +16,7 @@ const io = socketio(server);
 
 const port = process.env.PORT || 3000;
 const publicDirPath = path.join(__dirname, 'public');
+
 //imports
 const mongoose = require('./config/dbconnection');
 
