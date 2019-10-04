@@ -23,349 +23,102 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 
 /***/ }),
 
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/app.component.html":
+/***/ "./node_modules/raw-loader/index.js!./src/app/app.component.html":
+/*!**************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/app.component.html ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n  <app-header></app-header>\n  <router-outlet></router-outlet>\n</div>\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/chatroom/chatroom.component.html":
+/*!****************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/chatroom/chatroom.component.html ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n  <h1>\n    Chat Box\n    <!-- <a class=\"btn btn-primary\" (click)=\"logout()\" >Logout</a> -->\n  </h1>\n  <div>\n    <!-- <span class=\"new-day\">Aug 13, 2019</span> -->\n    <div #scrollbox [scrollTop]=\"scrollbox.scrollHeight\" class=\"d-flex flex-column scrollable\">\n      <ng-container *ngFor=\"let message of messages\" >\n        <span *ngIf=\"message.datechange\" class=\"new-day\">{{message.datechange | date: 'mediumDate' | recentDate}}</span>\n        <p *ngIf=\"message.joined\" class=\"text-success\">{{message.joined}}</p>\n        <p *ngIf=\"message.left\" class=\"text-danger\">{{message.left}}</p>\n        <p *ngIf=\"message.username\" [ngClass]=\"message.username === user.username ? 'current-user' : 'other-user'\">\n          <strong class=\"d-block\" *ngIf=\"message.username !== user.username\">{{message.username | uppercase}}</strong>\n          <span [innerHTML]=\"message.msg\"></span>\n          <span class=\"message-date\">{{message.date | date: 'shortTime'}}</span>\n        </p>\n      </ng-container>\n    </div>\n    <form [formGroup]=\"messageForm\" class=\"align-self-end\" (ngSubmit)=\"sendMessage()\">\n      <div class=\"form-group\">\n        <input formControlName=\"message\" class=\"form-control\" type=\"text\" autofocus placeholder=\"Enter message\">\n        <button class=\"btn btn-primary\" [disabled]=\"loading || checkValid()\">Send</button>\n        <button class=\"btn btn-warning\" [disabled]=\"loading\" type=\"button\" (click)=\"sendLocation()\">Share Location</button>\n      </div>\n    </form>\n  </div>\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/forgot-password/forgot-password.component.html":
+/*!******************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/forgot-password/forgot-password.component.html ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container-fluid view-area\">\n  <div class=\"row mt-4\">\n    <div class=\"col-md-6 m-auto\">\n      <div class=\"card\">\n        <div class=\"card-header bg-primary text-light\">\n          Forgot Password\n        </div>\n        <div class=\"card-body\">\n          <form [formGroup]=\"forgotForm\" (ngSubmit)=\"sendMail()\">\n            <div class=\"form-group\">\n              <label>Email</label>\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': isInvalid('email')}\"\n                formControlName=\"email\" placeholder=\"Your Login Email\" autocomplete=\"email\">\n              <div class=\"invalid-feedback\" *ngIf=\"isInvalid('email')\">\n                {{getErrors('email')}}\n              </div>\n            </div>\n            <div>\n              <button type=\"submit\" [disabled]=\"loader\" class=\"btn btn-primary d-inline-block\"> <span\n                  class=\"spinner-border spinner-border-sm\" *ngIf=\"loader\" role=\"status\">\n                  <span class=\"sr-only\">Loading...</span>\n                </span> Submit</button>\n            </div>\n            <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\n          </form>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/header/header.component.html":
+/*!************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/header/header.component.html ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<nav class=\"navbar navbar-light bg-light\">\n    <a class=\"navbar-brand\">Navbar</a>\n    <button class=\"btn btn-primary\" *ngIf=\"isLoggedIn()\" (click)=\"logout()\">Logout</button>\n  </nav>\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/joinchat/joinchat.component.html":
+/*!****************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/joinchat/joinchat.component.html ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<alert type=\"danger\" [isOpen]=\"error\" [dismissOnTimeout]=\"errTimeout\">\n  <span [innerHtml]=\"errMsg\"></span>\n</alert>\n<div class=\"row\">\n  <form class=\"col-md-6 mx-auto mt-5 joinbox\" [formGroup]=\"joinFormGroup\" (ngSubmit)=\"joinRoom()\">\n    <h2>Join Chat</h2>\n    <p>Hi <strong>{{username}}</strong>!</p>\n    <div class=\"form-group\">\n      <label for=\"room\">Room</label>\n      <select id=\"room\" formControlName=\"room\"\n        [ngClass]=\"{'is-invalid': joinFormGroup.get('room').invalid && joinFormGroup.get('room').dirty}\">\n        <option value=\"one\">One</option>\n        <option value=\"two\">Two</option>\n        <option value=\"three\">Three</option>\n      </select>\n      <div class=\"invalid-feedback\" *ngIf=\"joinFormGroup.get('room').invalid && joinFormGroup.get('room').dirty\">\n        {{getErrors('room')}}\n      </div>\n    </div>\n    <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n  </form>\n</div>\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/login/login.component.html":
+/*!**********************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/login/login.component.html ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<alert type=\"danger\" [isOpen]=\"error\" [dismissOnTimeout]=\"errTimeout\">\n  <span>{{errMsg}}</span>\n</alert>\n<div class=\"container-fluid view-area\">\n  <div class=\"row mt-4\">\n    <div class=\"col-md-6 m-auto\">\n      <div class=\"card\">\n        <div class=\"card-header bg-primary text-light\">\n          Login\n        </div>\n        <div class=\"card-body\">\n          <form [formGroup]=\"loginForm\" (ngSubmit)=\"login()\">\n            <div class=\"form-group\">\n              <label>Email</label>\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('email')}\"\n                formControlName=\"email\" placeholder=\"Your Login Email\" autocomplete=\"email\">\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('email')\">\n                {{getErrors('email')}}\n              </div>\n            </div>\n            <div class=\"form-group\">\n              <label>Password</label>\n              <input type=\"password\" class=\"form-control\" autocomplete=\"password\"\n                [ngClass]=\"{'is-invalid': getInvalidCondition('password')}\" formControlName=\"password\"\n                placeholder=\"Password\">\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('password')\">\n                {{getErrors('password')}}\n              </div>\n            </div>\n            <div>\n              <div class=\"btn-group\" role=\"login\" aria-label=\"Login Register\">\n                <button type=\"submit\" [disabled]=\"loader\" class=\"btn btn-primary d-inline-block\"> <span class=\"spinner-border spinner-border-sm\" *ngIf=\"loader\" role=\"status\">\n                    <span class=\"sr-only\">Loading...</span>\n                  </span> Login</button>\n                <button type=\"button\" [disabled]=\"loader\" [routerLink]=\"['/register']\"\n                  class=\"btn btn-outline-primary d-inline-block ml-1\">Sign Up</button>\n              </div>\n              <a class=\"float-right\" [routerLink]=\"['/forgot-password']\">Forgot Password?</a>\n            </div>\n            <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\n          </form>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/profile/profile.component.html":
 /*!**************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/app.component.html ***!
+  !*** ./node_modules/raw-loader!./src/app/profile/profile.component.html ***!
   \**************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n  <app-header></app-header>\r\n  <router-outlet></router-outlet>\r\n</div>\r\n");
+module.exports = "<div class=\"container-fluid view-area\">\n  <div class=\"row mt-4\">\n    <div class=\"col-md-6 m-auto\">\n        <div class=\"card\">\n        <div class=\"card-header bg-primary text-light\">\n          Update Profile\n        </div>\n        <div class=\"card-body\">\n          <form [formGroup]=\"profileForm\" (ngSubmit)=\"updateProfile()\">\n            <div class=\"form-group\">\n              <label>Username (<span class=\"text-danger\">*</span>)</label>\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('username'), 'is-valid': profileForm.get('username').valid}\" formControlName=\"username\" placeholder=\"Your Username\" autocomplete=\"off\">\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('username')\">\n                {{getErrors('username')}}\n              </div>\n              <div class=\"valid-feedback d-block\" *ngIf=\"profileForm.get('username').valid\">\n                Username Present\n              </div>\n            </div>\n            <div class=\"form-group\">\n              <label>First Name (<span class=\"text-danger\">*</span>)</label>\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('firstName')}\" formControlName=\"firstName\" placeholder=\"Your First Name\" autocomplete=\"firstName\">\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('firstName')\">\n                {{getErrors('firstName')}}\n              </div>\n            </div>\n            <div class=\"form-group\">\n              <label>Last Name</label>\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('lastName')}\" formControlName=\"lastName\" placeholder=\"Your Last Name\" autocomplete=\"lastName\">\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('lastName')\">\n                {{getErrors('lastName')}}\n              </div>\n            </div>\n            <div class=\"form-group\">\n              <label>Email (<span class=\"text-danger\">*</span>)</label>\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('email')}\" formControlName=\"email\" placeholder=\"Your Email\" autocomplete=\"email\">\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('email')\">\n                {{getErrors('email')}}\n              </div>\n            </div>\n            <!-- <div class=\"form-group\">\n              <label>Password (<span class=\"text-danger\">*</span>)</label>\n              <input type=\"password\" class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('password')}\" formControlName=\"password\" placeholder=\"Password\">\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('password')\">\n                {{getErrors('password')}}\n              </div>\n            </div>\n            <div class=\"form-group\">\n              <label>Confirm Password (<span class=\"text-danger\">*</span>)</label>\n              <input type=\"text\" class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('confirmPassword')}\" formControlName=\"confirmPassword\" placeholder=\"Confirm Password\">\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('confirmPassword')\">\n                {{getErrors('confirmPassword')}}\n              </div>\n            </div> -->\n            <div>\n              <button type=\"submit\" [disabled]=\"loader\" class=\"btn btn-primary d-inline-block\">\n                  <span class=\"spinner-border spinner-border-sm\" *ngIf=\"loader\" role=\"status\">\n                      <span class=\"sr-only\">Loading...</span>\n                    </span>Update Profile</button>\n            </div>\n            <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\n          </form>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/chatroom/chatroom.component.html":
+/***/ "./node_modules/raw-loader/index.js!./src/app/register/register.component.html":
+/*!****************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/register/register.component.html ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container-fluid view-area\">\n    <div class=\"row mt-4\">\n      <div class=\"col-md-4 m-auto\">\n          <div class=\"card\">\n          <div class=\"card-header bg-primary text-light\">\n            Register\n          </div>\n          <div class=\"card-body\">\n            <form [formGroup]=\"registerForm\" (ngSubmit)=\"register()\">\n              <div class=\"form-group\">\n                <label>First Name (<span class=\"text-danger\">*</span>)</label>\n                <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('firstName')}\" formControlName=\"firstName\" placeholder=\"Your First Name\" autocomplete=\"firstName\">\n                <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('firstName')\">\n                  {{getErrors('firstName')}}\n                </div>\n              </div>\n              <div class=\"form-group\">\n                <label>Last Name</label>\n                <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('lastName')}\" formControlName=\"lastName\" placeholder=\"Your Last Name\" autocomplete=\"lastName\">\n                <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('lastName')\">\n                  {{getErrors('lastName')}}\n                </div>\n              </div>\n              <div class=\"form-group\">\n                <label>Email (<span class=\"text-danger\">*</span>)</label>\n                <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('email')}\" formControlName=\"email\" placeholder=\"Your Email\" autocomplete=\"email\">\n                <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('email')\">\n                  {{getErrors('email')}}\n                </div>\n              </div>\n              <div class=\"form-group\">\n                <label>Password (<span class=\"text-danger\">*</span>)</label>\n                <input type=\"password\" class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('password')}\" formControlName=\"password\" placeholder=\"Password\">\n                <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('password')\">\n                  {{getErrors('password')}}\n                </div>\n              </div>\n              <div class=\"form-group\">\n                <label>Confirm Password (<span class=\"text-danger\">*</span>)</label>\n                <input type=\"text\" class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('confirmPassword')}\" formControlName=\"confirmPassword\" placeholder=\"Confirm Password\">\n                <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('confirmPassword')\">\n                  {{getErrors('confirmPassword')}}\n                </div>\n              </div>\n              <div>\n                <button type=\"submit\" [disabled]=\"loader\" class=\"btn btn-primary d-inline-block\">\n                    <span class=\"spinner-border spinner-border-sm\" *ngIf=\"loader\" role=\"status\">\n                        <span class=\"sr-only\">Loading...</span>\n                      </span> Register</button>\n                <button type=\"button\" [disabled]=\"loader\" [routerLink]=\"['/']\" class=\"btn btn-outline-success d-inline-block ml-1\">Already a User ? Login</button>\n              </div>\n              <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\n            </form>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/verify-account/verify-account.component.html":
 /*!****************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/chatroom/chatroom.component.html ***!
+  !*** ./node_modules/raw-loader!./src/app/verify-account/verify-account.component.html ***!
   \****************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!--The content below is only a placeholder and can be replaced.-->\r\n  <h1>\r\n    Chat Box\r\n    <!-- <a class=\"btn btn-primary\" (click)=\"logout()\" >Logout</a> -->\r\n  </h1>\r\n  <div>\r\n    <!-- <span class=\"new-day\">Aug 13, 2019</span> -->\r\n    <div #scrollbox [scrollTop]=\"scrollbox.scrollHeight\" class=\"d-flex flex-column scrollable\">\r\n      <ng-container *ngFor=\"let message of messages\" >\r\n        <span *ngIf=\"message.datechange\" class=\"new-day\">{{message.datechange | date: 'mediumDate' | recentDate}}</span>\r\n        <p *ngIf=\"message.joined\" class=\"text-success\">{{message.joined}}</p>\r\n        <p *ngIf=\"message.left\" class=\"text-danger\">{{message.left}}</p>\r\n        <p *ngIf=\"message.username\" [ngClass]=\"message.username === user.username ? 'current-user' : 'other-user'\">\r\n          <strong class=\"d-block\" *ngIf=\"message.username !== user.username\">{{message.username | uppercase}}</strong>\r\n          <span [innerHTML]=\"message.msg\"></span>\r\n          <span class=\"message-date\">{{message.date | date: 'shortTime'}}</span>\r\n        </p>\r\n      </ng-container>\r\n    </div>\r\n    <form [formGroup]=\"messageForm\" class=\"align-self-end\" (ngSubmit)=\"sendMessage()\">\r\n      <div class=\"form-group\">\r\n        <input formControlName=\"message\" class=\"form-control\" type=\"text\" autofocus placeholder=\"Enter message\">\r\n        <button class=\"btn btn-primary\" [disabled]=\"loading || checkValid()\">Send</button>\r\n        <button class=\"btn btn-warning\" [disabled]=\"loading\" type=\"button\" (click)=\"sendLocation()\">Share Location</button>\r\n      </div>\r\n    </form>\r\n  </div>\r\n");
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/forgot-password/forgot-password.component.html":
-/*!******************************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/forgot-password/forgot-password.component.html ***!
-  \******************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-fluid view-area\">\n  <div class=\"row mt-4\">\n    <div class=\"col-md-6 m-auto\">\n      <div class=\"card\">\n        <div class=\"card-header bg-primary text-light\">\n          Forgot Password\n        </div>\n        <div class=\"card-body\">\n          <form [formGroup]=\"forgotForm\" (ngSubmit)=\"sendMail()\">\n            <div class=\"form-group\">\n              <label>Email</label>\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': isInvalid('email')}\"\n                formControlName=\"email\" placeholder=\"Your Login Email\" autocomplete=\"email\">\n              <div class=\"invalid-feedback\" *ngIf=\"isInvalid('email')\">\n                {{getErrors('email')}}\n              </div>\n            </div>\n            <div>\n              <button type=\"submit\" [disabled]=\"loader\" class=\"btn btn-primary d-inline-block\"> <span\n                  class=\"spinner-border spinner-border-sm\" *ngIf=\"loader\" role=\"status\">\n                  <span class=\"sr-only\">Loading...</span>\n                </span> Submit</button>\n            </div>\n            <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\n          </form>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n");
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/header/header.component.html":
-/*!************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/header/header.component.html ***!
-  \************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-light bg-light\">\r\n    <a class=\"navbar-brand\">Navbar</a>\r\n    <button class=\"btn btn-primary\" *ngIf=\"isLoggedIn()\" (click)=\"logout()\">Logout</button>\r\n  </nav>\r\n");
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/joinchat/joinchat.component.html":
-/*!****************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/joinchat/joinchat.component.html ***!
-  \****************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<alert type=\"danger\" [isOpen]=\"error\" [dismissOnTimeout]=\"errTimeout\">\r\n  <span [innerHtml]=\"errMsg\"></span>\r\n</alert>\r\n<div class=\"row\">\r\n  <form class=\"col-md-6 mx-auto mt-5 joinbox\" [formGroup]=\"joinFormGroup\" (ngSubmit)=\"joinRoom()\">\r\n    <h2>Join Chat</h2>\r\n    <p>Hi <strong>{{username}}</strong>!</p>\r\n    <div class=\"form-group\">\r\n      <label for=\"room\">Room</label>\r\n      <select id=\"room\" formControlName=\"room\"\r\n        [ngClass]=\"{'is-invalid': joinFormGroup.get('room').invalid && joinFormGroup.get('room').dirty}\">\r\n        <option value=\"one\">One</option>\r\n        <option value=\"two\">Two</option>\r\n        <option value=\"three\">Three</option>\r\n      </select>\r\n      <div class=\"invalid-feedback\" *ngIf=\"joinFormGroup.get('room').invalid && joinFormGroup.get('room').dirty\">\r\n        {{getErrors('room')}}\r\n      </div>\r\n    </div>\r\n    <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\r\n  </form>\r\n</div>\r\n");
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/login/login.component.html":
-/*!**********************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/login/login.component.html ***!
-  \**********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<alert type=\"danger\" [isOpen]=\"error\" [dismissOnTimeout]=\"errTimeout\">\r\n  <span>{{errMsg}}</span>\r\n</alert>\r\n<div class=\"container-fluid view-area\">\r\n  <div class=\"row mt-4\">\r\n    <div class=\"col-md-6 m-auto\">\r\n      <div class=\"card\">\r\n        <div class=\"card-header bg-primary text-light\">\r\n          Login\r\n        </div>\r\n        <div class=\"card-body\">\r\n          <form [formGroup]=\"loginForm\" (ngSubmit)=\"login()\">\r\n            <div class=\"form-group\">\r\n              <label>Email</label>\r\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('email')}\"\r\n                formControlName=\"email\" placeholder=\"Your Login Email\" autocomplete=\"email\">\r\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('email')\">\r\n                {{getErrors('email')}}\r\n              </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label>Password</label>\r\n              <input type=\"password\" class=\"form-control\" autocomplete=\"password\"\r\n                [ngClass]=\"{'is-invalid': getInvalidCondition('password')}\" formControlName=\"password\"\r\n                placeholder=\"Password\">\r\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('password')\">\r\n                {{getErrors('password')}}\r\n              </div>\r\n            </div>\r\n            <div>\r\n              <div class=\"btn-group\" role=\"login\" aria-label=\"Login Register\">\r\n                <button type=\"submit\" [disabled]=\"loader\" class=\"btn btn-primary d-inline-block\"> <span class=\"spinner-border spinner-border-sm\" *ngIf=\"loader\" role=\"status\">\r\n                    <span class=\"sr-only\">Loading...</span>\r\n                  </span> Login</button>\r\n                <button type=\"button\" [disabled]=\"loader\" [routerLink]=\"['/register']\"\r\n                  class=\"btn btn-outline-primary d-inline-block ml-1\">Sign Up</button>\r\n              </div>\r\n              <a class=\"float-right\" [routerLink]=\"['/forgot-password']\">Forgot Password?</a>\r\n            </div>\r\n            <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n");
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/profile/profile.component.html":
-/*!**************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/profile/profile.component.html ***!
-  \**************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-fluid view-area\">\r\n  <div class=\"row mt-4\">\r\n    <div class=\"col-md-6 m-auto\">\r\n        <div class=\"card\">\r\n        <div class=\"card-header bg-primary text-light\">\r\n          Update Profile\r\n        </div>\r\n        <div class=\"card-body\">\r\n          <form [formGroup]=\"profileForm\" (ngSubmit)=\"updateProfile()\">\r\n            <div class=\"form-group\">\r\n              <label>Username (<span class=\"text-danger\">*</span>)</label>\r\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('username'), 'is-valid': profileForm.get('username').valid}\" formControlName=\"username\" placeholder=\"Your Username\" autocomplete=\"off\">\r\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('username')\">\r\n                {{getErrors('username')}}\r\n              </div>\r\n              <div class=\"valid-feedback d-block\" *ngIf=\"profileForm.get('username').valid\">\r\n                Username Present\r\n              </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label>First Name (<span class=\"text-danger\">*</span>)</label>\r\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('firstName')}\" formControlName=\"firstName\" placeholder=\"Your First Name\" autocomplete=\"firstName\">\r\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('firstName')\">\r\n                {{getErrors('firstName')}}\r\n              </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label>Last Name</label>\r\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('lastName')}\" formControlName=\"lastName\" placeholder=\"Your Last Name\" autocomplete=\"lastName\">\r\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('lastName')\">\r\n                {{getErrors('lastName')}}\r\n              </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label>Email (<span class=\"text-danger\">*</span>)</label>\r\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('email')}\" formControlName=\"email\" placeholder=\"Your Email\" autocomplete=\"email\">\r\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('email')\">\r\n                {{getErrors('email')}}\r\n              </div>\r\n            </div>\r\n            <!-- <div class=\"form-group\">\r\n              <label>Password (<span class=\"text-danger\">*</span>)</label>\r\n              <input type=\"password\" class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('password')}\" formControlName=\"password\" placeholder=\"Password\">\r\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('password')\">\r\n                {{getErrors('password')}}\r\n              </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label>Confirm Password (<span class=\"text-danger\">*</span>)</label>\r\n              <input type=\"text\" class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('confirmPassword')}\" formControlName=\"confirmPassword\" placeholder=\"Confirm Password\">\r\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('confirmPassword')\">\r\n                {{getErrors('confirmPassword')}}\r\n              </div>\r\n            </div> -->\r\n            <div>\r\n              <button type=\"submit\" [disabled]=\"loader\" class=\"btn btn-primary d-inline-block\">\r\n                  <span class=\"spinner-border spinner-border-sm\" *ngIf=\"loader\" role=\"status\">\r\n                      <span class=\"sr-only\">Loading...</span>\r\n                    </span>Update Profile</button>\r\n            </div>\r\n            <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n");
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/register/register.component.html":
-/*!****************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/register/register.component.html ***!
-  \****************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-fluid view-area\">\r\n    <div class=\"row mt-4\">\r\n      <div class=\"col-md-4 m-auto\">\r\n          <div class=\"card\">\r\n          <div class=\"card-header bg-primary text-light\">\r\n            Register\r\n          </div>\r\n          <div class=\"card-body\">\r\n            <form [formGroup]=\"registerForm\" (ngSubmit)=\"register()\">\r\n              <div class=\"form-group\">\r\n                <label>First Name (<span class=\"text-danger\">*</span>)</label>\r\n                <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('firstName')}\" formControlName=\"firstName\" placeholder=\"Your First Name\" autocomplete=\"firstName\">\r\n                <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('firstName')\">\r\n                  {{getErrors('firstName')}}\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label>Last Name</label>\r\n                <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('lastName')}\" formControlName=\"lastName\" placeholder=\"Your Last Name\" autocomplete=\"lastName\">\r\n                <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('lastName')\">\r\n                  {{getErrors('lastName')}}\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label>Email (<span class=\"text-danger\">*</span>)</label>\r\n                <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('email')}\" formControlName=\"email\" placeholder=\"Your Email\" autocomplete=\"email\">\r\n                <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('email')\">\r\n                  {{getErrors('email')}}\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label>Password (<span class=\"text-danger\">*</span>)</label>\r\n                <input type=\"password\" class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('password')}\" formControlName=\"password\" placeholder=\"Password\">\r\n                <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('password')\">\r\n                  {{getErrors('password')}}\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label>Confirm Password (<span class=\"text-danger\">*</span>)</label>\r\n                <input type=\"text\" class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('confirmPassword')}\" formControlName=\"confirmPassword\" placeholder=\"Confirm Password\">\r\n                <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('confirmPassword')\">\r\n                  {{getErrors('confirmPassword')}}\r\n                </div>\r\n              </div>\r\n              <div>\r\n                <button type=\"submit\" [disabled]=\"loader\" class=\"btn btn-primary d-inline-block\">\r\n                    <span class=\"spinner-border spinner-border-sm\" *ngIf=\"loader\" role=\"status\">\r\n                        <span class=\"sr-only\">Loading...</span>\r\n                      </span> Register</button>\r\n                <button type=\"button\" [disabled]=\"loader\" [routerLink]=\"['/']\" class=\"btn btn-outline-success d-inline-block ml-1\">Already a User ? Login</button>\r\n              </div>\r\n              <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\r\n            </form>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n");
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/verify-account/verify-account.component.html":
-/*!****************************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/verify-account/verify-account.component.html ***!
-  \****************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-fluid view-area\">\r\n  <div class=\"row mt-4\">\r\n    <div class=\"m-auto\">\r\n      <div class=\"card\">\r\n        <div class=\"card-header bg-primary text-light\">\r\n          Verify Your Account\r\n        </div>\r\n        <div class=\"card-body\">\r\n          <div class=\"text-success d-block\" *ngIf=\"successMsg\">{{successMsg}}</div>\r\n          <form [formGroup]=\"verifyForm\" (ngSubmit)=\"verifyOtp()\">\r\n            <div class=\"form-group\">\r\n              <label>Enter OTP</label>\r\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('otp')}\"\r\n                formControlName=\"otp\" placeholder=\"e.g. 123456\" autocomplete=\"otp\">\r\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('otp')\">\r\n                {{getErrors('otp')}}\r\n              </div>\r\n            </div>\r\n            <div>\r\n              <div class=\"spinner-border text-primary\" *ngIf=\"loader\" role=\"status\">\r\n                <span class=\"sr-only\">Loading...</span>\r\n              </div>\r\n              <button type=\"submit\" [disabled]=\"!otpSent\" class=\"btn btn-primary d-inline-block\">Verify</button>\r\n              <button type=\"button\" #resendButton class=\"btn btn-outline-success float-right\" [disabled]=\"!isResend\" (click)=\"sendOtp()\">Resend\r\n                <ng-container *ngIf=\"resendTime !== null\">\r\n                  in {{resendTime | date: 'mm:ss'}}\r\n                </ng-container>\r\n              </button>\r\n            </div>\r\n            <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n");
-
-/***/ }),
-
-/***/ "./node_modules/tslib/tslib.es6.js":
-/*!*****************************************!*\
-  !*** ./node_modules/tslib/tslib.es6.js ***!
-  \*****************************************/
-/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__extends", function() { return __extends; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__assign", function() { return __assign; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__rest", function() { return __rest; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__decorate", function() { return __decorate; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__param", function() { return __param; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__metadata", function() { return __metadata; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__awaiter", function() { return __awaiter; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__generator", function() { return __generator; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__exportStar", function() { return __exportStar; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__values", function() { return __values; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__read", function() { return __read; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spread", function() { return __spread; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spreadArrays", function() { return __spreadArrays; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__await", function() { return __await; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncGenerator", function() { return __asyncGenerator; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncDelegator", function() { return __asyncDelegator; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncValues", function() { return __asyncValues; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__makeTemplateObject", function() { return __makeTemplateObject; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importStar", function() { return __importStar; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importDefault", function() { return __importDefault; });
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
-THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
-See the Apache Version 2.0 License for specific language governing permissions
-and limitations under the License.
-***************************************************************************** */
-/* global Reflect, Promise */
-
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return extendStatics(d, b);
-};
-
-function __extends(d, b) {
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-}
-
-var __assign = function() {
-    __assign = Object.assign || function __assign(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-        }
-        return t;
-    }
-    return __assign.apply(this, arguments);
-}
-
-function __rest(s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-}
-
-function __decorate(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-}
-
-function __param(paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-}
-
-function __metadata(metadataKey, metadataValue) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-}
-
-function __awaiter(thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-}
-
-function __generator(thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-}
-
-function __exportStar(m, exports) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-
-function __values(o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-}
-
-function __read(o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-}
-
-function __spread() {
-    for (var ar = [], i = 0; i < arguments.length; i++)
-        ar = ar.concat(__read(arguments[i]));
-    return ar;
-}
-
-function __spreadArrays() {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
-};
-
-function __await(v) {
-    return this instanceof __await ? (this.v = v, this) : new __await(v);
-}
-
-function __asyncGenerator(thisArg, _arguments, generator) {
-    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-    var g = generator.apply(thisArg, _arguments || []), i, q = [];
-    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
-    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
-    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
-    function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
-    function fulfill(value) { resume("next", value); }
-    function reject(value) { resume("throw", value); }
-    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
-}
-
-function __asyncDelegator(o) {
-    var i, p;
-    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
-    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
-}
-
-function __asyncValues(o) {
-    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-    var m = o[Symbol.asyncIterator], i;
-    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
-    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
-    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
-}
-
-function __makeTemplateObject(cooked, raw) {
-    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
-    return cooked;
-};
-
-function __importStar(mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result.default = mod;
-    return result;
-}
-
-function __importDefault(mod) {
-    return (mod && mod.__esModule) ? mod : { default: mod };
-}
-
+module.exports = "<div class=\"container-fluid view-area\">\n  <div class=\"row mt-4\">\n    <div class=\"m-auto\">\n      <div class=\"card\">\n        <div class=\"card-header bg-primary text-light\">\n          Verify Your Account\n        </div>\n        <div class=\"card-body\">\n          <div class=\"text-success d-block\" *ngIf=\"successMsg\">{{successMsg}}</div>\n          <form [formGroup]=\"verifyForm\" (ngSubmit)=\"verifyOtp()\">\n            <div class=\"form-group\">\n              <label>Enter OTP</label>\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('otp')}\"\n                formControlName=\"otp\" placeholder=\"e.g. 123456\" autocomplete=\"otp\">\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('otp')\">\n                {{getErrors('otp')}}\n              </div>\n            </div>\n            <div>\n              <div class=\"spinner-border text-primary\" *ngIf=\"loader\" role=\"status\">\n                <span class=\"sr-only\">Loading...</span>\n              </div>\n              <button type=\"submit\" [disabled]=\"!otpSent\" class=\"btn btn-primary d-inline-block\">Verify</button>\n              <button type=\"button\" #resendButton class=\"btn btn-outline-success float-right\" [disabled]=\"!isResend\" (click)=\"sendOtp()\">Resend\n                <ng-container *ngIf=\"resendTime !== null\">\n                  in {{resendTime | date: 'mm:ss'}}\n                </ng-container>\n              </button>\n            </div>\n            <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\n          </form>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -524,12 +277,10 @@ AppRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*!************************************!*\
   !*** ./src/app/app.component.scss ***!
   \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyJ9 */");
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyJ9 */"
 
 /***/ }),
 
@@ -558,8 +309,8 @@ let AppComponent = class AppComponent {
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-root',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/app.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./app.component.scss */ "./src/app/app.component.scss")).default]
+        template: __webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/index.js!./src/app/app.component.html"),
+        styles: [__webpack_require__(/*! ./app.component.scss */ "./src/app/app.component.scss")]
     })
 ], AppComponent);
 
@@ -894,12 +645,10 @@ ChatroomGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*!**************************************************!*\
   !*** ./src/app/chatroom/chatroom.component.scss ***!
   \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".other-user {\n  background: #4f85b5a6;\n}\n\n.current-user {\n  background: #80808085;\n  align-self: flex-end;\n}\n\n.current-user, .other-user {\n  padding: 20px 20px;\n  border-radius: 5px;\n  display: inline-block;\n  width: 25%;\n  position: relative;\n}\n\n.scrollable {\n  min-height: 470px;\n  max-height: 470px;\n  overflow: scroll;\n}\n\n.message-date {\n  position: absolute;\n  bottom: 5px;\n  right: 5px;\n  font-size: 0.7rem;\n}\n\n.new-day {\n  text-align: center;\n}\n\n.new-day::before, .new-day::after {\n  content: \"\";\n  height: 1px;\n  display: inline-block;\n  width: 40%;\n  background-color: rgba(0, 0, 0, 0.7);\n  margin: 0 1%;\n  vertical-align: middle;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2hhdHJvb20vZTpcXHByb2plY3RzXFxjaGF0YXBwXFxhbmd1bGFyLXNvY2tldC9zcmNcXGFwcFxcY2hhdHJvb21cXGNoYXRyb29tLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9jaGF0cm9vbS9jaGF0cm9vbS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUFZLHFCQUFBO0FDRVo7O0FEREE7RUFBYyxxQkFBQTtFQUF1QixvQkFBQTtBQ01yQzs7QURMQTtFQUEyQixrQkFBQTtFQUFvQixrQkFBQTtFQUFvQixxQkFBQTtFQUF1QixVQUFBO0VBQVksa0JBQUE7QUNhdEc7O0FEWkE7RUFBWSxpQkFBQTtFQUFrQixpQkFBQTtFQUFrQixnQkFBQTtBQ2tCaEQ7O0FEakJBO0VBQWMsa0JBQUE7RUFBb0IsV0FBQTtFQUFhLFVBQUE7RUFBWSxpQkFBQTtBQ3dCM0Q7O0FEdkJBO0VBQVMsa0JBQUE7QUMyQlQ7O0FEMUJBO0VBQWtDLFdBQUE7RUFBYSxXQUFBO0VBQWEscUJBQUE7RUFBdUIsVUFBQTtFQUFZLG9DQUFBO0VBQXNDLFlBQUE7RUFBYyxzQkFBQTtBQ29DbkoiLCJmaWxlIjoic3JjL2FwcC9jaGF0cm9vbS9jaGF0cm9vbS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5vdGhlci11c2Vye2JhY2tncm91bmQ6ICM0Zjg1YjVhNjt9XHJcbi5jdXJyZW50LXVzZXJ7YmFja2dyb3VuZDogIzgwODA4MDg1OyBhbGlnbi1zZWxmOiBmbGV4LWVuZH1cclxuLmN1cnJlbnQtdXNlciwgLm90aGVyLXVzZXJ7cGFkZGluZzogMjBweCAyMHB4OyBib3JkZXItcmFkaXVzOiA1cHg7IGRpc3BsYXk6IGlubGluZS1ibG9jazsgd2lkdGg6IDI1JTsgcG9zaXRpb246IHJlbGF0aXZlfVxyXG4uc2Nyb2xsYWJsZXttaW4taGVpZ2h0OiA0NzBweDttYXgtaGVpZ2h0OiA0NzBweDtvdmVyZmxvdzogc2Nyb2xsfVxyXG4ubWVzc2FnZS1kYXRle3Bvc2l0aW9uOiBhYnNvbHV0ZTsgYm90dG9tOiA1cHg7IHJpZ2h0OiA1cHg7IGZvbnQtc2l6ZTogMC43cmVtO31cclxuLm5ldy1kYXl7dGV4dC1hbGlnbjogY2VudGVyO31cclxuLm5ldy1kYXk6OmJlZm9yZSwgLm5ldy1kYXk6OmFmdGVye2NvbnRlbnQ6IFwiXCI7IGhlaWdodDogMXB4OyBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IHdpZHRoOiA0MCU7IGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMC43KTsgbWFyZ2luOiAwIDElOyB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO31cclxuIiwiLm90aGVyLXVzZXIge1xuICBiYWNrZ3JvdW5kOiAjNGY4NWI1YTY7XG59XG5cbi5jdXJyZW50LXVzZXIge1xuICBiYWNrZ3JvdW5kOiAjODA4MDgwODU7XG4gIGFsaWduLXNlbGY6IGZsZXgtZW5kO1xufVxuXG4uY3VycmVudC11c2VyLCAub3RoZXItdXNlciB7XG4gIHBhZGRpbmc6IDIwcHggMjBweDtcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIHdpZHRoOiAyNSU7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cblxuLnNjcm9sbGFibGUge1xuICBtaW4taGVpZ2h0OiA0NzBweDtcbiAgbWF4LWhlaWdodDogNDcwcHg7XG4gIG92ZXJmbG93OiBzY3JvbGw7XG59XG5cbi5tZXNzYWdlLWRhdGUge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGJvdHRvbTogNXB4O1xuICByaWdodDogNXB4O1xuICBmb250LXNpemU6IDAuN3JlbTtcbn1cblxuLm5ldy1kYXkge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbi5uZXctZGF5OjpiZWZvcmUsIC5uZXctZGF5OjphZnRlciB7XG4gIGNvbnRlbnQ6IFwiXCI7XG4gIGhlaWdodDogMXB4O1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIHdpZHRoOiA0MCU7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMC43KTtcbiAgbWFyZ2luOiAwIDElO1xuICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufSJdfQ== */");
+module.exports = ".other-user {\n  background: #4f85b5a6;\n}\n\n.current-user {\n  background: #80808085;\n  align-self: flex-end;\n}\n\n.current-user, .other-user {\n  padding: 20px 20px;\n  border-radius: 5px;\n  display: inline-block;\n  width: 25%;\n  position: relative;\n}\n\n.scrollable {\n  min-height: 470px;\n  max-height: 470px;\n  overflow: scroll;\n}\n\n.message-date {\n  position: absolute;\n  bottom: 5px;\n  right: 5px;\n  font-size: 0.7rem;\n}\n\n.new-day {\n  text-align: center;\n}\n\n.new-day::before, .new-day::after {\n  content: \"\";\n  height: 1px;\n  display: inline-block;\n  width: 40%;\n  background-color: rgba(0, 0, 0, 0.7);\n  margin: 0 1%;\n  vertical-align: middle;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy91bWVzaGNoYXVoYW4vRG9jdW1lbnRzL25vZGVzYW5kYm94L2FuZ3VsYXItc29ja2V0L3NyYy9hcHAvY2hhdHJvb20vY2hhdHJvb20uY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2NoYXRyb29tL2NoYXRyb29tLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQVkscUJBQUE7QUNFWjs7QUREQTtFQUFjLHFCQUFBO0VBQXVCLG9CQUFBO0FDTXJDOztBRExBO0VBQTJCLGtCQUFBO0VBQW9CLGtCQUFBO0VBQW9CLHFCQUFBO0VBQXVCLFVBQUE7RUFBWSxrQkFBQTtBQ2F0Rzs7QURaQTtFQUFZLGlCQUFBO0VBQWtCLGlCQUFBO0VBQWtCLGdCQUFBO0FDa0JoRDs7QURqQkE7RUFBYyxrQkFBQTtFQUFvQixXQUFBO0VBQWEsVUFBQTtFQUFZLGlCQUFBO0FDd0IzRDs7QUR2QkE7RUFBUyxrQkFBQTtBQzJCVDs7QUQxQkE7RUFBa0MsV0FBQTtFQUFhLFdBQUE7RUFBYSxxQkFBQTtFQUF1QixVQUFBO0VBQVksb0NBQUE7RUFBc0MsWUFBQTtFQUFjLHNCQUFBO0FDb0NuSiIsImZpbGUiOiJzcmMvYXBwL2NoYXRyb29tL2NoYXRyb29tLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm90aGVyLXVzZXJ7YmFja2dyb3VuZDogIzRmODViNWE2O31cbi5jdXJyZW50LXVzZXJ7YmFja2dyb3VuZDogIzgwODA4MDg1OyBhbGlnbi1zZWxmOiBmbGV4LWVuZH1cbi5jdXJyZW50LXVzZXIsIC5vdGhlci11c2Vye3BhZGRpbmc6IDIwcHggMjBweDsgYm9yZGVyLXJhZGl1czogNXB4OyBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IHdpZHRoOiAyNSU7IHBvc2l0aW9uOiByZWxhdGl2ZX1cbi5zY3JvbGxhYmxle21pbi1oZWlnaHQ6IDQ3MHB4O21heC1oZWlnaHQ6IDQ3MHB4O292ZXJmbG93OiBzY3JvbGx9XG4ubWVzc2FnZS1kYXRle3Bvc2l0aW9uOiBhYnNvbHV0ZTsgYm90dG9tOiA1cHg7IHJpZ2h0OiA1cHg7IGZvbnQtc2l6ZTogMC43cmVtO31cbi5uZXctZGF5e3RleHQtYWxpZ246IGNlbnRlcjt9XG4ubmV3LWRheTo6YmVmb3JlLCAubmV3LWRheTo6YWZ0ZXJ7Y29udGVudDogXCJcIjsgaGVpZ2h0OiAxcHg7IGRpc3BsYXk6IGlubGluZS1ibG9jazsgd2lkdGg6IDQwJTsgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgwLCAwLCAwLCAwLjcpOyBtYXJnaW46IDAgMSU7IHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7fVxuIiwiLm90aGVyLXVzZXIge1xuICBiYWNrZ3JvdW5kOiAjNGY4NWI1YTY7XG59XG5cbi5jdXJyZW50LXVzZXIge1xuICBiYWNrZ3JvdW5kOiAjODA4MDgwODU7XG4gIGFsaWduLXNlbGY6IGZsZXgtZW5kO1xufVxuXG4uY3VycmVudC11c2VyLCAub3RoZXItdXNlciB7XG4gIHBhZGRpbmc6IDIwcHggMjBweDtcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIHdpZHRoOiAyNSU7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cblxuLnNjcm9sbGFibGUge1xuICBtaW4taGVpZ2h0OiA0NzBweDtcbiAgbWF4LWhlaWdodDogNDcwcHg7XG4gIG92ZXJmbG93OiBzY3JvbGw7XG59XG5cbi5tZXNzYWdlLWRhdGUge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGJvdHRvbTogNXB4O1xuICByaWdodDogNXB4O1xuICBmb250LXNpemU6IDAuN3JlbTtcbn1cblxuLm5ldy1kYXkge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbi5uZXctZGF5OjpiZWZvcmUsIC5uZXctZGF5OjphZnRlciB7XG4gIGNvbnRlbnQ6IFwiXCI7XG4gIGhlaWdodDogMXB4O1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIHdpZHRoOiA0MCU7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMC43KTtcbiAgbWFyZ2luOiAwIDElO1xuICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufSJdfQ== */"
 
 /***/ }),
 
@@ -1013,8 +762,8 @@ ChatroomComponent.ctorParameters = () => [
 ChatroomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-chatroom',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./chatroom.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/chatroom/chatroom.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./chatroom.component.scss */ "./src/app/chatroom/chatroom.component.scss")).default]
+        template: __webpack_require__(/*! raw-loader!./chatroom.component.html */ "./node_modules/raw-loader/index.js!./src/app/chatroom/chatroom.component.html"),
+        styles: [__webpack_require__(/*! ./chatroom.component.scss */ "./src/app/chatroom/chatroom.component.scss")]
     })
 ], ChatroomComponent);
 
@@ -1026,12 +775,10 @@ ChatroomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*!****************************************************************!*\
   !*** ./src/app/forgot-password/forgot-password.component.scss ***!
   \****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2ZvcmdvdC1wYXNzd29yZC9mb3Jnb3QtcGFzc3dvcmQuY29tcG9uZW50LnNjc3MifQ== */");
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2ZvcmdvdC1wYXNzd29yZC9mb3Jnb3QtcGFzc3dvcmQuY29tcG9uZW50LnNjc3MifQ== */"
 
 /***/ }),
 
@@ -1100,8 +847,8 @@ ForgotPasswordComponent.ctorParameters = () => [
 ForgotPasswordComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-forgot-password',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./forgot-password.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/forgot-password/forgot-password.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./forgot-password.component.scss */ "./src/app/forgot-password/forgot-password.component.scss")).default]
+        template: __webpack_require__(/*! raw-loader!./forgot-password.component.html */ "./node_modules/raw-loader/index.js!./src/app/forgot-password/forgot-password.component.html"),
+        styles: [__webpack_require__(/*! ./forgot-password.component.scss */ "./src/app/forgot-password/forgot-password.component.scss")]
     })
 ], ForgotPasswordComponent);
 
@@ -1113,12 +860,10 @@ ForgotPasswordComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*!**********************************************!*\
   !*** ./src/app/header/header.component.scss ***!
   \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2hlYWRlci9oZWFkZXIuY29tcG9uZW50LnNjc3MifQ== */");
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2hlYWRlci9oZWFkZXIuY29tcG9uZW50LnNjc3MifQ== */"
 
 /***/ }),
 
@@ -1161,8 +906,8 @@ HeaderComponent.ctorParameters = () => [
 HeaderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-header',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./header.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/header/header.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./header.component.scss */ "./src/app/header/header.component.scss")).default]
+        template: __webpack_require__(/*! raw-loader!./header.component.html */ "./node_modules/raw-loader/index.js!./src/app/header/header.component.html"),
+        styles: [__webpack_require__(/*! ./header.component.scss */ "./src/app/header/header.component.scss")]
     })
 ], HeaderComponent);
 
@@ -1174,12 +919,10 @@ HeaderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*!**************************************************!*\
   !*** ./src/app/joinchat/joinchat.component.scss ***!
   \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".joinbox {\n  box-shadow: 3px 4px 15px -2px rgba(0, 0, 0, 0.75);\n  padding: 30px 20px;\n  background: #85dbf5;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvam9pbmNoYXQvZTpcXHByb2plY3RzXFxjaGF0YXBwXFxhbmd1bGFyLXNvY2tldC9zcmNcXGFwcFxcam9pbmNoYXRcXGpvaW5jaGF0LmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9qb2luY2hhdC9qb2luY2hhdC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUdFLGlEQUFBO0VBQ0Esa0JBQUE7RUFDQSxtQkFBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvam9pbmNoYXQvam9pbmNoYXQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuam9pbmJveCB7XHJcbiAgLXdlYmtpdC1ib3gtc2hhZG93OiAzcHggNHB4IDE1cHggLTJweCByZ2JhKDAsMCwwLDAuNzUpO1xyXG4gIC1tb3otYm94LXNoYWRvdzogM3B4IDRweCAxNXB4IC0ycHggcmdiYSgwLDAsMCwwLjc1KTtcclxuICBib3gtc2hhZG93OiAzcHggNHB4IDE1cHggLTJweCByZ2JhKDAsMCwwLDAuNzUpO1xyXG4gIHBhZGRpbmc6IDMwcHggMjBweDtcclxuICBiYWNrZ3JvdW5kOiAjODVkYmY1O1xyXG59XHJcbiIsIi5qb2luYm94IHtcbiAgLXdlYmtpdC1ib3gtc2hhZG93OiAzcHggNHB4IDE1cHggLTJweCByZ2JhKDAsIDAsIDAsIDAuNzUpO1xuICAtbW96LWJveC1zaGFkb3c6IDNweCA0cHggMTVweCAtMnB4IHJnYmEoMCwgMCwgMCwgMC43NSk7XG4gIGJveC1zaGFkb3c6IDNweCA0cHggMTVweCAtMnB4IHJnYmEoMCwgMCwgMCwgMC43NSk7XG4gIHBhZGRpbmc6IDMwcHggMjBweDtcbiAgYmFja2dyb3VuZDogIzg1ZGJmNTtcbn0iXX0= */");
+module.exports = ".joinbox {\n  box-shadow: 3px 4px 15px -2px rgba(0, 0, 0, 0.75);\n  padding: 30px 20px;\n  background: #85dbf5;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy91bWVzaGNoYXVoYW4vRG9jdW1lbnRzL25vZGVzYW5kYm94L2FuZ3VsYXItc29ja2V0L3NyYy9hcHAvam9pbmNoYXQvam9pbmNoYXQuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2pvaW5jaGF0L2pvaW5jaGF0LmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBR0UsaURBQUE7RUFDQSxrQkFBQTtFQUNBLG1CQUFBO0FDQ0YiLCJmaWxlIjoic3JjL2FwcC9qb2luY2hhdC9qb2luY2hhdC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5qb2luYm94IHtcbiAgLXdlYmtpdC1ib3gtc2hhZG93OiAzcHggNHB4IDE1cHggLTJweCByZ2JhKDAsMCwwLDAuNzUpO1xuICAtbW96LWJveC1zaGFkb3c6IDNweCA0cHggMTVweCAtMnB4IHJnYmEoMCwwLDAsMC43NSk7XG4gIGJveC1zaGFkb3c6IDNweCA0cHggMTVweCAtMnB4IHJnYmEoMCwwLDAsMC43NSk7XG4gIHBhZGRpbmc6IDMwcHggMjBweDtcbiAgYmFja2dyb3VuZDogIzg1ZGJmNTtcbn1cbiIsIi5qb2luYm94IHtcbiAgLXdlYmtpdC1ib3gtc2hhZG93OiAzcHggNHB4IDE1cHggLTJweCByZ2JhKDAsIDAsIDAsIDAuNzUpO1xuICAtbW96LWJveC1zaGFkb3c6IDNweCA0cHggMTVweCAtMnB4IHJnYmEoMCwgMCwgMCwgMC43NSk7XG4gIGJveC1zaGFkb3c6IDNweCA0cHggMTVweCAtMnB4IHJnYmEoMCwgMCwgMCwgMC43NSk7XG4gIHBhZGRpbmc6IDMwcHggMjBweDtcbiAgYmFja2dyb3VuZDogIzg1ZGJmNTtcbn0iXX0= */"
 
 /***/ }),
 
@@ -1272,8 +1015,8 @@ JoinchatComponent.ctorParameters = () => [
 JoinchatComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-joinchat',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./joinchat.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/joinchat/joinchat.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./joinchat.component.scss */ "./src/app/joinchat/joinchat.component.scss")).default]
+        template: __webpack_require__(/*! raw-loader!./joinchat.component.html */ "./node_modules/raw-loader/index.js!./src/app/joinchat/joinchat.component.html"),
+        styles: [__webpack_require__(/*! ./joinchat.component.scss */ "./src/app/joinchat/joinchat.component.scss")]
     })
 ], JoinchatComponent);
 
@@ -1285,12 +1028,10 @@ JoinchatComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*!********************************************!*\
   !*** ./src/app/login/login.component.scss ***!
   \********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2xvZ2luL2xvZ2luLmNvbXBvbmVudC5zY3NzIn0= */");
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2xvZ2luL2xvZ2luLmNvbXBvbmVudC5zY3NzIn0= */"
 
 /***/ }),
 
@@ -1416,8 +1157,8 @@ LoginComponent.ctorParameters = () => [
 LoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
         selector: 'app-login',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./login.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/login/login.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./login.component.scss */ "./src/app/login/login.component.scss")).default]
+        template: __webpack_require__(/*! raw-loader!./login.component.html */ "./node_modules/raw-loader/index.js!./src/app/login/login.component.html"),
+        styles: [__webpack_require__(/*! ./login.component.scss */ "./src/app/login/login.component.scss")]
     })
 ], LoginComponent);
 
@@ -1429,12 +1170,10 @@ LoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*!************************************************!*\
   !*** ./src/app/profile/profile.component.scss ***!
   \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Byb2ZpbGUvcHJvZmlsZS5jb21wb25lbnQuc2NzcyJ9 */");
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Byb2ZpbGUvcHJvZmlsZS5jb21wb25lbnQuc2NzcyJ9 */"
 
 /***/ }),
 
@@ -1624,8 +1363,8 @@ ProfileComponent.ctorParameters = () => [
 ProfileComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
         selector: 'app-profile',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./profile.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/profile/profile.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./profile.component.scss */ "./src/app/profile/profile.component.scss")).default]
+        template: __webpack_require__(/*! raw-loader!./profile.component.html */ "./node_modules/raw-loader/index.js!./src/app/profile/profile.component.html"),
+        styles: [__webpack_require__(/*! ./profile.component.scss */ "./src/app/profile/profile.component.scss")]
     })
 ], ProfileComponent);
 
@@ -1677,12 +1416,10 @@ RecentDatePipe = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*!**************************************************!*\
   !*** ./src/app/register/register.component.scss ***!
   \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3JlZ2lzdGVyL3JlZ2lzdGVyLmNvbXBvbmVudC5zY3NzIn0= */");
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3JlZ2lzdGVyL3JlZ2lzdGVyLmNvbXBvbmVudC5zY3NzIn0= */"
 
 /***/ }),
 
@@ -1837,8 +1574,8 @@ RegisterComponent.ctorParameters = () => [
 RegisterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
         selector: 'app-register',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./register.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/register/register.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./register.component.scss */ "./src/app/register/register.component.scss")).default]
+        template: __webpack_require__(/*! raw-loader!./register.component.html */ "./node_modules/raw-loader/index.js!./src/app/register/register.component.html"),
+        styles: [__webpack_require__(/*! ./register.component.scss */ "./src/app/register/register.component.scss")]
     })
 ], RegisterComponent);
 
@@ -1956,12 +1693,10 @@ SocketService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*!**************************************************************!*\
   !*** ./src/app/verify-account/verify-account.component.scss ***!
   \**************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3ZlcmlmeS1hY2NvdW50L3ZlcmlmeS1hY2NvdW50LmNvbXBvbmVudC5zY3NzIn0= */");
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3ZlcmlmeS1hY2NvdW50L3ZlcmlmeS1hY2NvdW50LmNvbXBvbmVudC5zY3NzIn0= */"
 
 /***/ }),
 
@@ -2088,8 +1823,8 @@ VerifyAccountComponent.ctorParameters = () => [
 VerifyAccountComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-verify-account',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./verify-account.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/verify-account/verify-account.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./verify-account.component.scss */ "./src/app/verify-account/verify-account.component.scss")).default]
+        template: __webpack_require__(/*! raw-loader!./verify-account.component.html */ "./node_modules/raw-loader/index.js!./src/app/verify-account/verify-account.component.html"),
+        styles: [__webpack_require__(/*! ./verify-account.component.scss */ "./src/app/verify-account/verify-account.component.scss")]
     })
 ], VerifyAccountComponent);
 
@@ -2107,11 +1842,9 @@ VerifyAccountComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-
 const environment = {
     production: false,
     socketUrl: 'http://localhost:3000',
@@ -2138,20 +1871,18 @@ const environment = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/platform-browser-dynamic */ "./node_modules/@angular/platform-browser-dynamic/fesm2015/platform-browser-dynamic.js");
-/* harmony import */ var _app_app_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app/app.module */ "./src/app/app.module.ts");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser-dynamic */ "./node_modules/@angular/platform-browser-dynamic/fesm2015/platform-browser-dynamic.js");
+/* harmony import */ var _app_app_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app/app.module */ "./src/app/app.module.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./environments/environment */ "./src/environments/environment.ts");
 
 
 
 
-
-if (_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].production) {
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["enableProdMode"])();
+if (_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].production) {
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["enableProdMode"])();
 }
-Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformBrowserDynamic"])().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_3__["AppModule"])
+Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformBrowserDynamic"])().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_2__["AppModule"])
     .catch(err => console.error(err));
 
 
@@ -2164,7 +1895,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! e:\projects\chatapp\angular-socket\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/umeshchauhan/Documents/nodesandbox/angular-socket/src/main.ts */"./src/main.ts");
 
 
 /***/ }),
