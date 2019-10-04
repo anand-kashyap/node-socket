@@ -45,7 +45,7 @@ router.post('/confirm-otp', [
 ], user.confirmOtp);
 
 router.put('/reset-password',[
-  ...validationArray,
+  validationArray[1],
   check('token').exists().withMessage('Token is a required value')
 ], user.resetPassword);
 

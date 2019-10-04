@@ -21,35 +21,47 @@ const getUserDetails = (req, res, next) => {
   if (checkValidation(req, res)) return;
   // return res.status(200).json({ users: "test" });
   User = userModel.User;
-  User.findOne({email: req.query.email.trim()}).then((user) => {
-    console.log(user);
-    if (user) {
-      return res.status(200).json({success: true, message: 'User details found', data: user});
+  User.findOne({ email: req.query.email.trim() }).then(
+    user => {
+      console.log(user);
+      if (user) {
+        return res
+          .status(200)
+          .json({ success: true, message: "User details found", data: user });
+      }
+      return res
+        .status(404)
+        .json({ success: true, message: "User not found", data: {} });
+    },
+    err => {
+      console.log(err);
+      return res
+        .status(400)
+        .json({ success: false, message: err.message, data: {} });
     }
-    return res.status(404).json({success: true, message: 'User not found', data: {}});
-  }, err => {
-    console.log(err);
-    return res.status(400).json({success: false, message: err.message, data: {}});
-  });
+  );
 };
 
 const checkUserName = (req, res, next) => {
   if (checkValidation(req, res)) return;
-  console.log('req.query', req.query);
+  console.log("req.query", req.query);
   const userInput = req.query.userinput.trim();
   const email = req.query.email;
   user = userModel.User;
-  user.findOne({username: userInput}).then(resp => {
-    console.log(resp);
-    if (resp && resp.email !== email) {
-      return res.status(200).json({ success: true, exists: true });
+  user.findOne({ username: userInput }).then(
+    resp => {
+      console.log(resp);
+      if (resp && resp.email !== email) {
+        return res.status(200).json({ success: true, exists: true });
+      }
+      return res.status(200).json({ success: true, exists: false });
+    },
+    err => {
+      console.log(err);
+      return res.status(406).json({ message: err.message });
     }
-    return res.status(200).json({ success: true, exists: false });
-  }, err => {
-    console.log(err);
-    return res.status(406).json({ message: err.message });
-  });
-}
+  );
+};
 
 const userToken = oldUser => {
   let payload = {
@@ -99,13 +111,11 @@ const registerUser = (req, res, next) => {
           console.log("info from mail");
           console.log(info);
           const token = userToken(newUserDoc);
-          return res
-            .status(201)
-            .send({
-              token,
-              success: true,
-              message: "User created successfully!"
-            });
+          return res.status(201).send({
+            token,
+            success: true,
+            message: "User created successfully!"
+          });
         });
       });
     } else {
@@ -131,7 +141,7 @@ const authUser = (req, res, next) => {
       }
       if (isCorrect) {
         let token = userToken(oldUser);
-        // console.log(req.session.id, 'from route');        
+        // console.log(req.session.id, 'from route');
         // return the JWT token for the future API calls
         return res.status(200).json({
           success: true,
@@ -139,12 +149,10 @@ const authUser = (req, res, next) => {
           token: token
         });
       } else {
-        return res
-          .status(403)
-          .json({
-            success: false,
-            message: "Incorrect Password entered"
-          });
+        return res.status(403).json({
+          success: false,
+          message: "Incorrect Password entered"
+        });
       }
     } else {
       return res
@@ -166,15 +174,20 @@ const updateProfile = (req, res, next) => {
   User.findOne({ email: body.email }).then(oldUser => {
     if (oldUser) {
       console.log(oldUser);
-      User.findOneAndUpdate({email: body.email}, updateJson).then(updatedUser => {
-        return res
-        .status(200)
-        .json({ success: true, message: 'User details updated successfully.', data: updatedUser });  
-      }, err => {
-        return res
-        .status(500)
-        .json({ success: false, message: err.message });  
-      });
+      User.findOneAndUpdate({ email: body.email }, updateJson).then(
+        updatedUser => {
+          return res
+            .status(200)
+            .json({
+              success: true,
+              message: "User details updated successfully.",
+              data: updatedUser
+            });
+        },
+        err => {
+          return res.status(500).json({ success: false, message: err.message });
+        }
+      );
     } else {
       return res
         .status(404)
@@ -249,17 +262,16 @@ const forgotPassword = (req, res, next) => {
 };
 
 const isRecentOTP = (otpArr, recOtp, minutes = 2) => {
-  const f = otpArr.find(aOtp => aOtp.otp === recOtp); 
+  const f = otpArr.find(aOtp => aOtp.otp === recOtp);
   if (f) {
-  const diff =
-    (new Date().getTime() - f.createdDate.getTime()) / (1000 * 60);
+    const diff = (new Date().getTime() - f.createdDate.getTime()) / (1000 * 60);
     return diff <= minutes ? true : false;
   } else {
     return false;
   }
 };
 
-const convertToMs = (val, unit = 'h') => {
+const convertToMs = (val, unit = "h") => {
   if (unit === "s") {
     return val * 1000;
   } else if (unit === "m") {
@@ -269,14 +281,14 @@ const convertToMs = (val, unit = 'h') => {
   }
 };
 
-const emptyOtps = (email) => {
-  console.log('timer started');
+const emptyOtps = email => {
+  console.log("timer started");
   setTimeout(() => {
     user = userModel.User;
-    return user.findOneAndUpdate({ email }, {otps: []}).then(res => {
-      console.log('cleared array');
+    return user.findOneAndUpdate({ email }, { otps: [] }).then(res => {
+      console.log("cleared array");
     });
-  }, convertToMs(24));  
+  }, convertToMs(24));
 };
 
 const sendOtp = (req, res, next) => {
@@ -286,36 +298,36 @@ const sendOtp = (req, res, next) => {
   user.findOne({ email: req.body.email }).then(
     userDoc => {
       if (userDoc) {
-        if (
-          userDoc.otps.length >=3
-        ) {
+        if (userDoc.otps.length >= 3) {
           return res.status(400).json({
             success: false,
-            message: "Max number(3) of OTPs sent. Please try again after 24 hours."
+            message:
+              "Max number(3) of OTPs sent. Please try again after 24 hours."
           });
         }
         const otp = generateOTP();
-        mail.sendVerifyOTP(otp, req.body.email, function (err, info) {
-        if (err) return next(err);
-        if (info) {   
-        user.findOneAndUpdate(
-            { email: userDoc.email },
-            { $push: {otps: {otp}} },
-            { new: true }
-          )
-          .then(doc => {
-            if (doc.otps.length === 3) {
-              emptyOtps(req.body.email);
-            }
-            return res.status(200).json({
-              otp: doc.otps[doc.otps.length-1].otp,
-              success: true,
-              attempt: doc.otps.length,
-              message: `An OTP has been sent to your mail. Attempt ${doc.otps.length}.`
-            });
-            });
-          } 
-      });  
+        mail.sendVerifyOTP(otp, req.body.email, function(err, info) {
+          if (err) return next(err);
+          if (info) {
+            user
+              .findOneAndUpdate(
+                { email: userDoc.email },
+                { $push: { otps: { otp } } },
+                { new: true }
+              )
+              .then(doc => {
+                if (doc.otps.length === 3) {
+                  emptyOtps(req.body.email);
+                }
+                return res.status(200).json({
+                  otp: doc.otps[doc.otps.length - 1].otp,
+                  success: true,
+                  attempt: doc.otps.length,
+                  message: `An OTP has been sent to your mail. Attempt ${doc.otps.length}.`
+                });
+              });
+          }
+        });
       } else {
         res.status(404).json({
           success: false,
@@ -336,24 +348,24 @@ const confirmOtp = (req, res, next) => {
   user.findOne({ email: req.body.email }).then(
     userDoc => {
       if (userDoc) {
-        if (
-          isRecentOTP(userDoc.otps, req.body.otp, 15)
-        ) {
-          user.findOneAndUpdate(
-            { email: userDoc.email },
-            { otps: [], lastVerified: Date.now(), isVerified: true },
-            { new: true }
-          )
-          .then(doc => {
-            return res.status(200).json({
-              success: true,
-              message: "OTP correct. Account verified!"
+        if (isRecentOTP(userDoc.otps, req.body.otp, 15)) {
+          user
+            .findOneAndUpdate(
+              { email: userDoc.email },
+              { otps: [], lastVerified: Date.now(), isVerified: true },
+              { new: true }
+            )
+            .then(doc => {
+              return res.status(200).json({
+                success: true,
+                message: "OTP correct. Account verified!"
+              });
             });
-          }); 
         } else {
           return res.status(401).json({
             success: false,
-            message: "OTP incorrect/expired. Please generate a new one or recheck."
+            message:
+              "OTP incorrect/expired. Please generate a new one or recheck."
           });
         }
       } else {
@@ -372,45 +384,56 @@ const confirmOtp = (req, res, next) => {
 
 const resetPassword = (req, res, next) => {
   if (checkValidation(req, res)) return;
-  user = userModel.User;
-  query = user.findOne({ email: req.body.email });
-  query.exec(function(err, userDoc) {
-    if (err) {
-      return next(err);
-    }
-    if (req.body.token !== userDoc.resetToken || userDoc.isResetTokenUsed) {
+  return jwt.verify(req.body.token, 'secretkey', (err, decoded) => {
+    // Error handling
+    if (err)
+    return res.status(400).json({ success: false, message: err.message });
+    if (!decoded.email) {
       return res
-        .status(406)
-        .json({ success: false, message: `Invalid Reset Link.` });
+      .status(406)
+      .json({ success: false, message: `Invalid Reset Link.` });
     }
-    if (userDoc) {
-      const hashPassword = bcrypt.hashSync(req.body.password, process.env.salt);
-      user
-        .findOneAndUpdate(
-          { email: userDoc.email },
-          { password: hashPassword, isResetTokenUsed: true },
-          { new: true }
-        )
-        .then(
-          doc => {
-            console.log(doc);
-            return res
-              .status(200)
-              .json({
+    user = userModel.User;
+    query = user.findOne({ email: decoded.email });
+    query.exec(function(err, userDoc) {
+      if (err) {
+        return next(err);
+      }
+      if (userDoc) {
+        if (userDoc.isResetTokenUsed) {
+          return res
+          .status(406)
+          .json({ success: false, message: `Reset Token Used` });
+        }
+        const hashPassword = bcrypt.hashSync(
+          req.body.password,
+          process.env.salt
+        );
+        user
+          .findOneAndUpdate(
+            { email: userDoc.email },
+            { password: hashPassword, isResetTokenUsed: true },
+            { new: true }
+          )
+          .then(
+            doc => {
+              console.log(doc);
+              return res.status(200).json({
                 success: true,
                 message: "password successfully updated"
               });
-          },
-          err => {
-            console.log(err);
-            return next(err);
-          }
-        );
-    } else {
-      return res
-        .status(404)
-        .json({ success: false, message: "user not found" });
-    }
+            },
+            err => {
+              console.log(err);
+              return next(err);
+            }
+          );
+      } else {
+        return res
+          .status(404)
+          .json({ success: false, message: "user not found" });
+      }
+    });
   });
 };
 
@@ -438,12 +461,10 @@ const updatePassword = (req, res, next) => {
           { new: true }
         ).then(
           doc => {
-            return res
-              .status(200)
-              .json({
-                success: true,
-                message: "password updated successfully"
-              });
+            return res.status(200).json({
+              success: true,
+              message: "password updated successfully"
+            });
           },
           err => {
             console.log(err);
@@ -451,12 +472,10 @@ const updatePassword = (req, res, next) => {
           }
         );
       } else {
-        return res
-          .status(403)
-          .json({
-            success: false,
-            message: "Incorrect Email/Password entered"
-          });
+        return res.status(403).json({
+          success: false,
+          message: "Incorrect Email/Password entered"
+        });
       }
     } else {
       return res

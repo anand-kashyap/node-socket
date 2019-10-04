@@ -111,6 +111,17 @@ module.exports = "<div class=\"container-fluid view-area\">\n    <div class=\"ro
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/index.js!./src/app/reset-password/reset-password.component.html":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/reset-password/reset-password.component.html ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row mt-4\">\n  <div class=\"col-md-6 offset-md-3 col-sm-10 offset-sm-1\">\n    <div class=\"card mx-auto w-75\">\n      <div class=\"card-header bg-primary text-light\">Reset Password\n      </div>\n      <div class=\"card-body\">\n        <form [formGroup]=\"resetPasswordForm\" (ngSubmit)=\"resetPassword()\">\n          <div class=\"form-group\">\n            <label>Password<span class=\"text-danger\">*</span></label>\n            <input type=\"password\" class=\"form-control\" autocomplete=\"off\"\n              [ngClass]=\"{'is-invalid': isInvalid('password')}\" formControlName=\"password\"\n              placeholder=\"Enter Password\">\n            <div class=\"invalid-feedback\" *ngIf=\"isInvalid('password')\">{{getErrors('password')}}\n            </div>\n          </div>\n          <div class=\"form-group\">\n            <label>Confirm Password<span class=\"text-danger\">*</span></label>\n            <input type=\"text\" class=\"form-control\" [ngClass]=\"{'is-invalid': isInvalid('confirmPassword')}\"\n              formControlName=\"confirmPassword\" placeholder=\"Enter Confirm Password\">\n            <div class=\"invalid-feedback\" *ngIf=\"isInvalid('confirmPassword')\"\n              >{{getErrors('confirmPassword')}}\n            </div>\n          </div>\n          <div class=\"spinner-border text-primary\" *ngIf=\"loader\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n          </div>\n          <button type=\"submit\" *ngIf=\"!loader\" class=\"btn btn-outline-primary d-inline-block\">Submit</button>\n          <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\" [ngClass]=\"{'text-success': success}\">{{errorMessage}}</div>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/index.js!./src/app/verify-account/verify-account.component.html":
 /*!****************************************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/verify-account/verify-account.component.html ***!
@@ -239,6 +250,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _auth_guard__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./auth.guard */ "./src/app/auth.guard.ts");
 /* harmony import */ var _profile_profile_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./profile/profile.component */ "./src/app/profile/profile.component.ts");
 /* harmony import */ var _forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./forgot-password/forgot-password.component */ "./src/app/forgot-password/forgot-password.component.ts");
+/* harmony import */ var _reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./reset-password/reset-password.component */ "./src/app/reset-password/reset-password.component.ts");
+
 
 
 
@@ -255,6 +268,7 @@ const routes = [
     { path: '', component: _login_login_component__WEBPACK_IMPORTED_MODULE_6__["LoginComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]], data: { checkloggedIn: true } },
     { path: 'register', component: _register_register_component__WEBPACK_IMPORTED_MODULE_7__["RegisterComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]], data: { checkloggedIn: true } },
     { path: 'forgot-password', component: _forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_11__["ForgotPasswordComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]], data: { checkloggedIn: true } },
+    { path: 'reset-password', component: _reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_12__["ResetPasswordComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]], data: { checkloggedIn: true } },
     { path: 'verify', component: _verify_account_verify_account_component__WEBPACK_IMPORTED_MODULE_8__["VerifyAccountComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]], data: { checkVerified: true } },
     { path: 'update-profile', component: _profile_profile_component__WEBPACK_IMPORTED_MODULE_10__["ProfileComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
     { path: 'join', component: _joinchat_joinchat_component__WEBPACK_IMPORTED_MODULE_1__["JoinchatComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]], data: { checkjoin: true, checkUsername: true } },
@@ -348,6 +362,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./header/header.component */ "./src/app/header/header.component.ts");
 /* harmony import */ var _profile_profile_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./profile/profile.component */ "./src/app/profile/profile.component.ts");
 /* harmony import */ var _forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./forgot-password/forgot-password.component */ "./src/app/forgot-password/forgot-password.component.ts");
+/* harmony import */ var _reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./reset-password/reset-password.component */ "./src/app/reset-password/reset-password.component.ts");
+
 
 
 
@@ -382,7 +398,8 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _verify_account_verify_account_component__WEBPACK_IMPORTED_MODULE_16__["VerifyAccountComponent"],
             _header_header_component__WEBPACK_IMPORTED_MODULE_17__["HeaderComponent"],
             _profile_profile_component__WEBPACK_IMPORTED_MODULE_18__["ProfileComponent"],
-            _forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_19__["ForgotPasswordComponent"]
+            _forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_19__["ForgotPasswordComponent"],
+            _reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_20__["ResetPasswordComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -540,7 +557,7 @@ let ChatService = class ChatService {
         localStorage.removeItem('error');
         return error;
     }
-    getValidationErrors(formControl, formGroup, validations) {
+    getErrors(formControl, formGroup, validations) {
         const errorField = validations[formControl];
         for (const i in errorField) {
             if (formGroup.get(formControl).hasError(errorField[i].type)) {
@@ -557,6 +574,23 @@ let ChatService = class ChatService {
             const control = formGroup.get(formControl);
             control.markAsDirty({ onlySelf: true });
         });
+    }
+    mustMatch(controlName, matchingControlName) {
+        return (formGroup) => {
+            const control = formGroup.controls[controlName];
+            const matchingControl = formGroup.controls[matchingControlName];
+            if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+                // return if another validator has already found an error on the matchingControl
+                return;
+            }
+            // set error on matchingControl if validation fails
+            if (control.value !== matchingControl.value) {
+                matchingControl.setErrors({ mustMatch: true });
+            }
+            else {
+                matchingControl.setErrors(null);
+            }
+        };
     }
     showResponseError(error) {
         if (error.status === 422 && error.error.errors) {
@@ -823,7 +857,7 @@ let ForgotPasswordComponent = class ForgotPasswordComponent {
         return this.chatService.isInvalid(this.forgotForm, control);
     }
     getErrors(formcontrol) {
-        return this.chatService.getValidationErrors(formcontrol, this.forgotForm, this.forgotValidations);
+        return this.chatService.getErrors(formcontrol, this.forgotForm, this.forgotValidations);
     }
     sendMail() {
         if (this.forgotForm.valid) {
@@ -1004,7 +1038,7 @@ let JoinchatComponent = class JoinchatComponent {
         }
     }
     getErrors(formcontrol) {
-        return this.chatService.getValidationErrors(formcontrol, this.joinFormGroup, this.joinValidations);
+        return this.chatService.getErrors(formcontrol, this.joinFormGroup, this.joinValidations);
     }
 };
 JoinchatComponent.ctorParameters = () => [
@@ -1102,7 +1136,7 @@ let LoginComponent = class LoginComponent {
         // this.errorMessage = this.authService.getErrorMessage();
     }
     getErrors(formcontrol) {
-        return this.chatService.getValidationErrors(formcontrol, this.loginForm, this.loginValidations);
+        return this.chatService.getErrors(formcontrol, this.loginForm, this.loginValidations);
     }
     getInvalidCondition(formControl) {
         return (this.loginForm.get(formControl).invalid &&
@@ -1326,7 +1360,7 @@ let ProfileComponent = class ProfileComponent {
         };
     }
     getErrors(formcontrol) {
-        return this.chatService.getValidationErrors(formcontrol, this.profileForm, this.profileValidations);
+        return this.chatService.getErrors(formcontrol, this.profileForm, this.profileValidations);
     }
     getInvalidCondition(formControl) {
         return (this.profileForm.get(formControl).invalid &&
@@ -1532,7 +1566,7 @@ let RegisterComponent = class RegisterComponent {
         };
     }
     getErrors(formcontrol) {
-        return this.chatService.getValidationErrors(formcontrol, this.registerForm, this.registerValidations);
+        return this.chatService.getErrors(formcontrol, this.registerForm, this.registerValidations);
     }
     getInvalidCondition(formControl) {
         return (this.registerForm.get(formControl).invalid &&
@@ -1578,6 +1612,138 @@ RegisterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         styles: [__webpack_require__(/*! ./register.component.scss */ "./src/app/register/register.component.scss")]
     })
 ], RegisterComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/reset-password/reset-password.component.scss":
+/*!**************************************************************!*\
+  !*** ./src/app/reset-password/reset-password.component.scss ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Jlc2V0LXBhc3N3b3JkL3Jlc2V0LXBhc3N3b3JkLmNvbXBvbmVudC5zY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/reset-password/reset-password.component.ts":
+/*!************************************************************!*\
+  !*** ./src/app/reset-password/reset-password.component.ts ***!
+  \************************************************************/
+/*! exports provided: ResetPasswordComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResetPasswordComponent", function() { return ResetPasswordComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _chat_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../chat.service */ "./src/app/chat.service.ts");
+
+
+
+
+
+let ResetPasswordComponent = class ResetPasswordComponent {
+    constructor(fb, validateService, activatedRoute, router) {
+        this.fb = fb;
+        this.validateService = validateService;
+        this.activatedRoute = activatedRoute;
+        this.router = router;
+        this.loader = false;
+        this.success = false;
+        this.resetPasswordForm = this.fb.group({
+            password: ['', [
+                    _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required,
+                    _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(8)
+                ]],
+            confirmPassword: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]],
+            token: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
+        }, {
+            validators: this.validateService.mustMatch('password', 'confirmPassword')
+        });
+        this.resetPasswordValidations = {
+            password: [
+                {
+                    type: 'required',
+                    message: 'Password is required'
+                },
+                {
+                    type: 'minlength',
+                    message: 'Password must have a minimum length of 8 characters'
+                }
+            ],
+            confirmPassword: [
+                {
+                    type: 'required',
+                    message: 'Confirm Password is required'
+                },
+                {
+                    type: 'mustMatch',
+                    message: 'Confirm Password must match Password'
+                }
+            ]
+        };
+    }
+    ngOnInit() {
+        const token = this.activatedRoute.snapshot.queryParams.token;
+        if (token === undefined || token === '') {
+            this.router.navigate(['/forgot-password']);
+        }
+        else {
+            this.resetPasswordForm.controls.token.setValue(token);
+        }
+    }
+    getErrors(controlName) {
+        return this.validateService.getErrors(controlName, this.resetPasswordForm, this.resetPasswordValidations);
+    }
+    isInvalid(controlName) {
+        return this.validateService.isInvalid(this.resetPasswordForm, controlName);
+    }
+    resetPassword() {
+        if (this.resetPasswordForm.valid) {
+            const body = this.resetPasswordForm.value;
+            delete body.confirmPassword;
+            console.log(body);
+            this.resetPasswordForm.disable();
+            /* this.apiService.resetPassword(body).subscribe(res => {
+              this.successMessage = res.message;
+              console.log(res);
+              setTimeout(() => {
+                this.router.navigateByUrl('/');
+              }, 3000);
+            }, err => {
+              console.log(err);
+              this.errorMessage = this.apiService.showResponseError(err);
+              if (this.errorMessage === 'jwt expired') {
+                setTimeout(() => {
+                  this.router.navigateByUrl('/forgot-password');
+                }, 3000);
+              }
+            }).add(() => this.resetPasswordForm.enable()); */
+        }
+        else {
+            this.validateService.markFieldsAsDirty(this.resetPasswordForm);
+        }
+    }
+};
+ResetPasswordComponent.ctorParameters = () => [
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] },
+    { type: _chat_service__WEBPACK_IMPORTED_MODULE_4__["ChatService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
+];
+ResetPasswordComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-reset-password',
+        template: __webpack_require__(/*! raw-loader!./reset-password.component.html */ "./node_modules/raw-loader/index.js!./src/app/reset-password/reset-password.component.html"),
+        styles: [__webpack_require__(/*! ./reset-password.component.scss */ "./src/app/reset-password/reset-password.component.scss")]
+    })
+], ResetPasswordComponent);
 
 
 
@@ -1786,7 +1952,7 @@ let VerifyAccountComponent = class VerifyAccountComponent {
         });
     }
     getErrors(formcontrol) {
-        return this.chatService.getValidationErrors(formcontrol, this.verifyForm, this.verifyValidations);
+        return this.chatService.getErrors(formcontrol, this.verifyForm, this.verifyValidations);
     }
     getInvalidCondition(formControl) {
         return (this.verifyForm.get(formControl).invalid &&

@@ -26,7 +26,7 @@ const user = require('./api/routes/user');
 const socketHandle = require('./socketio');
 socketHandle(io);
 
-/* const whitelist = [process.env.ALLOWED_CORS_URL, process.env.ALLOWED_CORS_URL_PROD];
+const whitelist = [process.env.ALLOWED_CORS_URL, process.env.ALLOWED_CORS_URL_PROD];
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -37,7 +37,7 @@ const corsOptions = {
     }
   },
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}; */
+};
 
 const mStore = new MongoStore({ mongooseConnection: mongoose.connection });
 const session = eSession({
@@ -56,7 +56,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(compression());
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 app.use(express.static(publicDirPath));
 //test db connection
 app.use('/*', function(req, res, next) {
