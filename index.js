@@ -56,7 +56,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(compression());
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 app.use(express.static(publicDirPath));
 //test db connection
 app.use('/*', function(req, res, next) {
