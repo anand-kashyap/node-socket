@@ -2,13 +2,10 @@ const {addUser, removeUser, findUsers, findUserIndex, getUsers} = require('./use
 
 const socketHandle = (io) => {
   io.on('connection', (socket) => {
-    if (!socket.handshake.session.id) { // safeguard for dev
-      socket.handshake.session.id = Math.floor(Math.random()*1532);
-    }
-    console.log('id', socket.handshake.session.id) // same value on every connection
     socket.on('join', (options, callback) => {
       options.room = options.room.trim().toLowerCase();
-      const {user} = addUser({id: socket.handshake.session.id, socketId: socket.id, ...options});
+      const {user} = addUser({sessionId: socket.handshake.session.id, socketId: socket.id, ...options});
+      console.log('sessionId', socket.handshake.session.id) // same value on every connection
       console.log('before join', getUsers());
       socket.join(user.room);
       console.log('after join', getUsers());

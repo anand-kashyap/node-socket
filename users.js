@@ -1,19 +1,19 @@
 const users = [];
 
-const addUser = ({id, socketId, username, room}) => {
+const addUser = ({sessionId, socketId, username, room}) => {
   const eid = findUserIndex(username, room);
   console.log('users', users);
   if (eid !== -1) {
     // connect to previous chat
     users[eid].tabs.push(socketId);
   } else {
-    const user = {id, username, room, tabs: [socketId]};
+    const user = {sessionId, username, room, tabs: [socketId]};
     users.push(user);
   }
-  return {user: {id, socketId, username, room}};
+  return {user: {sessionId, socketId, username, room}};
 }
 
-const removeUser = ({socketId, username, room}) => {
+const removeUser = ({socketId, username, room}) => { // todo: add removing user of particular session
   const eid = findUserIndex(username, room);
   if (eid === -1) {
     return {
