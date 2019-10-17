@@ -30,7 +30,7 @@ mongoose.connection.on('connected', function() {
 
 gracefulShutdown = function (msg, callback) {
   mongoose.connection.close();
-  console.log('SQL disconnected through ' + msg);
+  console.log('Mongo disconnected through ' + msg);
   callback();
 };
 

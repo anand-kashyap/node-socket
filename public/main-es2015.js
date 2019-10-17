@@ -1,0 +1,1692 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["main"],{
+
+/***/ "./$$_lazy_route_resource lazy recursive":
+/*!******************************************************!*\
+  !*** ./$$_lazy_route_resource lazy namespace object ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function webpackEmptyAsyncContext(req) {
+	// Here Promise.resolve().then() is used instead of new Promise() to prevent
+	// uncaught exception popping up in devtools
+	return Promise.resolve().then(function() {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	});
+}
+webpackEmptyAsyncContext.keys = function() { return []; };
+webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
+module.exports = webpackEmptyAsyncContext;
+webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/app.component.html":
+/*!**************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/app.component.html ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <app-header></app-header>\n  <router-outlet></router-outlet>\n</div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/forgot-password/forgot-password.component.html":
+/*!******************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/forgot-password/forgot-password.component.html ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-fluid view-area\">\n  <div class=\"row mt-4\">\n    <div class=\"col-md-6 m-auto\">\n      <div class=\"card\">\n        <div class=\"card-header bg-primary text-light\">\n          Forgot Password\n        </div>\n        <div class=\"card-body\">\n          <form [formGroup]=\"forgotForm\" (ngSubmit)=\"sendMail()\">\n            <div class=\"form-group\">\n              <label>Email</label>\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': isInvalid('email')}\"\n                formControlName=\"email\" placeholder=\"Your Login Email\" autocomplete=\"email\">\n              <div class=\"invalid-feedback\" *ngIf=\"isInvalid('email')\">\n                {{getErrors('email')}}\n              </div>\n            </div>\n            <div>\n              <button type=\"submit\" [disabled]=\"loader\" class=\"btn btn-primary d-inline-block\"> <span\n                  class=\"spinner-border spinner-border-sm\" *ngIf=\"loader\" role=\"status\">\n                  <span class=\"sr-only\">Loading...</span>\n                </span> Submit</button>\n            </div>\n            <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\n          </form>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/header/header.component.html":
+/*!************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/header/header.component.html ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-light bg-light\">\n    <a class=\"navbar-brand\" [routerLink]=\"['/']\">Angular Socket</a>\n    <button class=\"btn btn-primary\" *ngIf=\"isLoggedIn()\" (click)=\"logout()\">Logout</button>\n  </nav>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/login/login.component.html":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/login/login.component.html ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<alert type=\"danger\" [isOpen]=\"error\" [dismissOnTimeout]=\"errTimeout\">\n  <span>{{errMsg}}</span>\n</alert>\n<div class=\"container-fluid view-area\">\n  <div class=\"row mt-4\">\n    <div class=\"col-md-6 m-auto\">\n      <div class=\"card\">\n        <div class=\"card-header bg-primary text-light\">\n          Login\n        </div>\n        <div class=\"card-body\">\n          <form [formGroup]=\"loginForm\" (ngSubmit)=\"login()\">\n            <div class=\"form-group\">\n              <label>Email</label>\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('email')}\"\n                formControlName=\"email\" placeholder=\"Your Login Email\" autocomplete=\"email\">\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('email')\">\n                {{getErrors('email')}}\n              </div>\n            </div>\n            <div class=\"form-group\">\n              <label>Password</label>\n              <input type=\"password\" class=\"form-control\" autocomplete=\"password\"\n                [ngClass]=\"{'is-invalid': getInvalidCondition('password')}\" formControlName=\"password\"\n                placeholder=\"Password\">\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('password')\">\n                {{getErrors('password')}}\n              </div>\n            </div>\n            <div>\n              <div class=\"btn-group\" role=\"login\" aria-label=\"Login Register\">\n                <button type=\"submit\" [disabled]=\"loader\" class=\"btn btn-primary d-inline-block\"> <span class=\"spinner-border spinner-border-sm\" *ngIf=\"loader\" role=\"status\">\n                    <span class=\"sr-only\">Loading...</span>\n                  </span> Login</button>\n                <button type=\"button\" [disabled]=\"loader\" [routerLink]=\"['/register']\"\n                  class=\"btn btn-outline-primary d-inline-block ml-1\">Sign Up</button>\n              </div>\n              <a class=\"float-right\" [routerLink]=\"['/forgot-password']\">Forgot Password?</a>\n            </div>\n            <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\n          </form>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/register/register.component.html":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/register/register.component.html ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-fluid view-area\">\n    <div class=\"row mt-4\">\n      <div class=\"col-md-4 m-auto\">\n          <div class=\"card\">\n          <div class=\"card-header bg-primary text-light\">\n            Register\n          </div>\n          <div class=\"card-body\">\n            <form [formGroup]=\"registerForm\" (ngSubmit)=\"register()\">\n              <div class=\"form-group\">\n                <label>First Name (<span class=\"text-danger\">*</span>)</label>\n                <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('firstName')}\" formControlName=\"firstName\" placeholder=\"Your First Name\" autocomplete=\"firstName\">\n                <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('firstName')\">\n                  {{getErrors('firstName')}}\n                </div>\n              </div>\n              <div class=\"form-group\">\n                <label>Last Name</label>\n                <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('lastName')}\" formControlName=\"lastName\" placeholder=\"Your Last Name\" autocomplete=\"lastName\">\n                <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('lastName')\">\n                  {{getErrors('lastName')}}\n                </div>\n              </div>\n              <div class=\"form-group\">\n                <label>Email (<span class=\"text-danger\">*</span>)</label>\n                <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('email')}\" formControlName=\"email\" placeholder=\"Your Email\" autocomplete=\"email\">\n                <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('email')\">\n                  {{getErrors('email')}}\n                </div>\n              </div>\n              <div class=\"form-group\">\n                <label>Password (<span class=\"text-danger\">*</span>)</label>\n                <input type=\"password\" class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('password')}\" formControlName=\"password\" placeholder=\"Password\">\n                <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('password')\">\n                  {{getErrors('password')}}\n                </div>\n              </div>\n              <div class=\"form-group\">\n                <label>Confirm Password (<span class=\"text-danger\">*</span>)</label>\n                <input type=\"text\" class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('confirmPassword')}\" formControlName=\"confirmPassword\" placeholder=\"Confirm Password\">\n                <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('confirmPassword')\">\n                  {{getErrors('confirmPassword')}}\n                </div>\n              </div>\n              <div>\n                <button type=\"submit\" [disabled]=\"loader\" class=\"btn btn-primary d-inline-block\">\n                    <span class=\"spinner-border spinner-border-sm\" *ngIf=\"loader\" role=\"status\">\n                        <span class=\"sr-only\">Loading...</span>\n                      </span> Register</button>\n                <button type=\"button\" [disabled]=\"loader\" [routerLink]=\"['/']\" class=\"btn btn-outline-success d-inline-block ml-1\">Already a User ? Login</button>\n              </div>\n              <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\n            </form>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/reset-password/reset-password.component.html":
+/*!****************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/reset-password/reset-password.component.html ***!
+  \****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row mt-4\">\n  <div class=\"col-md-6 offset-md-3 col-sm-10 offset-sm-1\">\n    <div class=\"card mx-auto w-75\">\n      <div class=\"card-header bg-primary text-light\">Reset Password\n      </div>\n      <div class=\"card-body\">\n        <form [formGroup]=\"resetPasswordForm\" (ngSubmit)=\"resetPassword()\">\n          <div class=\"form-group\">\n            <label>Password<span class=\"text-danger\">*</span></label>\n            <input type=\"password\" class=\"form-control\" autocomplete=\"off\"\n              [ngClass]=\"{'is-invalid': isInvalid('password')}\" formControlName=\"password\"\n              placeholder=\"Enter Password\">\n            <div class=\"invalid-feedback\" *ngIf=\"isInvalid('password')\">{{getErrors('password')}}\n            </div>\n          </div>\n          <div class=\"form-group\">\n            <label>Confirm Password<span class=\"text-danger\">*</span></label>\n            <input type=\"text\" class=\"form-control\" [ngClass]=\"{'is-invalid': isInvalid('confirmPassword')}\"\n              formControlName=\"confirmPassword\" placeholder=\"Enter Confirm Password\">\n            <div class=\"invalid-feedback\" *ngIf=\"isInvalid('confirmPassword')\"\n              >{{getErrors('confirmPassword')}}\n            </div>\n          </div>\n          <div class=\"spinner-border text-primary\" *ngIf=\"loader\" role=\"status\">\n            <span class=\"sr-only\">Loading...</span>\n          </div>\n          <button type=\"submit\" *ngIf=\"!loader\" class=\"btn btn-outline-primary d-inline-block\">Submit</button>\n          <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\" [ngClass]=\"{'text-success': success}\">{{errorMessage}}</div>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/verify-account/verify-account.component.html":
+/*!****************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/verify-account/verify-account.component.html ***!
+  \****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-fluid view-area\">\n  <div class=\"row mt-4\">\n    <div class=\"m-auto\">\n      <div class=\"card\">\n        <div class=\"card-header bg-primary text-light\">\n          Verify Your Account\n        </div>\n        <div class=\"card-body\">\n          <div class=\"text-success d-block\" *ngIf=\"successMsg\">{{successMsg}}</div>\n          <form [formGroup]=\"verifyForm\" (ngSubmit)=\"verifyOtp()\">\n            <div class=\"form-group\">\n              <label>Enter OTP</label>\n              <input class=\"form-control\" [ngClass]=\"{'is-invalid': getInvalidCondition('otp')}\"\n                formControlName=\"otp\" placeholder=\"e.g. 123456\" autocomplete=\"otp\">\n              <div class=\"invalid-feedback\" *ngIf=\"getInvalidCondition('otp')\">\n                {{getErrors('otp')}}\n              </div>\n            </div>\n            <div>\n              <div class=\"spinner-border text-primary\" *ngIf=\"loader\" role=\"status\">\n                <span class=\"sr-only\">Loading...</span>\n              </div>\n              <button type=\"submit\" [disabled]=\"!otpSent\" class=\"btn btn-primary d-inline-block\">Verify</button>\n              <button type=\"button\" #resendButton class=\"btn btn-outline-success float-right\" [disabled]=\"!isResend\" (click)=\"sendOtp()\">Resend\n                <ng-container *ngIf=\"resendTime !== null\">\n                  in {{resendTime | date: 'mm:ss'}}\n                </ng-container>\n              </button>\n            </div>\n            <div class=\"invalid-feedback mt-3 d-block\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\n          </form>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/tslib/tslib.es6.js":
+/*!*****************************************!*\
+  !*** ./node_modules/tslib/tslib.es6.js ***!
+  \*****************************************/
+/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__extends", function() { return __extends; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__assign", function() { return __assign; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__rest", function() { return __rest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__decorate", function() { return __decorate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__param", function() { return __param; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__metadata", function() { return __metadata; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__awaiter", function() { return __awaiter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__generator", function() { return __generator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__exportStar", function() { return __exportStar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__values", function() { return __values; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__read", function() { return __read; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spread", function() { return __spread; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spreadArrays", function() { return __spreadArrays; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__await", function() { return __await; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncGenerator", function() { return __asyncGenerator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncDelegator", function() { return __asyncDelegator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncValues", function() { return __asyncValues; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__makeTemplateObject", function() { return __makeTemplateObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importStar", function() { return __importStar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importDefault", function() { return __importDefault; });
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var extendStatics = function(d, b) {
+    extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return extendStatics(d, b);
+};
+
+function __extends(d, b) {
+    extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    }
+    return __assign.apply(this, arguments);
+}
+
+function __rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function __param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function __metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function __awaiter(thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+function __generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
+function __exportStar(m, exports) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+
+function __values(o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+}
+
+function __read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
+
+function __spread() {
+    for (var ar = [], i = 0; i < arguments.length; i++)
+        ar = ar.concat(__read(arguments[i]));
+    return ar;
+}
+
+function __spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
+
+function __await(v) {
+    return this instanceof __await ? (this.v = v, this) : new __await(v);
+}
+
+function __asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+    function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+    function fulfill(value) { resume("next", value); }
+    function reject(value) { resume("throw", value); }
+    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+}
+
+function __asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+}
+
+function __asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+}
+
+function __makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+
+function __importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result.default = mod;
+    return result;
+}
+
+function __importDefault(mod) {
+    return (mod && mod.__esModule) ? mod : { default: mod };
+}
+
+
+/***/ }),
+
+/***/ "./src/app/api.service.ts":
+/*!********************************!*\
+  !*** ./src/app/api.service.ts ***!
+  \********************************/
+/*! exports provided: ApiService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApiService", function() { return ApiService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _chat_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chat.service */ "./src/app/chat.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
+
+
+
+
+
+
+let ApiService = class ApiService {
+    constructor(httpClient, router, chatService) {
+        this.httpClient = httpClient;
+        this.router = router;
+        this.chatService = chatService;
+        this.apiUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].socketUrl;
+    }
+    login(loginInput) {
+        const loginUrl = this.apiUrl + '/user/authenticate';
+        return this.httpClient.post(loginUrl, loginInput);
+    }
+    logout() {
+        this.chatService.clearUser();
+        this.router.navigate(['/']);
+    }
+    register(registerInput) {
+        const registerUrl = this.apiUrl + '/user/register';
+        return this.httpClient.post(registerUrl, registerInput);
+    }
+    forgotPass(email) {
+        const forgotUrl = this.apiUrl + '/user/forgot-password';
+        return this.httpClient.post(forgotUrl, { email, baseUrl: _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].baseUrl });
+    }
+    resetPass(resObj) {
+        const resetUrl = this.apiUrl + '/user/reset-password';
+        return this.httpClient.put(resetUrl, resObj);
+    }
+    addXToken() {
+        return new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'x-access-token': this.chatService.getFromLocal('token')
+        });
+    }
+    sendOtp() {
+        const verifyUrl = this.apiUrl + '/user/send-otp';
+        const headers = this.addXToken();
+        const email = this.chatService.getUserInfo().email;
+        return this.httpClient.post(verifyUrl, { email }, { headers });
+    }
+    confirmOtp(otpInput) {
+        const confirmOtpUrl = this.apiUrl + '/user/confirm-otp';
+        const headers = this.addXToken();
+        return this.httpClient.post(confirmOtpUrl, otpInput, { headers });
+    }
+    checkIfUserExists(userString) {
+        const checkUserUrl = this.apiUrl + '/user/check-username';
+        const params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"]().set('userinput', userString).set('email', this.chatService.getUserInfo().email);
+        const headers = this.addXToken();
+        return this.httpClient.get(checkUserUrl, { headers, params });
+    }
+    getUserDetails() {
+        const getUserDetailsUrl = this.apiUrl + '/user/user-details';
+        const params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"]().set('email', this.chatService.getUserInfo().email);
+        const headers = this.addXToken();
+        return this.httpClient.get(getUserDetailsUrl, { headers, params });
+    }
+    updateProfile(userInfo) {
+        const updateProfileUrl = this.apiUrl + '/user/update-profile';
+        userInfo.email = this.chatService.getUserInfo().email;
+        const headers = this.addXToken();
+        return this.httpClient.patch(updateProfileUrl, userInfo, { headers });
+    }
+};
+ApiService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _chat_service__WEBPACK_IMPORTED_MODULE_1__["ChatService"] }
+];
+ApiService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
+        providedIn: 'root'
+    })
+], ApiService);
+
+
+
+/***/ }),
+
+/***/ "./src/app/app-routing.module.ts":
+/*!***************************************!*\
+  !*** ./src/app/app-routing.module.ts ***!
+  \***************************************/
+/*! exports provided: AppRoutingModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRoutingModule", function() { return AppRoutingModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
+/* harmony import */ var _register_register_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./register/register.component */ "./src/app/register/register.component.ts");
+/* harmony import */ var _verify_account_verify_account_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./verify-account/verify-account.component */ "./src/app/verify-account/verify-account.component.ts");
+/* harmony import */ var _auth_guard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./auth.guard */ "./src/app/auth.guard.ts");
+/* harmony import */ var _forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./forgot-password/forgot-password.component */ "./src/app/forgot-password/forgot-password.component.ts");
+/* harmony import */ var _reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./reset-password/reset-password.component */ "./src/app/reset-password/reset-password.component.ts");
+
+
+
+
+
+
+
+
+
+const routes = [
+    { path: '', component: _login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_6__["AuthGuard"]], data: { checkloggedIn: true } },
+    { path: 'register', component: _register_register_component__WEBPACK_IMPORTED_MODULE_4__["RegisterComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_6__["AuthGuard"]], data: { checkloggedIn: true } },
+    { path: 'forgot-password', component: _forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_7__["ForgotPasswordComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_6__["AuthGuard"]], data: { checkloggedIn: true } },
+    { path: 'reset-password', component: _reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_8__["ResetPasswordComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_6__["AuthGuard"]], data: { checkloggedIn: true } },
+    { path: 'verify', component: _verify_account_verify_account_component__WEBPACK_IMPORTED_MODULE_5__["VerifyAccountComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_6__["AuthGuard"]], data: { checkVerified: true } },
+    { path: 'user', loadChildren: () => __webpack_require__.e(/*! import() | user-user-module */ "user-user-module").then(__webpack_require__.bind(null, /*! ./user/user.module */ "./src/app/user/user.module.ts")).then(m => m.UserModule) },
+];
+let AppRoutingModule = class AppRoutingModule {
+};
+AppRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(routes)],
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
+    })
+], AppRoutingModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/app.component.scss":
+/*!************************************!*\
+  !*** ./src/app/app.component.scss ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyJ9 */");
+
+/***/ }),
+
+/***/ "./src/app/app.component.ts":
+/*!**********************************!*\
+  !*** ./src/app/app.component.ts ***!
+  \**********************************/
+/*! exports provided: AppComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var ngx_bootstrap_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ngx-bootstrap/utils */ "./node_modules/ngx-bootstrap/utils/fesm2015/ngx-bootstrap-utils.js");
+
+
+
+let AppComponent = class AppComponent {
+    constructor() {
+        Object(ngx_bootstrap_utils__WEBPACK_IMPORTED_MODULE_2__["setTheme"])('bs4');
+    }
+    ngOnInit() { }
+};
+AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-root',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/app.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./app.component.scss */ "./src/app/app.component.scss")).default]
+    })
+], AppComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/app.module.ts":
+/*!*******************************!*\
+  !*** ./src/app/app.module.ts ***!
+  \*******************************/
+/*! exports provided: AppModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppModule", function() { return AppModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm2015/animations.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var ngx_bootstrap_buttons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-bootstrap/buttons */ "./node_modules/ngx-bootstrap/buttons/fesm2015/ngx-bootstrap-buttons.js");
+/* harmony import */ var ngx_bootstrap_alert__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-bootstrap/alert */ "./node_modules/ngx-bootstrap/alert/fesm2015/ngx-bootstrap-alert.js");
+/* harmony import */ var _register_register_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./register/register.component */ "./src/app/register/register.component.ts");
+/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _verify_account_verify_account_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./verify-account/verify-account.component */ "./src/app/verify-account/verify-account.component.ts");
+/* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./header/header.component */ "./src/app/header/header.component.ts");
+/* harmony import */ var _forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./forgot-password/forgot-password.component */ "./src/app/forgot-password/forgot-password.component.ts");
+/* harmony import */ var _reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./reset-password/reset-password.component */ "./src/app/reset-password/reset-password.component.ts");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let AppModule = class AppModule {
+};
+AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
+        declarations: [
+            _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
+            _register_register_component__WEBPACK_IMPORTED_MODULE_9__["RegisterComponent"],
+            _login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"],
+            _verify_account_verify_account_component__WEBPACK_IMPORTED_MODULE_12__["VerifyAccountComponent"],
+            _header_header_component__WEBPACK_IMPORTED_MODULE_13__["HeaderComponent"],
+            _forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_14__["ForgotPasswordComponent"],
+            _reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_15__["ResetPasswordComponent"]
+        ],
+        imports: [
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
+            _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"],
+            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__["BrowserAnimationsModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["ReactiveFormsModule"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpClientModule"],
+            ngx_bootstrap_alert__WEBPACK_IMPORTED_MODULE_8__["AlertModule"].forRoot(),
+            ngx_bootstrap_buttons__WEBPACK_IMPORTED_MODULE_7__["ButtonsModule"].forRoot(),
+        ],
+        providers: [],
+        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
+    })
+], AppModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/auth.guard.ts":
+/*!*******************************!*\
+  !*** ./src/app/auth.guard.ts ***!
+  \*******************************/
+/*! exports provided: AuthGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuard", function() { return AuthGuard; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _chat_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chat.service */ "./src/app/chat.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
+
+
+
+let AuthGuard = class AuthGuard {
+    constructor(chatService, router) {
+        this.chatService = chatService;
+        this.router = router;
+    }
+    canActivate(next, state) {
+        const loggedIn = this.chatService.isLoggedIn();
+        if (loggedIn) {
+            if (next.data.checkVerified) {
+                const isVerified = this.chatService.getUserInfo().isVerified;
+                if (isVerified) {
+                    return this.router.parseUrl('/user');
+                }
+            }
+            if (next.data.checkjoin) {
+                const isVerified = this.chatService.getUserInfo().isVerified;
+                if (!isVerified) {
+                    return this.router.parseUrl('/verify');
+                }
+            }
+            if (next.data.checkUsername) {
+                const username = this.chatService.getUserInfo().username;
+                if (username === '') {
+                    return this.router.parseUrl('/user/update-profile');
+                }
+            }
+            if (next.data.checkloggedIn) {
+                return this.router.parseUrl('/user');
+            }
+            return true;
+        }
+        else {
+            if (next.data.checkloggedIn) {
+                return true;
+            }
+            return this.router.parseUrl('/');
+        }
+    }
+};
+AuthGuard.ctorParameters = () => [
+    { type: _chat_service__WEBPACK_IMPORTED_MODULE_1__["ChatService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
+];
+AuthGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
+        providedIn: 'root'
+    })
+], AuthGuard);
+
+
+
+/***/ }),
+
+/***/ "./src/app/chat.service.ts":
+/*!*********************************!*\
+  !*** ./src/app/chat.service.ts ***!
+  \*********************************/
+/*! exports provided: ChatService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChatService", function() { return ChatService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+
+
+
+let ChatService = class ChatService {
+    constructor() {
+        this.errMsgSub = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+    }
+    isLoggedIn() {
+        return this.getUserInfo() ? this.getUserInfo() : false;
+    }
+    isSocketPresent() {
+        return localStorage.getItem('sUser');
+    }
+    clearUser() {
+        localStorage.removeItem('user');
+    }
+    setInLocal(key, val) {
+        localStorage.setItem(key, JSON.stringify(val));
+    }
+    getFromLocal(key, json = true) {
+        let item = localStorage.getItem(key);
+        if (json && item) {
+            item = JSON.parse(item);
+        }
+        return item;
+    }
+    getUserInfo(socketUser = false) {
+        if (socketUser) {
+            return this.getFromLocal('sUser');
+        }
+        return this.getFromLocal('user');
+    }
+    setUserInfo(val, socketUser = false) {
+        if (socketUser) {
+            return this.setInLocal('sUser', val);
+        }
+        return this.setInLocal('user', val);
+    }
+    setErrorMsg(val) {
+        this.errMsgSub.next(val);
+        // return this.setInLocal('error', val);
+    }
+    setRouteErrorMsg(val) {
+        return this.setInLocal('error', val);
+    }
+    getErrorMsg() {
+        return this.errMsgSub.asObservable();
+        /* const error = this.getFromLocal('error', false);
+        localStorage.removeItem('error');
+        return error; */
+    }
+    getRouteErrorMsg() {
+        const error = this.getFromLocal('error', false);
+        localStorage.removeItem('error');
+        return error;
+    }
+    getErrors(formControl, formGroup, validations) {
+        const errorField = validations[formControl];
+        for (const i in errorField) {
+            if (formGroup.get(formControl).hasError(errorField[i].type)) {
+                return errorField[i].message;
+            }
+        }
+    }
+    isInvalid(formgroup, formControl) {
+        return (formgroup.get(formControl).invalid &&
+            formgroup.get(formControl).dirty);
+    }
+    markFieldsAsDirty(formGroup) {
+        Object.keys(formGroup.controls).forEach(formControl => {
+            const control = formGroup.get(formControl);
+            control.markAsDirty({ onlySelf: true });
+        });
+    }
+    mustMatch(controlName, matchingControlName) {
+        return (formGroup) => {
+            const control = formGroup.controls[controlName];
+            const matchingControl = formGroup.controls[matchingControlName];
+            if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+                // return if another validator has already found an error on the matchingControl
+                return;
+            }
+            // set error on matchingControl if validation fails
+            if (control.value !== matchingControl.value) {
+                matchingControl.setErrors({ mustMatch: true });
+            }
+            else {
+                matchingControl.setErrors(null);
+            }
+        };
+    }
+    showResponseError(error) {
+        if (error.status === 422 && error.error.errors) {
+            let msg = '';
+            const errors = error.error.errors;
+            for (let i = 0; i < errors.length; i++) {
+                const element = errors[i];
+                msg += element.msg;
+                if (i !== errors.length - 1) {
+                    msg += '. ';
+                }
+            }
+            return msg;
+        }
+        else if (error.error.message === undefined) {
+            return error.status + ' - ' + error.statusText;
+        }
+        else {
+            return error.error.message;
+        }
+    }
+};
+ChatService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], ChatService);
+
+
+
+/***/ }),
+
+/***/ "./src/app/forgot-password/forgot-password.component.scss":
+/*!****************************************************************!*\
+  !*** ./src/app/forgot-password/forgot-password.component.scss ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2ZvcmdvdC1wYXNzd29yZC9mb3Jnb3QtcGFzc3dvcmQuY29tcG9uZW50LnNjc3MifQ== */");
+
+/***/ }),
+
+/***/ "./src/app/forgot-password/forgot-password.component.ts":
+/*!**************************************************************!*\
+  !*** ./src/app/forgot-password/forgot-password.component.ts ***!
+  \**************************************************************/
+/*! exports provided: ForgotPasswordComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ForgotPasswordComponent", function() { return ForgotPasswordComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _chat_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../chat.service */ "./src/app/chat.service.ts");
+/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
+
+
+
+
+
+let ForgotPasswordComponent = class ForgotPasswordComponent {
+    constructor(chatService, apiService) {
+        this.chatService = chatService;
+        this.apiService = apiService;
+        this.loader = false;
+        this.forgotForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required)
+        });
+        this.forgotValidations = {
+            email: [{
+                    type: 'required',
+                    message: 'Email is required'
+                }]
+        };
+    }
+    ngOnInit() {
+    }
+    isInvalid(control) {
+        return this.chatService.isInvalid(this.forgotForm, control);
+    }
+    getErrors(formcontrol) {
+        return this.chatService.getErrors(formcontrol, this.forgotForm, this.forgotValidations);
+    }
+    sendMail() {
+        if (this.forgotForm.valid) {
+            const email = this.forgotForm.value.email;
+            this.forgotForm.disable();
+            this.apiService.forgotPass(email).subscribe(res => {
+                this.errorMessage = res.message;
+            }, err => this.errorMessage = this.chatService.showResponseError(err)).add(() => {
+                this.forgotForm.enable();
+            });
+        }
+        else {
+            this.chatService.markFieldsAsDirty(this.forgotForm);
+        }
+    }
+};
+ForgotPasswordComponent.ctorParameters = () => [
+    { type: _chat_service__WEBPACK_IMPORTED_MODULE_3__["ChatService"] },
+    { type: _api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"] }
+];
+ForgotPasswordComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-forgot-password',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./forgot-password.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/forgot-password/forgot-password.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./forgot-password.component.scss */ "./src/app/forgot-password/forgot-password.component.scss")).default]
+    })
+], ForgotPasswordComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/header/header.component.scss":
+/*!**********************************************!*\
+  !*** ./src/app/header/header.component.scss ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2hlYWRlci9oZWFkZXIuY29tcG9uZW50LnNjc3MifQ== */");
+
+/***/ }),
+
+/***/ "./src/app/header/header.component.ts":
+/*!********************************************!*\
+  !*** ./src/app/header/header.component.ts ***!
+  \********************************************/
+/*! exports provided: HeaderComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderComponent", function() { return HeaderComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
+/* harmony import */ var _chat_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../chat.service */ "./src/app/chat.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+
+
+let HeaderComponent = class HeaderComponent {
+    constructor(chatService, apiService) {
+        this.chatService = chatService;
+        this.apiService = apiService;
+    }
+    ngOnInit() {
+    }
+    isLoggedIn() {
+        return this.chatService.isLoggedIn();
+    }
+    logout() {
+        this.apiService.logout();
+    }
+};
+HeaderComponent.ctorParameters = () => [
+    { type: _chat_service__WEBPACK_IMPORTED_MODULE_2__["ChatService"] },
+    { type: _api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"] }
+];
+HeaderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-header',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./header.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/header/header.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./header.component.scss */ "./src/app/header/header.component.scss")).default]
+    })
+], HeaderComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/login/login.component.scss":
+/*!********************************************!*\
+  !*** ./src/app/login/login.component.scss ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2xvZ2luL2xvZ2luLmNvbXBvbmVudC5zY3NzIn0= */");
+
+/***/ }),
+
+/***/ "./src/app/login/login.component.ts":
+/*!******************************************!*\
+  !*** ./src/app/login/login.component.ts ***!
+  \******************************************/
+/*! exports provided: LoginComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginComponent", function() { return LoginComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var jwt_decode__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jwt-decode */ "./node_modules/jwt-decode/lib/index.js");
+/* harmony import */ var jwt_decode__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jwt_decode__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _chat_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../chat.service */ "./src/app/chat.service.ts");
+
+
+
+
+
+
+
+let LoginComponent = class LoginComponent {
+    constructor(chatService, apiService, router) {
+        this.chatService = chatService;
+        this.apiService = apiService;
+        this.router = router;
+        this.error = false;
+        this.errMsg = '';
+        this.loader = false;
+        this.errTimeout = 4000;
+        this.loginForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
+            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].email]),
+            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required])
+        });
+        this.loginValidations = {
+            email: [
+                {
+                    type: 'required',
+                    message: 'Email is required'
+                },
+                {
+                    type: 'email',
+                    message: 'Invalid Email'
+                }
+            ],
+            password: [
+                {
+                    type: 'required',
+                    message: 'Password is required'
+                }
+            ]
+        };
+    }
+    ngOnInit() {
+        this.errMsg = this.chatService.getRouteErrorMsg();
+        if (this.errMsg) {
+            this.error = true;
+        }
+        const l = this.chatService.isLoggedIn();
+        console.log(l);
+        // this.errorMessage = this.authService.getErrorMessage();
+    }
+    getErrors(formcontrol) {
+        return this.chatService.getErrors(formcontrol, this.loginForm, this.loginValidations);
+    }
+    getInvalidCondition(formControl) {
+        return (this.loginForm.get(formControl).invalid &&
+            this.loginForm.get(formControl).dirty);
+    }
+    login() {
+        if (this.loginForm.valid) {
+            // return;
+            this.loader = true;
+            this.loginForm.disable();
+            this.apiService.login(this.loginForm.value).subscribe(response => {
+                this.loader = false;
+                this.loginForm.enable();
+                const token = jwt_decode__WEBPACK_IMPORTED_MODULE_4___default()(response.token);
+                if (!token.active) {
+                    this.errorMessage =
+                        'Your account is not active. Please contact admin.';
+                    return;
+                }
+                this.chatService.setUserInfo(token);
+                this.chatService.setInLocal('token', response.token);
+                console.log(token);
+                this.router.navigateByUrl('/user');
+                /* if (token.isAdmin) {
+                  if (!token.isVerified) {
+                    this.router.navigate(['admin/update-password']);
+                  } else {
+                    this.router.navigate(['/admin']);
+                  }
+                } else {
+                  if (!token.isVerified) {
+                    this.router.navigate(['user/update-password']);
+                  } else {
+                  }
+                } */
+            }, error => {
+                this.loader = false;
+                this.loginForm.enable();
+                this.errorMessage = this.chatService.showResponseError(error);
+            });
+        }
+        else {
+            this.chatService.markFieldsAsDirty(this.loginForm);
+        }
+    }
+};
+LoginComponent.ctorParameters = () => [
+    { type: _chat_service__WEBPACK_IMPORTED_MODULE_6__["ChatService"] },
+    { type: _api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] }
+];
+LoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+        selector: 'app-login',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./login.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/login/login.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./login.component.scss */ "./src/app/login/login.component.scss")).default]
+    })
+], LoginComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/register/register.component.scss":
+/*!**************************************************!*\
+  !*** ./src/app/register/register.component.scss ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3JlZ2lzdGVyL3JlZ2lzdGVyLmNvbXBvbmVudC5zY3NzIn0= */");
+
+/***/ }),
+
+/***/ "./src/app/register/register.component.ts":
+/*!************************************************!*\
+  !*** ./src/app/register/register.component.ts ***!
+  \************************************************/
+/*! exports provided: RegisterComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegisterComponent", function() { return RegisterComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var jwt_decode__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jwt-decode */ "./node_modules/jwt-decode/lib/index.js");
+/* harmony import */ var jwt_decode__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jwt_decode__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _chat_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../chat.service */ "./src/app/chat.service.ts");
+
+
+
+
+
+
+
+let RegisterComponent = class RegisterComponent {
+    constructor(chatService, router, apiService) {
+        this.chatService = chatService;
+        this.router = router;
+        this.apiService = apiService;
+        this.loader = false;
+        this.registerForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
+            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].email]),
+            firstName: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required,
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3)
+            ]),
+            lastName: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', []),
+            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required,
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(6)
+            ]),
+            confirmPassword: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required])
+        }, {
+            validators: this.mustMatch('password', 'confirmPassword')
+        });
+        this.registerValidations = {
+            email: [
+                {
+                    type: 'required',
+                    message: 'Email is required'
+                },
+                {
+                    type: 'email',
+                    message: 'Invalid Email'
+                }
+            ],
+            firstName: [
+                {
+                    type: 'required',
+                    message: 'First Name is required'
+                },
+                {
+                    type: 'minlength',
+                    message: 'First Name must be atleast 3 characters long'
+                }
+            ],
+            password: [
+                {
+                    type: 'required',
+                    message: 'Password is required'
+                },
+                {
+                    type: 'minlength',
+                    message: 'Password must be atleast 8 characters long'
+                }
+            ],
+            confirmPassword: [
+                {
+                    type: 'required',
+                    message: 'Confirm Password is required'
+                },
+                {
+                    type: 'mustMatch',
+                    message: 'Password and Confirm Password must match'
+                }
+            ]
+        };
+    }
+    ngOnInit() {
+    }
+    mustMatch(controlName, matchingControlName) {
+        return (formGroup) => {
+            const control = formGroup.controls[controlName];
+            const matchingControl = formGroup.controls[matchingControlName];
+            if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+                // return if another validator has already found an error on the matchingControl
+                return;
+            }
+            // set error on matchingControl if validation fails
+            if (control.value !== matchingControl.value) {
+                matchingControl.setErrors({ mustMatch: true });
+            }
+            else {
+                matchingControl.setErrors(null);
+            }
+        };
+    }
+    getErrors(formcontrol) {
+        return this.chatService.getErrors(formcontrol, this.registerForm, this.registerValidations);
+    }
+    getInvalidCondition(formControl) {
+        return (this.registerForm.get(formControl).invalid &&
+            this.registerForm.get(formControl).dirty);
+    }
+    register() {
+        if (this.registerForm.valid) {
+            // return;
+            this.loader = true;
+            this.registerForm.disable();
+            this.apiService.register(this.registerForm.value).subscribe(response => {
+                this.loader = false;
+                this.registerForm.enable();
+                const token = jwt_decode__WEBPACK_IMPORTED_MODULE_4___default()(response.token);
+                if (!token.active) {
+                    this.errorMessage =
+                        'Your account is not active. Please contact admin.';
+                    return;
+                }
+                this.chatService.setUserInfo(token);
+                this.chatService.setInLocal('token', response.token);
+                this.router.navigate(['/verify']);
+            }, error => {
+                this.loader = false;
+                this.registerForm.enable();
+                this.errorMessage = this.chatService.showResponseError(error);
+            });
+        }
+        else {
+            this.chatService.markFieldsAsDirty(this.registerForm);
+        }
+    }
+};
+RegisterComponent.ctorParameters = () => [
+    { type: _chat_service__WEBPACK_IMPORTED_MODULE_6__["ChatService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
+    { type: _api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"] }
+];
+RegisterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+        selector: 'app-register',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./register.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/register/register.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./register.component.scss */ "./src/app/register/register.component.scss")).default]
+    })
+], RegisterComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/reset-password/reset-password.component.scss":
+/*!**************************************************************!*\
+  !*** ./src/app/reset-password/reset-password.component.scss ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Jlc2V0LXBhc3N3b3JkL3Jlc2V0LXBhc3N3b3JkLmNvbXBvbmVudC5zY3NzIn0= */");
+
+/***/ }),
+
+/***/ "./src/app/reset-password/reset-password.component.ts":
+/*!************************************************************!*\
+  !*** ./src/app/reset-password/reset-password.component.ts ***!
+  \************************************************************/
+/*! exports provided: ResetPasswordComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResetPasswordComponent", function() { return ResetPasswordComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _chat_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../chat.service */ "./src/app/chat.service.ts");
+/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
+
+
+
+
+
+
+let ResetPasswordComponent = class ResetPasswordComponent {
+    constructor(fb, validateService, activatedRoute, apiService, router) {
+        this.fb = fb;
+        this.validateService = validateService;
+        this.activatedRoute = activatedRoute;
+        this.apiService = apiService;
+        this.router = router;
+        this.loader = false;
+        this.success = false;
+        this.resetPasswordForm = this.fb.group({
+            password: ['', [
+                    _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required,
+                    _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(6)
+                ]],
+            confirmPassword: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]],
+            token: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
+        }, {
+            validators: this.validateService.mustMatch('password', 'confirmPassword')
+        });
+        this.resetPasswordValidations = {
+            password: [
+                {
+                    type: 'required',
+                    message: 'Password is required'
+                },
+                {
+                    type: 'minlength',
+                    message: 'Password must have a minimum length of 6 characters'
+                }
+            ],
+            confirmPassword: [
+                {
+                    type: 'required',
+                    message: 'Confirm Password is required'
+                },
+                {
+                    type: 'mustMatch',
+                    message: 'Confirm Password must match Password'
+                }
+            ]
+        };
+    }
+    ngOnInit() {
+        const token = this.activatedRoute.snapshot.queryParams.token;
+        if (token === undefined || token === '') {
+            this.router.navigate(['/forgot-password']);
+        }
+        else {
+            this.resetPasswordForm.controls.token.setValue(token);
+        }
+    }
+    getErrors(controlName) {
+        return this.validateService.getErrors(controlName, this.resetPasswordForm, this.resetPasswordValidations);
+    }
+    isInvalid(controlName) {
+        return this.validateService.isInvalid(this.resetPasswordForm, controlName);
+    }
+    resetPassword() {
+        if (this.resetPasswordForm.valid) {
+            const body = this.resetPasswordForm.value;
+            delete body.confirmPassword;
+            console.log(body);
+            this.resetPasswordForm.disable();
+            this.apiService.resetPass(body).subscribe(res => {
+                this.success = res.success;
+                this.errorMessage = res.message;
+                console.log(res);
+                /* setTimeout(() => {
+                  this.router.navigateByUrl('/');
+                }, 3000); */
+            }, err => {
+                console.log(err);
+                this.errorMessage = this.validateService.showResponseError(err);
+                if (this.errorMessage === 'jwt expired') {
+                    console.log('expired');
+                    /* setTimeout(() => {
+                      this.router.navigateByUrl('/forgot-password');
+                    }, 3000); */
+                }
+            }).add(() => this.resetPasswordForm.enable());
+        }
+        else {
+            this.validateService.markFieldsAsDirty(this.resetPasswordForm);
+        }
+    }
+};
+ResetPasswordComponent.ctorParameters = () => [
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] },
+    { type: _chat_service__WEBPACK_IMPORTED_MODULE_4__["ChatService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
+    { type: _api_service__WEBPACK_IMPORTED_MODULE_5__["ApiService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
+];
+ResetPasswordComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-reset-password',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./reset-password.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/reset-password/reset-password.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./reset-password.component.scss */ "./src/app/reset-password/reset-password.component.scss")).default]
+    })
+], ResetPasswordComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/verify-account/verify-account.component.scss":
+/*!**************************************************************!*\
+  !*** ./src/app/verify-account/verify-account.component.scss ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3ZlcmlmeS1hY2NvdW50L3ZlcmlmeS1hY2NvdW50LmNvbXBvbmVudC5zY3NzIn0= */");
+
+/***/ }),
+
+/***/ "./src/app/verify-account/verify-account.component.ts":
+/*!************************************************************!*\
+  !*** ./src/app/verify-account/verify-account.component.ts ***!
+  \************************************************************/
+/*! exports provided: VerifyAccountComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VerifyAccountComponent", function() { return VerifyAccountComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _chat_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../chat.service */ "./src/app/chat.service.ts");
+
+
+
+
+
+
+let VerifyAccountComponent = class VerifyAccountComponent {
+    constructor(chatService, apiService, /* private renderer: Renderer2, */ router) {
+        this.chatService = chatService;
+        this.apiService = apiService;
+        this.router = router;
+        this.otpSent = false;
+        this.loader = false;
+        this.isResend = false;
+        this.resendTime = null;
+        this.verifyForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormGroup"]({
+            otp: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].minLength(4)])
+        });
+        this.verifyValidations = {
+            otp: [
+                {
+                    type: 'required',
+                    message: 'OTP is required'
+                },
+                {
+                    type: 'minlength',
+                    message: 'OTP must be atleast 4 digits'
+                }
+            ]
+        };
+    }
+    ngOnInit() {
+        this.sendOtp();
+    }
+    setTimer() {
+        this.resendTime = new Date().setMinutes(2, 0, 0);
+        const timer = setInterval(() => {
+            const d = new Date(this.resendTime);
+            if (d.getMinutes() === 0 && d.getSeconds() === 1) {
+                this.isResend = true;
+                // this.resendButton.nativeElement.innerText = 'Resend'; <- never use this
+                this.resendTime = null;
+                // this.renderer.setProperty(this.resendButton.nativeElement, 'innerText', 'Resend');
+                clearInterval(timer);
+            }
+            else {
+                this.resendTime = d.setSeconds(d.getSeconds() - 1);
+            }
+        }, 1000);
+    }
+    sendOtp() {
+        this.isResend = false;
+        this.apiService.sendOtp().subscribe(res => {
+            this.successMsg = res.message;
+            this.otpSent = true;
+            if (res.attempt < 3) {
+                this.setTimer();
+            }
+        }, err => {
+            this.otpSent = true;
+            if (err.status === 400) {
+                this.resendTime = null;
+            }
+            else {
+                this.isResend = true;
+            }
+            this.errorMessage = this.chatService.showResponseError(err);
+        });
+    }
+    getErrors(formcontrol) {
+        return this.chatService.getErrors(formcontrol, this.verifyForm, this.verifyValidations);
+    }
+    getInvalidCondition(formControl) {
+        return (this.verifyForm.get(formControl).invalid &&
+            this.verifyForm.get(formControl).dirty);
+    }
+    verifyOtp() {
+        if (this.verifyForm.valid) {
+            const otpInput = {
+                email: this.chatService.getUserInfo().email,
+                otp: this.verifyForm.value.otp
+            };
+            this.apiService.confirmOtp(otpInput).subscribe(res => {
+                this.successMsg = 'otp confirmed';
+                this.otpSent = false;
+                const user = this.chatService.getUserInfo();
+                user.isVerified = true;
+                this.chatService.setUserInfo(user);
+                this.router.navigateByUrl('/user');
+            }, err => {
+                this.otpSent = true;
+                this.errorMessage = this.chatService.showResponseError(err);
+            });
+        }
+        else {
+            this.chatService.markFieldsAsDirty(this.verifyForm);
+        }
+    }
+};
+VerifyAccountComponent.ctorParameters = () => [
+    { type: _chat_service__WEBPACK_IMPORTED_MODULE_5__["ChatService"] },
+    { type: _api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+];
+VerifyAccountComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-verify-account',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./verify-account.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/verify-account/verify-account.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./verify-account.component.scss */ "./src/app/verify-account/verify-account.component.scss")).default]
+    })
+], VerifyAccountComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/environments/environment.ts":
+/*!*****************************************!*\
+  !*** ./src/environments/environment.ts ***!
+  \*****************************************/
+/*! exports provided: environment */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+// This file can be replaced during build by using the `fileReplacements` array.
+// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
+// The list of file replacements can be found in `angular.json`.
+
+const environment = {
+    production: false,
+    hmr: false,
+    socketUrl: 'http://localhost:3000',
+    baseUrl: 'http://localhost:3000'
+};
+/*
+ * For easier debugging in development mode, you can import the following file
+ * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
+ *
+ * This import should be commented out in production mode because it will have a negative impact
+ * on performance if an error is thrown.
+ */
+// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
+
+/***/ }),
+
+/***/ "./src/hmr.ts":
+/*!********************!*\
+  !*** ./src/hmr.ts ***!
+  \********************/
+/*! exports provided: hmrBootstrap */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hmrBootstrap", function() { return hmrBootstrap; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angularclass_hmr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angularclass/hmr */ "./node_modules/@angularclass/hmr/dist/index.js");
+/* harmony import */ var _angularclass_hmr__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_angularclass_hmr__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+const hmrBootstrap = (module, bootstrap) => {
+    let ngModule;
+    module.hot.accept();
+    bootstrap().then(mod => (ngModule = mod));
+    module.hot.dispose(() => {
+        const appRef = ngModule.injector.get(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ApplicationRef"]);
+        const elements = appRef.components.map(c => c.location.nativeElement);
+        const makeVisible = Object(_angularclass_hmr__WEBPACK_IMPORTED_MODULE_2__["createNewHosts"])(elements);
+        ngModule.destroy();
+        makeVisible();
+    });
+};
+
+
+/***/ }),
+
+/***/ "./src/main.ts":
+/*!*********************!*\
+  !*** ./src/main.ts ***!
+  \*********************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/platform-browser-dynamic */ "./node_modules/@angular/platform-browser-dynamic/fesm2015/platform-browser-dynamic.js");
+/* harmony import */ var _app_app_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app/app.module */ "./src/app/app.module.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _hmr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./hmr */ "./src/hmr.ts");
+/* harmony import */ var webpack_hot_log__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! webpack/hot/log */ "./node_modules/webpack/hot/log.js");
+/* harmony import */ var webpack_hot_log__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(webpack_hot_log__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
+
+
+
+
+Object(webpack_hot_log__WEBPACK_IMPORTED_MODULE_6__["setLogLevel"])('none');
+if (_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].production) {
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["enableProdMode"])();
+}
+const bootstrap = () => Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformBrowserDynamic"])().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_3__["AppModule"]);
+if (_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].hmr) {
+    if (false) {}
+    else {
+        console.error('HMR is not enabled for webpack-dev-server!');
+        console.log('Are you using the --hmr flag for ng serve?');
+    }
+}
+else {
+    bootstrap().catch(err => console.log(err));
+}
+
+
+/***/ }),
+
+/***/ 0:
+/*!***************************!*\
+  !*** multi ./src/main.ts ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! /Users/umeshchauhan/Documents/nodesandbox/angular-socket/src/main.ts */"./src/main.ts");
+
+
+/***/ })
+
+},[[0,"runtime","vendor"]]]);
+//# sourceMappingURL=main-es2015.js.map
