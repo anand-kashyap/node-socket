@@ -65,18 +65,17 @@ const checkUserName = (req, res, next) => {
 
 const searchUser = (req, res, next) => {
   if (checkValidation(req, res)) return;
-  console.log("req.query", req.query);
   const userInput = req.query.userinput.trim();
+  const cUser = req.body.user;
   user = userModel.User;
   user.find(
     {$or: [
-      {username: {$regex: `.*${userInput}.*`, $options: 'i'}},
-      {email: {$regex: userInput, $options: 'i'} },
-      {fullName: {$regex: `.*${userInput}.*`, $options: 'i'} },
+      {username: {$regex: `.*${userInput}.*`, $options: 'i', $ne: cUser.username}},
+      {email: {$regex: userInput, $options: 'i', $ne: cUser.email} },
+      {fullName: {$regex: `.*${userInput}.*`, $options: 'i', $ne: cUser.fullName} },
     ]
   }).limit(20).then(
     resp => {
-      console.log(resp);
       return res.status(200).json({ success: true, data: resp });
     },
     err => {

@@ -14,7 +14,7 @@ const validationArray = [
 
 const queryValidations = [
   check('email').exists().withMessage('Email is a required value').isEmail().withMessage('Email must be valid'),
-  check('userinput').exists().withMessage('Userinput is a required value').isLength({ min: 3 }).withMessage('Userinput must be at least 5 chars long')
+  check('userinput').exists().withMessage('Userinput is a required value').isLength({ min: 3 }).withMessage('Userinput must be at least 3 chars long')
 ];
 
 router.get('/', user.getUsers);
@@ -23,7 +23,7 @@ router.post('/authenticate',[
   ...validationArray
 ], user.authUser);
 router.get('/check-username', [middleware.checkToken, ...queryValidations], user.checkUserName);
-router.get('/search-user', [/* middleware.checkToken, */ queryValidations[1]], user.searchUser);
+router.post('/search-user', [/* middleware.checkToken, */ queryValidations[1]], user.searchUser);
 router.get('/user-details', [middleware.checkToken], user.getUserDetails);
 router.patch('/update-profile', [middleware.checkToken], user.updateProfile);
 
