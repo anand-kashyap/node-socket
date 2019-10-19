@@ -35,5 +35,5 @@ userSchema.virtual('fullName').get(function () {
 const User = mongoose.model('users', userSchema);
 
 module.exports = {
-  User: User
+  User
 }

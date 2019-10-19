@@ -1,19 +1,16 @@
-const {addUser, removeUser, findUsers} = require('./users');
+const {addUser, removeUser, findUsers, findUserIndex, getUsers} = require('./users');
 
 const socketHandle = (io) => {
   io.on('connection', (socket) => {
-    // console.log('id', socket.handshake.session.id) // same value on every connection
     socket.on('join', (options, callback) => {
-      options.username = options.username.trim().toLowerCase();
-      options.room = options.room.trim().toLowerCase();
-      const {error, user} = addUser({id: socket.handshake.session.id, ...options});
-      if (error) {
-        return callback(error);
-      }
+      const {user} = addUser({sessionId: socket.handshake.session.id, socketId: socket.id, ...options});
+      console.log('sessionId', socket.handshake.session.id) // same value on every connection
       socket.join(user.room);
-      socket.broadcast.to(user.room).emit('newClient', `${user.username} has joined`);
+      console.log('after join', getUsers());
+      socket.broadcast.to(user.room).emit('newClient', user.username);
 
       socket.on('newMessage', (msg) => {
+        console.log('user', user);
         io.to(user.room).emit('newMessage', msg, user.username, new Date());
       });
 
@@ -26,8 +23,12 @@ const socketHandle = (io) => {
       });
 
       socket.on('disconnect', () => {
-        removeUser({...options});
-        io.to(user.room).emit('clientLeft', `${user.username} has left`);
+        console.log('before remove', getUsers());
+        const delUser = removeUser(user);
+        console.log('after remove', getUsers());
+        if (!delUser.tabs) {
+          io.to(user.room).emit('clientLeft', user.username);
+        }
       });
 
       callback();

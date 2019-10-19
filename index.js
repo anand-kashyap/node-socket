@@ -22,6 +22,7 @@ const mongoose = require('./config/dbconnection');
 
 //routes
 const user = require('./api/routes/user');
+const room = require('./api/routes/room');
 
 const socketHandle = require('./socketio');
 socketHandle(io);
@@ -69,7 +70,7 @@ app.use('/*', function(req, res, next) {
 });
 
 app.use('/user', user);
-
+app.use('/room', room);
 
 app.all("/*", function(req, res, next) {
   res.sendFile("index.html", { root: __dirname + "/public" });
