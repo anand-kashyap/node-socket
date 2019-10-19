@@ -3,10 +3,8 @@ const {addUser, removeUser, findUsers, findUserIndex, getUsers} = require('./use
 const socketHandle = (io) => {
   io.on('connection', (socket) => {
     socket.on('join', (options, callback) => {
-      options.room = options.room.trim().toLowerCase();
       const {user} = addUser({sessionId: socket.handshake.session.id, socketId: socket.id, ...options});
       console.log('sessionId', socket.handshake.session.id) // same value on every connection
-      console.log('before join', getUsers());
       socket.join(user.room);
       console.log('after join', getUsers());
       socket.broadcast.to(user.room).emit('newClient', user.username);
