@@ -1,4 +1,5 @@
 const {addUser, removeUser, findUsers, findUserIndex, getUsers} = require('./users');
+const { Room } = require('./api/models/room');
 
 const socketHandle = (io) => {
   io.on('connection', (socket) => {
@@ -10,8 +11,31 @@ const socketHandle = (io) => {
       socket.broadcast.to(user.room).emit('newClient', user.username);
 
       socket.on('newMessage', (msg) => {
-        console.log('user', user);
-        io.to(user.room).emit('newMessage', msg, user.username, new Date());
+        const message = {
+          msg,
+          username: user.username,
+          date: new Date()
+        }
+        console.log('msgObj', message);
+        io.to(user.room).emit('newMessage', {...message});
+        Room.findByIdAndUpdate(
+          {_id: user.room},
+          {
+            $push: {
+              messages: message
+              /* messages: {
+                $each: [message],
+                $position: 0,
+              } */ 
+            }
+          },
+          {new: true},
+          (err, res) => {
+            if (err) {
+              console.log('err ocurred', err);
+            }
+            console.log('saved message', res);
+          });
       });
 
       socket.on('sendLocation', (data) => {

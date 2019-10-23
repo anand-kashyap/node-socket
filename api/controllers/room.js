@@ -18,7 +18,8 @@ const findCreateRoom = (req, res, next) => {
     {
       members: { $all: req.body.userNameArr},
       directMessage
-    }).then(
+    },
+    {messages: { $slice: -20}}).then(
     (room) => {
       console.log('room', room);
       if (room) {
