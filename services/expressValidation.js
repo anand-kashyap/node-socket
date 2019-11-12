@@ -1,5 +1,8 @@
 const { validationResult } = require('express-validator');
-
+/** Check Validation Error in request
+ * @param  {Request} req: Request Object
+ * @param  {Response} res: Response Object
+ */
 const checkValidationErrors = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
