@@ -1,6 +1,6 @@
 const { addUser, removeUser, findUsers, findUserIndex, getUsers } = require('./users');
 const { Room } = require('./api/models/room');
-
+const mongoose = require('mongoose');
 
 /** On New Message Method
  * @param  {object} user: User Object
@@ -11,16 +11,16 @@ const onNewMessage = (user, io) => {
   return (msg) => {
     const message = {
       msg,
-      username: user.username,
-      date: new Date()
+      username: user.username
     };
     console.log('msgObj', message);
-    io.to(user.room).emit('newMessage', { ...message });
     Room.findByIdAndUpdate({ _id: user.room }, {
       $push: {
         messages: message
       }
-    }, { new: true }).catch(err =>
+    }, { new: true }).then(savedMessage => {
+      io.to(user.room).emit('newMessage', savedMessage.messages[savedMessage.messages.length - 1]);
+    }).catch(err =>
       console.error('err ocurred', err)
     );
   };

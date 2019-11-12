@@ -72,6 +72,20 @@ const deleteRoom = (req, res) => {
   })
 };
 
+const deleteSingleMessage = (req, res) => {
+  if (validator(req, res)) {
+    return;
+  }
+  const params = req.params;
+  Room.findByIdAndUpdate({ _id: params.roomId }, { $pull: { messages: { _id: params.msgId } } },
+    { new: true }).then(updatedRoom => {
+      return res.status(200).json({ success: true, updatedRoom });
+    }, err => {
+      console.error(err);
+      return res.status(402).json({ success: false, err });
+    })
+};
+
 const clearMsgs = (req, res) => {
   if (validator(req, res)) return;
 
@@ -90,5 +104,6 @@ module.exports = {
   findCreateRoom,
   getRooms,
   deleteRoom,
+  deleteSingleMessage,
   clearMsgs
 }

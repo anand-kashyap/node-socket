@@ -4,7 +4,7 @@ const { check } = require('express-validator');
 const router = express.Router();
 const middleware = require('../../config/middleware');
 
-const { findCreateRoom, getRooms, deleteRoom, clearMsgs } = require('../controllers/room');
+const { findCreateRoom, getRooms, deleteRoom, deleteSingleMessage, clearMsgs } = require('../controllers/room');
 
 router.put('/', [
   // middleware.checkToken,
@@ -25,6 +25,7 @@ router.put('/', [
 
 router.get('/', getRooms);
 router.delete('/:roomId', deleteRoom);
-router.delete('/clearMsgs/:roomId', clearMsgs);
+router.delete('/:roomId/message/:msgId', deleteSingleMessage);
+router.delete('/:roomId/clearMsgs', clearMsgs);
 
 module.exports = router;
