@@ -4,18 +4,27 @@ const { check } = require('express-validator');
 const router = express.Router();
 const middleware = require('../../config/middleware');
 
-const room = require('../controllers/room');
+const { findCreateRoom, getRooms, deleteRoom, clearMsgs } = require('../controllers/room');
 
 router.put('/', [
-    // middleware.checkToken,
-    check('userNameArr').isArray().withMessage('must be an array').custom((value, { req }) => {
-        if (value.length < 2) {
-            throw new Error('must have at least 2 users');
-        }
-        return true;
-    }),
-    check('initMsgs').optional().isInt({ max: 200, min: 20 }).withMessage('must be between range 20 to 200'),
-    check('directMessage').optional().isBoolean()
-], room.findCreateRoom);
+  // middleware.checkToken,
+  check('userNameArr').isArray().withMessage('must be an array').custom((userArr, { req }) => {
+    if (userArr.length < 2) {
+      throw new Error('must have at least 2 users');
+    }
+    for (const user of userArr) {
+      if (typeof user !== 'string' || user === '') {
+        throw new Error('must contain non empty strings only');
+      }
+    }
+    return true;
+  }),
+  check('initMsgs').optional().isInt({ max: 200, min: 20 }).withMessage('must be between range 20 to 200'),
+  check('directMessage').optional().isBoolean()
+], findCreateRoom);
+
+router.get('/', getRooms);
+router.delete('/:roomId', deleteRoom);
+router.delete('/clearMsgs/:roomId', clearMsgs);
 
 module.exports = router;

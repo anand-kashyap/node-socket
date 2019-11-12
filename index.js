@@ -26,7 +26,6 @@ const corsOptions = {
   },
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
-// app.use(cors(corsOptions));
 
 const port = process.env.PORT || 3000;
 const publicDirPath = path.join(__dirname, 'public');
@@ -35,6 +34,7 @@ const publicDirPath = path.join(__dirname, 'public');
 const mongoose = require('./config/dbconnection');
 
 //routes
+const test = require('./api/routes/test');
 const user = require('./api/routes/user');
 const room = require('./api/routes/room');
 
@@ -48,6 +48,7 @@ const session = eSession({
   saveUninitialized: true,
   store: mStore
 });
+// app.use(cors(corsOptions));
 
 app.use(session);
 io.use(sharedsession(session, { autoSave: true }));
@@ -68,6 +69,7 @@ app.use('/*', function (req, res, next) {
   next();
 });
 
+app.use('/test', test);
 app.use('/user', user);
 app.use('/room', room);
 

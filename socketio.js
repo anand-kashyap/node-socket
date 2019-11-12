@@ -20,12 +20,9 @@ const onNewMessage = (user, io) => {
       $push: {
         messages: message
       }
-    }, { new: true }, (err, res) => {
-      if (err) {
-        console.log('err ocurred', err);
-      }
-      console.log('saved message', res);
-    });
+    }, { new: true }).catch(err =>
+      console.error('err ocurred', err)
+    );
   };
 }
 
