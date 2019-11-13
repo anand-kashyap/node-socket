@@ -1,6 +1,5 @@
 const { addUser, removeUser, findUsers, findUserIndex, getUsers } = require('./users');
 const { Room } = require('./api/models/room');
-const mongoose = require('mongoose');
 
 /** On New Message Method
  * @param  {object} user: User Object
@@ -20,6 +19,23 @@ const onNewMessage = (user, io) => {
       }
     }, { new: true }).then(savedMessage => {
       io.to(user.room).emit('newMessage', savedMessage.messages[savedMessage.messages.length - 1]);
+    }).catch(err =>
+      console.error('err ocurred', err)
+    );
+  };
+}
+
+/** On Delete Message
+ * @param  {object} user: User Object
+ * @param  {object} io: Socket io instance
+ * TODO: better jsdoc
+ */
+const onDeleteMessage = (user, io) => {
+  return (msg) => {
+    console.log('msgObj to be del', msg);
+    console.log('userObj', user);
+    Room.findByIdAndUpdate({ _id: user.room }, { $pull: { messages: { _id: msg._id } } }).then(delMessage => {
+      io.to(user.room).emit('deleteMessage', msg);
     }).catch(err =>
       console.error('err ocurred', err)
     );
@@ -52,6 +68,7 @@ const socketHandle = (io) => {
       socket.broadcast.to(user.room).emit('newClient', user.username);
 
       socket.on('newMessage', onNewMessage(user, io));
+      socket.on('deleteMessage', onDeleteMessage(user, io));
 
       socket.on('sendLocation', (data) => {
         socket.broadcast.to(user.room).emit('newMessage', `<a target='_blank' href='https://www.google.com/maps?q=${data.lat},${data.long}'>Location</a>`, user.username, new Date());

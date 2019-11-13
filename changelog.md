@@ -3,14 +3,20 @@
 ## [Unreleased]
 
 ### TODO
-
 - make models on angular side for message, room and user
-- angular functionality for deleting single message
 - add push notifcation
 - show recent chats
 - send message after request accept
 
-## [Version] - 2019-11-12
+# Changelog
+
+## [V1.0.1] - 2019-11-13
+
+### Added
+
+- Add Angular functionality for deleting single message
+
+## [v1.0.0] - 2019-11-12
 
 ### Added
 
