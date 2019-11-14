@@ -1,12 +1,12 @@
 const dotenv = require('dotenv').config(), //for getting env file variables
   path = require('path'),
+  cors = require('cors'),
   eSession = require('express-session'),
   MongoStore = require('connect-mongo')(eSession),
   compression = require('compression'),
   express = require('express'),
   sharedsession = require('express-socket.io-session'),
   http = require('http'),
-  enforce = require('express-sslify'),
   bodyParser = require('body-parser'),
   socketio = require('socket.io');
 
@@ -14,8 +14,9 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
+const whitelist = [process.env.ALLOWED_CORS_URL, process.env.ALLOWED_CORS_URL_PROD];
 
-/* const corsOptions = {
+const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
@@ -24,7 +25,7 @@ const io = socketio(server);
     }
   },
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}; */
+};
 
 const port = process.env.PORT || 3000;
 const publicDirPath = path.join(__dirname, 'public');
@@ -47,7 +48,7 @@ const session = eSession({
   saveUninitialized: true,
   store: mStore
 });
-app.use(enforce.HTTPS({ trustProtoHeader: true }));
+app.use(cors(corsOptions));
 
 app.use(session);
 io.use(sharedsession(session, { autoSave: true }));

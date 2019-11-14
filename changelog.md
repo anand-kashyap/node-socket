@@ -3,10 +3,17 @@
 ## [Unreleased]
 
 ### TODO
+
+- add http to https redirect on heroku
 - make models on angular side for message, room and user
-- add push notifcation
 - show recent chats
 - send message after request accept
+
+#### LONG TERM
+
+- add push notifcation
+- progressive web app (PWA)
+- touch and hold functionality in PWA
 
 # Changelog
 
