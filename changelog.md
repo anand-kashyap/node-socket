@@ -4,9 +4,8 @@
 
 ### TODO
 
-- add http to https redirect on heroku
-- make models on angular side for message, room and user
 - show recent chats
+- make models on angular side for message, room and user
 - send message after request accept
 
 #### LONG TERM
@@ -16,6 +15,16 @@
 - touch and hold functionality in PWA
 
 # Changelog
+
+## [V1.0.2] - 2019-11-14
+
+### Fixed
+
+- Fixed http redirect to https not taking place on heroku
+
+### Added
+
+- show three dots on hover
 
 ## [V1.0.1] - 2019-11-13
 
