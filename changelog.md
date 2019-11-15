@@ -4,7 +4,7 @@
 
 ### TODO
 
-- show recent chats
+- add redis cache or local storage saving
 - make models on angular side for message, room and user
 - send message after request accept
 
@@ -15,6 +15,13 @@
 - touch and hold functionality in PWA
 
 # Changelog
+
+## [V1.0.3] - 2019-11-15
+
+### Added
+
+- show recent chats with ui
+- join room by id
 
 ## [V1.0.2] - 2019-11-14
 

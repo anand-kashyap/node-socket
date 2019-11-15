@@ -72,6 +72,20 @@ const deleteRoom = (req, res) => {
   })
 };
 
+const getRoomById = (req, res) => {
+  if (validator(req, res)) return;
+
+  Room.findById(req.params.roomId).then(room => {
+    return res.status(200).json({ success: true, data: room });
+  }, err => {
+    console.error(err);
+    return res.status(402).json({ success: false, message: err.message });
+  }).catch(ex => {
+    console.warn('Exception occured', ex);
+    return res.status(500).json({ success: false, message: ex.message });
+  })
+};
+
 const deleteSingleMessage = (req, res) => {
   if (validator(req, res)) {
     return;
@@ -84,6 +98,25 @@ const deleteSingleMessage = (req, res) => {
       console.error(err);
       return res.status(402).json({ success: false, err });
     })
+};
+
+const getRecentChats = (req, res) => { // get all recent rooms of user
+  if (validator(req, res)) {
+    return;
+  }
+  const params = req.params;
+  Room.find({ members: params.userName }, '_id directMessage members updatedAt roomName').sort('-updatedAt').limit(20).then(recentRooms => {
+    for (let i = 0; i < recentRooms.length; i++) {
+      const members = recentRooms[i].members;
+      const index = members.indexOf(params.userName);
+      members.splice(index, 1);
+      recentRooms[i].members = members;
+    }
+    return res.status(200).json({ success: true, data: recentRooms });
+  }, err => {
+    console.error(err);
+    return res.status(402).json({ success: false, err });
+  })
 };
 
 const clearMsgs = (req, res) => {
@@ -104,6 +137,8 @@ module.exports = {
   findCreateRoom,
   getRooms,
   deleteRoom,
+  getRoomById,
+  getRecentChats,
   deleteSingleMessage,
   clearMsgs
 }
