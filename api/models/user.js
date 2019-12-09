@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const otpSchema = Schema({otp: String, createdDate: {type: Date, default: Date.now()}});
+const otpSchema = Schema({ otp: String, createdDate: { type: Date, default: Date.now() } });
 
 const userSchema = Schema({
-  username: { type: String, unique: true, default: '' },
-  firstName: {type: String, required: true},
+  username: { type: String },
+  firstName: { type: String, required: true },
   lastName: String,
-  isAdmin: {type: Boolean, default: false},
+  isAdmin: { type: Boolean, default: false },
   session: String,
   email: { type: String, unique: true, required: true },
   phone: String,
@@ -16,15 +16,15 @@ const userSchema = Schema({
   imageUrl: String,
   active: Boolean,
   password: String,
-  isVerified: {type: Boolean, default: false},
+  isVerified: { type: Boolean, default: false },
   otps: [otpSchema],
-  lastVerified: {type: Date, default: null}
+  lastVerified: { type: Date, default: null }
 }, {
   toObject: {
-      virtuals: true
+    virtuals: true
   },
   toJSON: {
-      virtuals: true
+    virtuals: true
   }
 });
 

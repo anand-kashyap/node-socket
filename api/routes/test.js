@@ -1,8 +1,8 @@
 const express = require('express');
 
 const router = express.Router();
-const testController = require('../controllers/test');
+const { deleteUser } = require('../controllers/test');
 
-// router.get('/rooms', testController.getRooms);
+router.delete('/delUser/:userId', deleteUser);
 
 module.exports = router;

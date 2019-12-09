@@ -48,7 +48,7 @@ const session = eSession({
   saveUninitialized: true,
   store: mStore
 });
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 app.use(session);
 io.use(sharedsession(session, { autoSave: true }));

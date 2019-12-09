@@ -8,7 +8,7 @@ const userModel = require("../models/user");
 const getUsers = (req, res, next) => {
   // return res.status(200).json({ users: "test" });
   User = userModel.User;
-  User.find({isAdmin: false}).then((users) => {
+  User.find({ isAdmin: false }).then((users) => {
     console.log(users);
     return res.status(200).json(users);
   }, err => {
@@ -69,20 +69,21 @@ const searchUser = (req, res, next) => {
   const cUser = req.body.user;
   user = userModel.User;
   user.find(
-    {$or: [
-      {username: {$regex: `.*${userInput}.*`, $options: 'i', $ne: cUser.username}},
-      {email: {$regex: userInput, $options: 'i', $ne: cUser.email} },
-      {fullName: {$regex: `.*${userInput}.*`, $options: 'i', $ne: cUser.fullName} },
-    ]
-  }).limit(20).then(
-    resp => {
-      return res.status(200).json({ success: true, data: resp });
-    },
-    err => {
-      console.log(err);
-      return res.status(406).json({ message: err.message });
-    }
-  );
+    {
+      $or: [
+        { username: { $regex: `.*${userInput}.*`, $options: 'i', $ne: cUser.username } },
+        { email: { $regex: userInput, $options: 'i', $ne: cUser.email } },
+        { fullName: { $regex: `.*${userInput}.*`, $options: 'i', $ne: cUser.fullName } },
+      ]
+    }).limit(20).then(
+      resp => {
+        return res.status(200).json({ success: true, data: resp });
+      },
+      err => {
+        console.log(err);
+        return res.status(406).json({ message: err.message });
+      }
+    );
 };
 
 const userToken = oldUser => {
@@ -108,7 +109,7 @@ const registerUser = (req, res, next) => {
   User.findOne({ email: body.email }).then(oldUser => {
     if (!oldUser) {
       const hashPassword = bcrypt.hashSync(body.password, process.env.salt);
-      if (!body.hasOwnProperty("isAdmin")) {
+      if (!body.isAdmin) {
         body.isAdmin = false;
       }
 
@@ -128,7 +129,7 @@ const registerUser = (req, res, next) => {
           console.log(err);
         }
         console.log(newUserDoc.email);
-        mail.sendWelcomeMail(newUserDoc.email, function(err, info) {
+        mail.sendWelcomeMail(newUserDoc.email, function (err, info) {
           if (err) return next(err);
           console.log("info from mail");
           console.log(info);

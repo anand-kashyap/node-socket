@@ -33,7 +33,6 @@ const publicDirPath = path.join(__dirname, 'public');
 const mongoose = require('./config/dbconnection');
 
 //routes
-const test = require('./api/routes/test');
 const user = require('./api/routes/user');
 const room = require('./api/routes/room');
 
@@ -68,7 +67,6 @@ app.use('/*', function (req, res, next) {
   next();
 });
 
-app.use('/test', test);
 app.use('/user', user);
 app.use('/room', room);
 
