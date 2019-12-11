@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1576050789759,
+  "timestamp": 1576051690988,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -18,7 +18,7 @@
         "/common.ee4b489aa1555c341f26.js",
         "/favicon.ico",
         "/index.html",
-        "/main.40d2e1b412f5e8b2495e.js",
+        "/main.ce987891b35822e5aea1.js",
         "/manifest.webmanifest",
         "/polyfills.57363e6883df3952ae3e.js",
         "/runtime.aa06187c41f88aee254b.js",
@@ -47,7 +47,8 @@
     {
       "name": "api",
       "patterns": [
-        "https:\\/\\/angular-socket-ak\\.herokuapp\\.com\\/.*"
+        "https:\\/\\/angular-socket-ak\\.herokuapp\\.com\\/.*",
+        "https:\\/\\/angular-socket-pwa\\.herokuapp\\.com\\/.*"
       ],
       "strategy": "freshness",
       "maxSize": 3,
@@ -73,8 +74,8 @@
     "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/common.ee4b489aa1555c341f26.js": "1d43f25fe9baaa7258835b5b4080097b722ea21b",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/index.html": "f7beecd6bf101ad902ed38d33f87325fe2ed6ffc",
-    "/main.40d2e1b412f5e8b2495e.js": "c9f16c6212b9409e4393c1a01ad4b7e33ad099bc",
+    "/index.html": "539cf0e00f02f31727c22b96586d1449a7bb95d6",
+    "/main.ce987891b35822e5aea1.js": "b9ce9ba4dd24424daf39b3203f255a48ae6fdcfa",
     "/manifest.webmanifest": "1920c940aa210061a280d6ecc1b5bfdc6c9ff9d6",
     "/polyfills.57363e6883df3952ae3e.js": "27a114678a0639b4ee72c82ea1bcb78c12916bfe",
     "/runtime.aa06187c41f88aee254b.js": "a96f78f646783445e7aa9ae265eb632e3876259c",
