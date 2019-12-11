@@ -197,7 +197,7 @@ const updateProfile = (req, res, next) => {
   User.findOne({ email: body.email }).then(oldUser => {
     if (oldUser) {
       console.log(oldUser);
-      User.findOneAndUpdate({ email: body.email }, updateJson).then(
+      User.findOneAndUpdate({ email: body.email }, updateJson, { new: true }).then(
         updatedUser => {
           return res
             .status(200)
