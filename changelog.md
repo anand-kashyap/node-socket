@@ -4,17 +4,21 @@
 
 ### TODO
 
-- add redis cache or local storage saving
-- make models on angular side for message, room and user
-- send message after request accept
-
-#### LONG TERM
-
-- add push notifcation
 - progressive web app (PWA)
+- add push notifcation
 - touch and hold functionality in PWA
+- send message after request accept
+- make models on angular side for message, room and user
 
 # Changelog
+
+# Changelog
+
+## [V1.0.4] - 2019-12-11
+
+### Added
+
+- turn into PWA
 
 ## [V1.0.3] - 2019-11-15
 
