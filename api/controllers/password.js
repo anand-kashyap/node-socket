@@ -72,7 +72,7 @@ const forgotPassword = (req, res, next) => {
 const isRecentOTP = (otpArr, recOtp, minutes = 2) => {
     const f = otpArr.find(aOtp => aOtp.otp === recOtp);
     if (f) {
-        const diff = (new Date().getTime() - f.createdDate.getTime()) / (1000 * 60);
+        const diff = (new Date().getTime() - f.createdAt.getTime()) / (1000 * 60);
         return diff <= minutes ? true : false;
     } else {
         return false;
@@ -294,9 +294,9 @@ const updatePassword = (req, res, next) => {
 };
 
 module.exports = {
-  forgotPassword,
-  resetPassword,
-  updatePassword,
-  sendOtp,
-  confirmOtp
+    forgotPassword,
+    resetPassword,
+    updatePassword,
+    sendOtp,
+    confirmOtp
 }

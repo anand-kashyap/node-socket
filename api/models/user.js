@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const otpSchema = Schema({ otp: String, createdDate: { type: Date, default: Date.now() } });
+const otpSchema = Schema({ otp: String }, { timestamps: true });
 
 const userSchema = Schema({
   username: { type: String },
