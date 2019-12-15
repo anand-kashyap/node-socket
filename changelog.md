@@ -4,13 +4,10 @@
 
 ### TODO
 
-- progressive web app (PWA)
 - add push notifcation
 - touch and hold functionality in PWA
 - send message after request accept
 - make models on angular side for message, room and user
-
-# Changelog
 
 # Changelog
 
