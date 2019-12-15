@@ -18,7 +18,7 @@ const findCreateRoom = (req, res, next) => {
   };
   return res.status(200).json({ success: true, data: room }); */
   const directMessage = body.userNameArr.length === 2 ? true : false;
-  const initMsgs = body.initMsgs ? body.initMsgs : 50;
+  const initMsgs = body.initMsgs || 50;
   Room.findOne(
     {
       members: { $all: body.userNameArr },
@@ -105,7 +105,8 @@ const getRecentChats = (req, res) => { // get all recent rooms of user
     return;
   }
   const params = req.params;
-  Room.find({ members: params.userName }, '_id directMessage members updatedAt roomName').sort('-updatedAt').limit(20).then(recentRooms => {
+  const msgLimit = req.query.msgLimit || 30;
+  Room.find({ members: params.userName }, { messages: { $slice: -msgLimit } }).sort('-updatedAt').limit(20).then(recentRooms => {
     for (let i = 0; i < recentRooms.length; i++) {
       const members = recentRooms[i].members;
       const index = members.indexOf(params.userName);

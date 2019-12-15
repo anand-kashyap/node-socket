@@ -1,4 +1,5 @@
 const { User } = require('../models/user');
+const { Room } = require('../models/room');
 
 const getRooms = (req, res) => {
 
@@ -31,7 +32,46 @@ const deleteUser = (req, res) => {
   )
 }
 
+const getRecentChatsOld = (req, res) => { // get all recent rooms of user
+  /* if (validator(req, res)) {
+    return;
+  } */
+  const params = req.params;
+  Room.find({ members: params.userName }, '_id directMessage members updatedAt roomName').sort('-updatedAt').limit(20).then(recentRooms => {
+    for (let i = 0; i < recentRooms.length; i++) {
+      const members = recentRooms[i].members;
+      const index = members.indexOf(params.userName);
+      members.splice(index, 1);
+      recentRooms[i].members = members;
+    }
+    return res.status(200).json({ success: true, data: recentRooms });
+  }, err => {
+    console.error(err);
+    return res.status(402).json({ success: false, err });
+  })
+};
+
+const getRecentChatsNew = (req, res) => { // get all recent rooms of user
+  /* if (validator(req, res)) {
+    return;
+  } */
+  const params = req.params;
+  Room.find({ members: params.userName }, { messages: { $slice: -30 } }).sort('-updatedAt').limit(20).then(recentRooms => {
+    for (let i = 0; i < recentRooms.length; i++) {
+      const members = recentRooms[i].members;
+      const index = members.indexOf(params.userName);
+      members.splice(index, 1);
+      recentRooms[i].members = members;
+    }
+    return res.status(200).json({ success: true, data: recentRooms });
+  }, err => {
+    console.error(err);
+    return res.status(402).json({ success: false, err });
+  })
+};
+
 module.exports = {
   getRooms,
-  deleteUser
+  deleteUser,
+  getRecentChatsOld, getRecentChatsNew
 };

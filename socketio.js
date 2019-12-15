@@ -49,7 +49,6 @@ const onDeleteMessage = (user, io) => {
  */
 const onSocketDisconnect = (user, io) => {
   return () => {
-    console.log('before remove', getUsers());
     const delUser = removeUser(user);
     console.log('after remove', getUsers());
     if (!delUser.tabs) {
