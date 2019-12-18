@@ -4,9 +4,12 @@
 
 ### TODO
 
+- message clear of only user who sent it not others in input
 - add notification popup for error and success messages
 - add push notifcation
+- theme - dark and light
 - send message after request accept
+- active/inactive status
 - integrate ng-rxform and improve it
 - make models on angular side for message, room and user
 
@@ -14,9 +17,15 @@
 
 ## [V1.0.5] - 2019-12-18
 
+### Added
+
+- lazy load remaining modules
+- update profile icon and route in header
+
 ### Fixed
 
 - access room by id in url
+- always show three dots in mobile views
 
 ### Removed
 
