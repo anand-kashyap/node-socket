@@ -59,9 +59,10 @@ const onSocketDisconnect = (user, io) => {
 const socketHandle = (io) => {
   io.on('connection', (socket) => {
     socket.on('join', (options, callback) => {
-      const sessionId = socket.handshake.session.id;
-      const { user } = addUser({ sessionId, socketId: socket.id, ...options });
-      console.log('sessionId', sessionId) // same value on every connection
+      // const sessionId = socket.handshake.session.id;
+      // const { user } = addUser({ sessionId, socketId: socket.id, ...options });
+      const { user } = addUser({ socketId: socket.id, ...options });
+      // console.log('sessionId', sessionId) // same value on every connection
       socket.join(user.room);
       console.log('after join', getUsers());
       socket.broadcast.to(user.room).emit('newClient', user.username);

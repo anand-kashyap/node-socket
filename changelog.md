@@ -4,12 +4,23 @@
 
 ### TODO
 
+- add notification popup for error and success messages
 - add push notifcation
-- touch and hold functionality in PWA
 - send message after request accept
+- integrate ng-rxform and improve it
 - make models on angular side for message, room and user
 
 # Changelog
+
+## [V1.0.5] - 2019-12-18
+
+### Fixed
+
+- access room by id in url
+
+### Removed
+
+- remove storing chats in localstorage
 
 ## [V1.0.4] - 2019-12-11
 

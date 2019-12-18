@@ -6,6 +6,16 @@ const getRooms = (req, res) => {
   return res.status(200).json({ success: true });
 }
 
+const checkSession = (req, res) => {
+  req.session.test = 'by ak';
+  return res.status(200).json({ success: true, session: req.session, sid: req.session.id });
+}
+
+const checkSession2 = (req, res) => {
+
+  return res.status(200).json({ success: true, session: req.session, sid: req.session.id });
+}
+
 const deleteUser = (req, res) => {
   /* User.collection.getIndexes({ full: true }).then(resp => {
     console.log(resp);
@@ -73,5 +83,5 @@ const getRecentChatsNew = (req, res) => { // get all recent rooms of user
 module.exports = {
   getRooms,
   deleteUser,
-  getRecentChatsOld, getRecentChatsNew
+  getRecentChatsOld, getRecentChatsNew, checkSession, checkSession2
 };

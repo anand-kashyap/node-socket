@@ -1,10 +1,7 @@
 const dotenv = require('dotenv').config(), //for getting env file variables
   path = require('path'),
-  eSession = require('express-session'),
-  MongoStore = require('connect-mongo')(eSession),
   compression = require('compression'),
   express = require('express'),
-  sharedsession = require('express-socket.io-session'),
   http = require('http'),
   enforce = require('express-sslify'),
   bodyParser = require('body-parser'),
@@ -39,17 +36,7 @@ const room = require('./api/routes/room');
 const socketHandle = require('./socketio');
 socketHandle(io);
 
-const mStore = new MongoStore({ mongooseConnection: mongoose.connection });
-const session = eSession({
-  secret: 'my-secret',
-  resave: true,
-  saveUninitialized: true,
-  store: mStore
-});
 app.use(enforce.HTTPS({ trustProtoHeader: true }));
-
-app.use(session);
-io.use(sharedsession(session, { autoSave: true }));
 
 //body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
