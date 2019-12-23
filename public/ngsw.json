@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1577088117125,
+  "timestamp": 1577089833746,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -46,19 +46,7 @@
       "patterns": []
     }
   ],
-  "dataGroups": [
-    {
-      "name": "api",
-      "patterns": [
-        "https:\\/\\/angular-socket-ak\\.herokuapp\\.com\\/.*",
-        "https:\\/\\/angular-socket-pwa\\.herokuapp\\.com\\/.*"
-      ],
-      "strategy": "freshness",
-      "maxSize": 3,
-      "maxAge": 604800000,
-      "version": 1
-    }
-  ],
+  "dataGroups": [],
   "hashTable": {
     "/0.178d5820c675ab67fcfa.js": "2fdffac92f40069e04c5f491b4b9c1787695b987",
     "/10.176baf63552c5982c8ad.js": "d3aca9d9d6830c7589cca43c2deac6daa03d6f54",
