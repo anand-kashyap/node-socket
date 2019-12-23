@@ -5,6 +5,7 @@
 ### TODO
 
 - message clear of only user who sent it not others in input
+- Show name of User at top
 - add notification popup for error and success messages
 - add push notifcation
 - theme - dark and light
@@ -14,6 +15,12 @@
 - make models on angular side for message, room and user
 
 # Changelog
+
+## [V1.0.6] - 2019-12-23
+
+### Fixed
+
+- Fixed offline support
 
 ## [V1.0.5] - 2019-12-18
 
