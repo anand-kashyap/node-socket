@@ -1,5 +1,6 @@
 const dotenv = require('dotenv').config(), //for getting env file variables
   path = require('path'),
+  cors = require('cors'),
   compression = require('compression'),
   express = require('express'),
   http = require('http'),
@@ -10,9 +11,10 @@ const dotenv = require('dotenv').config(), //for getting env file variables
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
+const whitelist = [process.env.ALLOWED_CORS_URL, process.env.ALLOWED_CORS_URL_PROD];
 
 
-/* const corsOptions = {
+const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
@@ -21,7 +23,7 @@ const io = socketio(server);
     }
   },
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}; */
+};
 
 const port = process.env.PORT || 3000;
 const publicDirPath = path.join(__dirname, 'public');
@@ -42,6 +44,7 @@ app.use(enforce.HTTPS({ trustProtoHeader: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(compression());
+app.use(cors(corsOptions));
 
 app.use(express.static(publicDirPath));
 //test db connection
