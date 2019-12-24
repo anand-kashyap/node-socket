@@ -32,7 +32,7 @@ const forgotPassword = (req, res, next) => {
                 mail.sendTokenForgotPassword(
                     token,
                     req.body.email,
-                    req.body.baseUrl,
+                    process.env.ALLOWED_CORS_URL_PROD,
                     function (err, info) {
                         if (err) return next(err);
                         if (info) {
