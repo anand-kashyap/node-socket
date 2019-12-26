@@ -4,23 +4,37 @@
 
 ### TODO
 
-- message clear of only user who sent it not others in input
-- Show name of User at top
+- load older messages on scroll up
+- typing status show to other
+- status of sent messages progress by icon
 - add notification popup for error and success messages
 - add push notifcation
+- keep socket connected for all rooms as long as window open
 - theme - dark and light
 - send message after request accept
-- active/inactive status
 - integrate ng-rxform and improve it
 - make models on angular side for message, room and user
 
 # Changelog
+
+## [V1.0.7] - 2019-12-26
+
+### Added
+
+- Show name of User at top
+- active/inactive status
+
+### Fixed
+
+- Fixed message send on multiple clicks/sends
+- fetch last 30 messages in room by id api call
 
 ## [V1.0.6] - 2019-12-23
 
 ### Fixed
 
 - Fixed offline support
+- message clear of only user who sent it not others in input
 
 ## [V1.0.5] - 2019-12-18
 

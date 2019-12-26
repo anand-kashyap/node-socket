@@ -75,7 +75,16 @@ const deleteRoom = (req, res) => {
 const getRoomById = (req, res) => {
   if (validator(req, res)) return;
 
-  Room.findById(req.params.roomId).then(room => {
+  const { msgLimit = 30, currentUser } = req.query;
+  console.log('qsss', req.query);
+
+  Room.findById(req.params.roomId, { messages: { $slice: -msgLimit } }).then(room => {
+    if (currentUser) {
+      const ind = room.members.indexOf(currentUser);
+      if (ind != -1) {
+        room.members.splice(ind, 1);
+      }
+    }
     return res.status(200).json({ success: true, data: room });
   }, err => {
     console.error(err);

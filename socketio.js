@@ -1,4 +1,4 @@
-const { addUser, removeUser, findUsers, findUserIndex, getUsers } = require('./users');
+const { addUser, removeUser, getUsers, removeOnline } = require('./users');
 const { Room } = require('./api/models/room');
 
 /** On New Message Method
@@ -52,7 +52,7 @@ const onSocketDisconnect = (user, io) => {
     const delUser = removeUser(user);
     console.log('after remove', getUsers());
     if (!delUser.tabs) {
-      io.to(user.room).emit('clientLeft', user.username);
+      io.to(user.room).emit('clientLeft', removeOnline(user));
     }
   };
 }
@@ -61,11 +61,12 @@ const socketHandle = (io) => {
     socket.on('join', (options, callback) => {
       // const sessionId = socket.handshake.session.id;
       // const { user } = addUser({ sessionId, socketId: socket.id, ...options });
-      const { user } = addUser({ socketId: socket.id, ...options });
+      const { user, onlineUsers } = addUser({ socketId: socket.id, ...options });
       // console.log('sessionId', sessionId) // same value on every connection
       socket.join(user.room);
+
       console.log('after join', getUsers());
-      socket.broadcast.to(user.room).emit('newClient', user.username);
+      socket.broadcast.to(user.room).emit('newClient', { username: user.username, onlineUsers });
 
       socket.on('newMessage', onNewMessage(user, io));
       socket.on('deleteMessage', onDeleteMessage(user, io));
@@ -80,7 +81,7 @@ const socketHandle = (io) => {
 
       socket.on('disconnect', onSocketDisconnect(user, io));
 
-      callback();
+      callback(onlineUsers);
     });
 
   });
