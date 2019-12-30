@@ -1,3 +1,4 @@
+const webpush = require('web-push');
 const { User } = require('../models/user');
 const { Room } = require('../models/room');
 
@@ -6,14 +7,46 @@ const getRooms = (req, res) => {
   return res.status(200).json({ success: true });
 }
 
-const checkSession = (req, res) => {
-  req.session.test = 'by ak';
-  return res.status(200).json({ success: true, session: req.session, sid: req.session.id });
+const addProperty = (req, res) => {
+  User.updateMany({}, { $set: { notificationSub: null } }, { upsert: true }).then(resp =>
+    res.status(200).json({ success: true, resp })
+    , err =>
+      res.status(406).json({ success: false, err })
+  );
 }
 
-const checkSession2 = (req, res) => {
+const sendnotify = async (req, res) => {
+  webpush.setVapidDetails(
+    'mailto:anandkashyap60@gmail.com',
+    process.env.VAPID_PUBLIC,
+    process.env.VAPID_PRIVATE
+  );
 
-  return res.status(200).json({ success: true, session: req.session, sid: req.session.id });
+  const all = await User.findById('5d5b902a4dd82473d96343dc');
+  const sub = all.notificationSub;
+
+  console.log('Total subscriptions', sub);
+  const notificationPayload = {
+    "notification": {
+      "title": "Angular News",
+      "body": "Newsletter Available!",
+      "vibrate": [100, 50, 100],
+      "data": {
+        "dateOfArrival": Date.now(),
+        "primaryKey": 1
+      },
+      "actions": [{
+        "action": "explore",
+        "title": "Go to the site"
+      }]
+    }
+  };
+
+  return webpush.sendNotification(
+    sub, JSON.stringify(notificationPayload)).then(
+      resp => res.status(200).json({ data: resp }),
+      err => res.status(406).json(err)
+    )
 }
 
 const deleteUser = (req, res) => {
@@ -42,25 +75,6 @@ const deleteUser = (req, res) => {
   )
 }
 
-const getRecentChatsOld = (req, res) => { // get all recent rooms of user
-  /* if (validator(req, res)) {
-    return;
-  } */
-  const params = req.params;
-  Room.find({ members: params.userName }, '_id directMessage members updatedAt roomName').sort('-updatedAt').limit(20).then(recentRooms => {
-    for (let i = 0; i < recentRooms.length; i++) {
-      const members = recentRooms[i].members;
-      const index = members.indexOf(params.userName);
-      members.splice(index, 1);
-      recentRooms[i].members = members;
-    }
-    return res.status(200).json({ success: true, data: recentRooms });
-  }, err => {
-    console.error(err);
-    return res.status(402).json({ success: false, err });
-  })
-};
-
 const getRecentChatsNew = (req, res) => { // get all recent rooms of user
   /* if (validator(req, res)) {
     return;
@@ -83,5 +97,6 @@ const getRecentChatsNew = (req, res) => { // get all recent rooms of user
 module.exports = {
   getRooms,
   deleteUser,
-  getRecentChatsOld, getRecentChatsNew, checkSession, checkSession2
+  getRecentChatsNew,
+  addProperty, sendnotify
 };

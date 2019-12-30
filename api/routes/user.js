@@ -19,7 +19,7 @@ const queryValidations = [
 
 router.get('/', user.getUsers);
 
-router.post('/authenticate',[
+router.post('/authenticate', [
   ...validationArray
 ], user.authUser);
 router.get('/check-username', [middleware.checkToken, ...queryValidations], user.checkUserName);
@@ -29,8 +29,12 @@ router.patch('/update-profile', [middleware.checkToken], user.updateProfile);
 
 router.post('/register', [
   check('firstName').exists().withMessage('First Name is a required value').isLength({ min: 3 }).withMessage('First Name must be at least 3 chars long'),
-...validationArray], user.registerUser);
+  ...validationArray], user.registerUser);
 
+router.post('/store-notification/:userId', [/* middleware.checkToken, */
+  check('userId').isLength({ min: 5 }).withMessage('UserId must be of 5 chars at least'),
+  check('data').exists().withMessage('Data key is required'),
+], user.storeNotif);
 
 router.post('/forgot-password', [validationArray[0],
 check('baseUrl').exists().withMessage('Base Url is a required value')], pass.forgotPassword);
@@ -46,12 +50,12 @@ router.post('/confirm-otp', [
   check('otp').exists().withMessage('OTP is a required value')
 ], pass.confirmOtp);
 
-router.put('/reset-password',[
+router.put('/reset-password', [
   validationArray[1],
   check('token').exists().withMessage('Token is a required value')
 ], pass.resetPassword);
 
-router.put('/update-password',[
+router.put('/update-password', [
   [middleware.checkToken],
   ...validationArray,
   check('newPassword').exists().withMessage('New Password is a required value').isLength({ min: 5 }).withMessage('New Password must be at least 5 chars long'),

@@ -3,11 +3,10 @@ const bcrypt = require("bcryptjs");
 const mail = require("../../services/sendmail");
 const checkValidation = require("../../services/expressValidation");
 
-const userModel = require("../models/user");
+const { User } = require("../models/user");
 
 const getUsers = (req, res, next) => {
   // return res.status(200).json({ users: "test" });
-  User = userModel.User;
   User.find({ isAdmin: false }).then((users) => {
     console.log(users);
     return res.status(200).json(users);
@@ -20,7 +19,6 @@ const getUsers = (req, res, next) => {
 const getUserDetails = (req, res, next) => {
   if (checkValidation(req, res)) return;
   // return res.status(200).json({ users: "test" });
-  User = userModel.User;
   User.findOne({ email: req.query.email.trim() }).then(
     user => {
       console.log(user);
@@ -47,7 +45,6 @@ const checkUserName = (req, res, next) => {
   console.log("req.query", req.query);
   const userInput = req.query.userinput.trim();
   const email = req.query.email;
-  user = userModel.User;
   user.findOne({ username: userInput }).then(
     resp => {
       console.log(resp);
@@ -67,8 +64,7 @@ const searchUser = (req, res, next) => {
   if (checkValidation(req, res)) return;
   const userInput = req.query.userinput.trim();
   const cUser = req.body.user;
-  user = userModel.User;
-  user.find(
+  User.find(
     {
       $or: [
         { username: { $regex: `.*${userInput}.*`, $options: 'i', $ne: cUser.username } },
@@ -88,6 +84,8 @@ const searchUser = (req, res, next) => {
 
 const userToken = oldUser => {
   let payload = {
+    id: oldUser._id,
+    notificationSub: oldUser.notificationSub,
     email: oldUser.email,
     username: oldUser.username,
     fullName: oldUser.fullName,
@@ -105,7 +103,6 @@ const userToken = oldUser => {
 const registerUser = (req, res, next) => {
   if (checkValidation(req, res)) return;
   body = req.body;
-  User = userModel.User;
   User.findOne({ email: body.email }).then(oldUser => {
     if (!oldUser) {
       const hashPassword = bcrypt.hashSync(body.password, process.env.salt);
@@ -113,7 +110,7 @@ const registerUser = (req, res, next) => {
         body.isAdmin = false;
       }
 
-      newUser = new userModel.User({
+      newUser = new User({
         // userId: body.userId,
         firstName: body.firstName,
         lastName: body.lastName,
@@ -152,7 +149,6 @@ const registerUser = (req, res, next) => {
 const authUser = (req, res, next) => {
   if (checkValidation(req, res)) return;
   body = req.body;
-  User = userModel.User;
   User.findOne({ email: body.email }).then(oldUser => {
     if (oldUser) {
       console.log(oldUser);
@@ -188,7 +184,6 @@ const authUser = (req, res, next) => {
 const updateProfile = (req, res, next) => {
   if (checkValidation(req, res)) return;
   body = req.body;
-  User = userModel.User;
   const updateJson = {
     username: body.username,
     firstName: body.firstName,
@@ -219,6 +214,21 @@ const updateProfile = (req, res, next) => {
   });
 };
 
+const storeNotif = (req, res, next) => {
+  if (checkValidation(req, res)) return;
+  User.findByIdAndUpdate(req.params.userId, { notificationSub: req.body.data }, { new: true }).then((updated) => {
+    console.log(updated);
+    return res.status(200).json({
+      success: true,
+      message: "Notification sub stored in user successfully.",
+      updated
+    });
+  }, err => {
+    console.log(err);
+    return res.status(400).json({ success: false, message: err.message });
+  });
+};
+
 module.exports = {
   getUsers,
   checkUserName,
@@ -226,5 +236,6 @@ module.exports = {
   getUserDetails,
   registerUser,
   authUser,
-  updateProfile
+  updateProfile,
+  storeNotif
 };

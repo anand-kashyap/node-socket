@@ -4,11 +4,17 @@
 
 ### TODO
 
+- improve push notifcation
+- serve icon files
 - load older messages on scroll up
 - typing status show to other
+- on delete msg prevent list update
+- common socket id for all rooms
+- case insensitive email login or user login
+- logo for app by combining font awesome icons
+- remember me function
 - status of sent messages progress by icon
 - add notification popup for error and success messages
-- add push notifcation
 - keep socket connected for all rooms as long as window open
 - theme - dark and light
 - send message after request accept
@@ -16,6 +22,19 @@
 - make models on angular side for message, room and user
 
 # Changelog
+
+## [V2.0.0] - 2019-12-30
+
+### Added
+
+- Notication push
+- custom icon added
+
+## [V1.1.0] - 2019-12-30
+
+### Fixed
+
+- Ui Imprvements
 
 ## [V1.0.7] - 2019-12-26
 

@@ -1,4 +1,4 @@
-const { addUser, removeUser, getUsers, removeOnline } = require('./users');
+const { addUser, removeUser, getUsers, removeOnline, notify } = require('./users');
 const { Room } = require('./api/models/room');
 
 /** On New Message Method
@@ -17,8 +17,14 @@ const onNewMessage = (user, io) => {
       $push: {
         messages: message
       }
-    }, { new: true }).then(savedMessage => {
-      io.to(user.room).emit('newMessage', savedMessage.messages[savedMessage.messages.length - 1]);
+    }, { new: true }).lean().then(savedMessage => {
+      console.log(savedMessage);
+      const room = { ...savedMessage };
+      const message = room.messages[room.messages.length - 1]; // last message
+      room.members.splice(room.members.indexOf(user.username), 1);
+      room.messages = [message];
+      notify(room); // send push notify to all members except self
+      io.to(user.room).emit('newMessage', message);
     }).catch(err =>
       console.error('err ocurred', err)
     );
@@ -60,7 +66,6 @@ const socketHandle = (io) => {
   io.on('connection', (socket) => {
     socket.on('join', (options, callback) => {
       // const sessionId = socket.handshake.session.id;
-      // const { user } = addUser({ sessionId, socketId: socket.id, ...options });
       const { user, onlineUsers } = addUser({ socketId: socket.id, ...options });
       // console.log('sessionId', sessionId) // same value on every connection
       socket.join(user.room);

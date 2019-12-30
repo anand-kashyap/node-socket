@@ -1,12 +1,11 @@
 const express = require('express');
 
 const router = express.Router();
-const { deleteUser, getRecentChatsNew, getRecentChatsOld, checkSession, checkSession2 } = require('../controllers/test');
+const { deleteUser, getRecentChatsNew, addProperty, sendnotify } = require('../controllers/test');
 
 router.delete('/delUser/:userId', deleteUser);
-router.get('/chatsold/:userName', getRecentChatsOld);
 router.get('/chatsnew/:userName', getRecentChatsNew);
-router.get('/session', checkSession);
-router.get('/session2', checkSession2);
+// router.get('/addProp', addProperty);
+// router.post('/notify', sendnotify);
 
 module.exports = router;

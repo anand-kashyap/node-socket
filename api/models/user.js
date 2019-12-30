@@ -7,6 +7,7 @@ const userSchema = Schema({
   username: { type: String },
   firstName: { type: String, required: true },
   lastName: String,
+  notificationSub: { type: Schema.Types.Mixed, default: null }, // for storing push notify subscription
   isAdmin: { type: Boolean, default: false },
   session: String,
   email: { type: String, unique: true, required: true },
