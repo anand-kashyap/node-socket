@@ -77,6 +77,9 @@ const socketHandle = (io) => {
       socket.on('newMessage', onNewMessage(user, io));
       socket.on('deleteMessage', onDeleteMessage(user, io));
 
+      socket.on('typing', () => {
+        socket.broadcast.to(user.room).emit('typing', user.username);
+      });
       socket.on('sendLocation', (data) => {
         socket.broadcast.to(user.room).emit('newMessage', `<a target='_blank' href='https://www.google.com/maps?q=${data.lat},${data.long}'>Location</a>`, user.username, new Date());
       });
