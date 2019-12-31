@@ -7,7 +7,7 @@ const { Room } = require('./api/models/room');
  * TODO: better jsdoc
  */
 const onNewMessage = (user, io) => {
-  return (msg) => {
+  return (msg, prod) => {
     const message = {
       msg,
       username: user.username
@@ -18,12 +18,13 @@ const onNewMessage = (user, io) => {
         messages: message
       }
     }, { new: true }).lean().then(savedMessage => {
-      console.log(savedMessage);
-      const room = { ...savedMessage };
-      const message = room.messages[room.messages.length - 1]; // last message
-      room.members.splice(room.members.indexOf(user.username), 1);
-      room.messages = [message];
-      notify(room); // send push notify to all members except self
+      if (prod) { // send notification in prod mode only
+        const room = { ...savedMessage };
+        const message = room.messages[room.messages.length - 1]; // last message
+        room.members.splice(room.members.indexOf(user.username), 1);
+        room.messages = [message];
+        notify(room); // send push notify to all members except self
+      }
       io.to(user.room).emit('newMessage', message);
     }).catch(err =>
       console.error('err ocurred', err)
