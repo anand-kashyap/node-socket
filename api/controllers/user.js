@@ -216,7 +216,11 @@ const updateProfile = (req, res, next) => {
 
 const storeNotif = (req, res, next) => {
   if (checkValidation(req, res)) return;
-  User.findByIdAndUpdate(req.params.userId, { notificationSub: req.body.data }, { new: true }).then((updated) => {
+  const { userId } = req.params;
+  if (userId === 'null' || userId === 'undefined') {
+    return res.status(400).json({ success: false, message: 'UserId cannot be null/empty' });
+  }
+  User.findByIdAndUpdate(userId, { notificationSub: req.body.data }, { new: true }).then((updated) => {
     console.log(updated);
     return res.status(200).json({
       success: true,
