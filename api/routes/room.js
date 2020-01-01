@@ -25,7 +25,7 @@ router.put('/', [
 
 router.get('/', getRooms);
 router.get('/recentChats/:userName', [middleware.checkToken], getRecentChats);
-router.get('/:roomId'/* , [middleware.checkToken] */, getRoomById);
+router.get('/:roomId', [middleware.checkToken], getRoomById);
 router.delete('/:roomId', deleteRoom);
 router.delete('/:roomId/message/:msgId', deleteSingleMessage);
 router.delete('/:roomId/clearMsgs', clearMsgs);

@@ -44,7 +44,7 @@ const checkUserName = (req, res, next) => {
   if (checkValidation(req, res)) return;
   console.log("req.query", req.query);
   const userInput = req.query.userinput.trim();
-  const email = req.query.email;
+  const email = req.query.email.toLowerCase();
   user.findOne({ username: userInput }).then(
     resp => {
       console.log(resp);
@@ -82,7 +82,7 @@ const searchUser = (req, res, next) => {
     );
 };
 
-const userToken = oldUser => {
+const userToken = (oldUser, remember = false) => { // remember me expires after 2 weeks
   let payload = {
     id: oldUser._id,
     notificationSub: oldUser.notificationSub,
@@ -94,8 +94,9 @@ const userToken = oldUser => {
     priceGroup: oldUser.priceGroup,
     isVerified: oldUser.isVerified
   };
+  const expiresIn = remember ? '14d' : '24h';
   let token = jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: "24h" // expires in 24 hours 24h
+    expiresIn // expires in 24 hours 24h
   });
   return token;
 };
@@ -103,6 +104,7 @@ const userToken = oldUser => {
 const registerUser = (req, res, next) => {
   if (checkValidation(req, res)) return;
   body = req.body;
+  body.email = body.email.toLowerCase();
   User.findOne({ email: body.email }).then(oldUser => {
     if (!oldUser) {
       const hashPassword = bcrypt.hashSync(body.password, process.env.salt);
@@ -149,9 +151,19 @@ const registerUser = (req, res, next) => {
 const authUser = (req, res, next) => {
   if (checkValidation(req, res)) return;
   body = req.body;
-  User.findOne({ email: body.email }).then(oldUser => {
+  const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
+  const isMail = emailRegex.test(body.email);
+  if (isMail) {
+    body.email = body.email.toLowerCase();
+  }
+  User.findOne({
+    $or: [
+      { username: body.email },
+      { email: body.email },
+    ]
+  }).then(oldUser => {
     if (oldUser) {
-      console.log(oldUser);
+      // console.log(oldUser);
       const isCorrect = bcrypt.compareSync(body.password, oldUser.password);
       if (!oldUser.active) {
         return res
@@ -159,7 +171,7 @@ const authUser = (req, res, next) => {
           .json({ success: false, message: "Account not active" });
       }
       if (isCorrect) {
-        let token = userToken(oldUser);
+        let token = userToken(oldUser, body.remember);
         // console.log(req.session.id, 'from route');
         // return the JWT token for the future API calls
         return res.status(200).json({
@@ -189,6 +201,7 @@ const updateProfile = (req, res, next) => {
     firstName: body.firstName,
     lastName: body.lastName
   };
+  body.email = body.email.toLowerCase();
   User.findOne({ email: body.email }).then(oldUser => {
     if (oldUser) {
       console.log(oldUser);

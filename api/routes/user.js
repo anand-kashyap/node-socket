@@ -20,7 +20,8 @@ const queryValidations = [
 router.get('/', user.getUsers);
 
 router.post('/authenticate', [
-  ...validationArray
+  check('email').exists().withMessage('Email/Username is a required value').isLength({ min: 4 }).withMessage('Email/Username must be at least 5 chars long'),
+  validationArray[1]
 ], user.authUser);
 router.get('/check-username', [middleware.checkToken, ...queryValidations], user.checkUserName);
 router.post('/search-user', [/* middleware.checkToken, */ queryValidations[1]], user.searchUser);
