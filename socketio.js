@@ -18,14 +18,14 @@ const onNewMessage = (user, io) => {
         messages: message
       }
     }, { new: true }).lean().then(savedMessage => {
+      const room = { ...savedMessage };
+      const nMessage = room.messages[room.messages.length - 1]; // last message
       if (prod) { // send notification in prod mode only
-        const room = { ...savedMessage };
-        const message = room.messages[room.messages.length - 1]; // last message
         room.members.splice(room.members.indexOf(user.username), 1);
-        room.messages = [message];
+        room.messages = [nMessage];
         notify(room); // send push notify to all members except self
       }
-      io.to(user.room).emit('newMessage', message);
+      io.to(user.room).emit('newMessage', nMessage); // has msg date also
     }).catch(err =>
       console.error('err ocurred', err)
     );

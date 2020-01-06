@@ -8,7 +8,7 @@ process.stdin.resume();
 
 const uri = `mongodb+srv://${process.env.CLOUD_MONGO_USER}:${process.env.CLOUD_MONGO_PSW}@cluster0-yu8za.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true }).catch(err => console.error('Error in connecting', err));
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }).catch(err => console.error('Error in connecting', err));
 
 mongoose.connection.on('connecting', function () {
   console.log('db connecting');
