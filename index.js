@@ -11,7 +11,7 @@ const dotenv = require('dotenv').config(), //for getting env file variables
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
-const whitelist = [process.env.ALLOWED_CORS_URL, process.env.ALLOWED_CORS_URL_PROD];
+const whitelist = [process.env.ALLOWED_CORS_URL, process.env.ALLOWED_CORS_URL_PROD, 'https://angular-socket-ak.herokuapp.com'];
 
 
 const corsOptions = {
