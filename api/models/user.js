@@ -10,6 +10,7 @@ const userSchema = Schema({
   notificationSub: { type: Schema.Types.Mixed, default: null }, // for storing push notify subscription
   isAdmin: { type: Boolean, default: false },
   session: String,
+  lastSeen: { type: Date, default: null },
   email: { type: String, unique: true, required: true },
   phone: String,
   resetToken: String,

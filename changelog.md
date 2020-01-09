@@ -24,6 +24,7 @@
 ### Added
 
 - Fetch older messages
+- last seen at feature
 
 ## [V2.0.0] - 2019-12-30
 

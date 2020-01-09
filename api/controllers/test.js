@@ -8,7 +8,7 @@ const getRooms = (req, res) => {
 }
 
 const addProperty = (req, res) => {
-  User.updateMany({}, { $set: { notificationSub: null } }, { upsert: true }).then(resp =>
+  User.updateMany({}, { $set: { lastSeen: null } }, { upsert: true }).then(resp =>
     res.status(200).json({ success: true, resp })
     , err =>
       res.status(406).json({ success: false, err })
@@ -116,9 +116,23 @@ const getOlder = (req, res) => {
   ); */
 }
 
+const clearOtps = (req, res) => {
+  const { userId } = req.params;
+  if (!userId) {
+    return res.status(422).json({ success: false, message: 'UserId not sent' });
+  }
+
+  User.findByIdAndUpdate(userId, { otps: [] }).then(resp => {
+    // console.log(resp);
+    res.status(200).json({ message: `cleared OTP for ${resp.fullName}` });
+  },
+    err => res.status(400).json(err));
+
+};
+
 module.exports = {
   getRooms,
   deleteUser,
   getRecentChatsNew,
-  addProperty, sendnotify, getOlder
+  addProperty, sendnotify, getOlder, clearOtps
 };

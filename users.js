@@ -39,7 +39,16 @@ const removeUser = ({ socketId, username, room }) => { // todo: add removing use
   return users.splice(eid, 1)[0].username;
 }
 
+const updateLastSeen = (username) => {
+  User.findOneAndUpdate({ username }, {
+    $currentDate: {
+      lastSeen: true
+    },
+  });
+}
 const removeOnline = (user) => {
+  updateLastSeen(user.username);
+  // console.log('updated user: ', res);
   if (onlineUsers[user.room]) {
     const f = onlineUsers[user.room].indexOf(user.username);
     if (f !== -1) {
