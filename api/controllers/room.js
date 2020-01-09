@@ -17,7 +17,9 @@ const findCreateRoom = (req, res, next) => {
     __v: 0
   };
   return res.status(200).json({ success: true, data: room }); */
-  const directMessage = body.userNameArr.length === 2 ? true : false;
+  const currentUser = body.currentUser;
+  const directMessage = body.userNameArr.length === 1 ? true : false;
+  body.userNameArr.push(currentUser);
   const initMsgs = body.initMsgs || 50;
   Room.findOne(
     {
@@ -27,18 +29,30 @@ const findCreateRoom = (req, res, next) => {
     { messages: { $slice: -initMsgs } }).then(room => {
       console.log('room', room)
       if (room) {
+        if (currentUser) {
+          const ind = room.members.indexOf(currentUser);
+          if (ind != -1) {
+            room.members.splice(ind, 1);
+          }
+        }
         return res.status(200).json({ success: true, data: room });
       } else {
         const newRoom = new Room({
           members: body.userNameArr,
           directMessage
         });
-        newRoom.save().then((newRoom, err) => {
-          console.log('newRoom', newRoom);
+        newRoom.save().then((newRoomDoc, err) => {
+          console.log('newRoom', newRoomDoc);
           if (err) {
             console.error(err);
           }
-          return res.status(201).json({ success: true, data: newRoom });
+          if (currentUser) {
+            const ind = newRoomDoc.members.indexOf(currentUser);
+            if (ind != -1) {
+              newRoomDoc.members.splice(ind, 1);
+            }
+          }
+          return res.status(201).json({ success: true, data: newRoomDoc });
         });
       }
     }
