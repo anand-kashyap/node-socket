@@ -4,15 +4,11 @@
 
 ### TODO
 
-- improve push notifcation
+- improve push notification
 - serve icon files
 - load older messages on scroll up
-- typing status show to other
 - on delete msg prevent list update
 - common socket id for all rooms
-- case insensitive email login or user login
-- logo for app by combining font awesome icons
-- remember me function
 - status of sent messages progress by icon
 - add notification popup for error and success messages
 - keep socket connected for all rooms as long as window open
@@ -23,12 +19,21 @@
 
 # Changelog
 
+## [V2.1.0] - 2020-01-09
+
+### Added
+
+- Fetch older messages
+
 ## [V2.0.0] - 2019-12-30
 
 ### Added
 
 - Notication push
 - custom icon added
+- typing status show to other
+- case insensitive email login or user login
+- remember me function
 
 ## [V1.1.0] - 2019-12-30
 

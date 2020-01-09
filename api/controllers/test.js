@@ -94,9 +94,31 @@ const getRecentChatsNew = (req, res) => { // get all recent rooms of user
   })
 };
 
+const getOlder = (req, res) => {
+  /* Room.aggregate([
+    { $match: { _id: mongoose.Types.ObjectId('5dac17d7bc01681dd8d34cf4') } },
+    {
+      $project: {
+        // count: { $size: "$messages" },
+        messages: { $slice: ["$messages", 0, { $subtract: [{ $size: "$messages" }, 30] }] }
+      }
+    }
+  ]).then(resp =>
+    res.status(200).json(resp)
+  ) */
+  /* Room.findOne({ _id: '5dac17d7bc01681dd8d34cf4' }, { messages: { $slice: [-31, 3] } }).then(older => {
+    res.status(200).json(older.messages);
+    // socket.emit('loadMsgs', older.messages);
+  }).catch(err => {
+    res.status(400).json(err);
+    console.error('err ocurred', err)
+  }
+  ); */
+}
+
 module.exports = {
   getRooms,
   deleteUser,
   getRecentChatsNew,
-  addProperty, sendnotify
+  addProperty, sendnotify, getOlder
 };

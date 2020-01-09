@@ -1,5 +1,5 @@
 const { addUser, removeUser, getUsers, removeOnline, notify } = require('./users');
-const { Room } = require('./api/models/room');
+const { Room, makeId } = require('./api/models/room');
 
 /** On New Message Method
  * @param  {object} user: User Object
@@ -49,6 +49,33 @@ const onDeleteMessage = (user, io) => {
   };
 }
 
+/** On load older messages
+ * @param  {object} user: User Object
+ * @param  {object} socket: Socket io instance
+ * TODO: better jsdoc
+ */
+const onloadMsgs = (user, socket) => {
+  return ({ skip, limit }) => {
+    console.log('msgs to skip from last', skip);
+    // console.log('userObj', user);
+    const last = skip + limit;
+    Room.findById({ _id: user.room }, { messages: { $slice: -last } }).then(async older => {
+      const count = await Room.aggregate([
+        { $match: { _id: older._id } },
+        { $project: { num: { $size: '$messages' } } }
+      ]);
+      console.log('count of msgs: ', count);
+
+      const las = older.messages.length - skip;
+      const ret = older.messages.slice(0, las);
+      // console.log('ranged msgs: ', ret);
+      socket.emit('loadMsgs', { olderMsgs: ret, count: count.num - last });
+    }).catch(err =>
+      console.error('err ocurred', err)
+    );
+  };
+}
+
 /** On Socket Disconnect
  * @param  {object} user: User Object
  * @param  {object} io: Socket io instance
@@ -76,6 +103,8 @@ const socketHandle = (io) => {
 
       socket.on('newMessage', onNewMessage(user, io));
       socket.on('deleteMessage', onDeleteMessage(user, io));
+
+      socket.on('loadMsgs', onloadMsgs(user, socket));
 
       socket.on('typing', () => {
         socket.broadcast.to(user.room).emit('typing', user.username);

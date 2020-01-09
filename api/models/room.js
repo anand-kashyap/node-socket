@@ -11,11 +11,15 @@ const roomSchema = Schema({
   directMessage: { type: Boolean, default: true },
   members: [String],
   messages: [messageSchema]
-}, { timestamps: true }); // creates updated on and created on fields 
+}, { timestamps: true }); // creates updated on and created on fields
 
 
 const Room = mongoose.model('rooms', roomSchema);
 
+const makeId = (id) => {
+  return mongoose.Types.ObjectId(id);
+}
+
 module.exports = {
-  Room
+  Room, makeId
 }
