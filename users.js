@@ -39,8 +39,10 @@ const removeUser = ({ socketId, username, room }) => { // todo: add removing use
   return users.splice(eid, 1)[0].username;
 }
 
-const updateLastSeen = (username) => {
-  User.findOneAndUpdate({ username }, {
+const updateLastSeen = async (username) => {
+  console.log('updating last seen');
+
+  await User.findOneAndUpdate({ username }, {
     $currentDate: {
       lastSeen: true
     },
