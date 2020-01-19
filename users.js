@@ -125,8 +125,8 @@ const notify = (room) => { // members to notify
                 primaryKey: 1
               },
               actions: [{
-                action: 'explore',
-                title: 'Go to the site'
+                link: process.env.ALLOWED_CORS_URL_PROD + '/user/join',
+                title: 'Open'
               }]
             }
           };

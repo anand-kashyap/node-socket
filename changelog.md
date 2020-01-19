@@ -4,7 +4,7 @@
 
 ### TODO
 
-- improve push notification
+- improve push notification; auto apply to new notification on expire
 - fix search popdown for user search
 - add animation in sending msg
 - notification snooze/mute
