@@ -122,12 +122,9 @@ const notify = (room) => { // members to notify
               badge: '/assets/icons/badge-72x72.png',
               data: {
                 dateOfArrival: Date.now(),
-                primaryKey: 1
-              },
-              actions: [{
-                link: process.env.ALLOWED_CORS_URL_PROD + '/user/join',
-                title: 'Open'
-              }]
+                primaryKey: 1,
+                url: '/user/chat/' + room._id
+              }
             }
           };
 
