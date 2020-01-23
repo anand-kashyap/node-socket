@@ -5,7 +5,7 @@
 ### TODO
 
 - improve push notification; auto apply to new notification on expire
-- fix search popdown for user search
+- show number of new messages when in mid chat
 - add animation in sending msg
 - notification snooze/mute
 - send message after request accept
@@ -19,6 +19,12 @@
 - make models on angular side for message, room and user
 
 # Changelog
+
+## [V2.1.2] - 2020-01-20
+
+### Fixed
+
+- fix search popdown for user search
 
 ## [V2.1.1] - 2020-01-11
 

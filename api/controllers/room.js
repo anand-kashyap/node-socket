@@ -1,5 +1,7 @@
 const { Room } = require('../models/room');
 const validator = require('../../services/expressValidation');
+const { sortByDate } = require('../utils/common');
+
 
 const findCreateRoom = (req, res, next) => {
   console.log(req.body);
@@ -127,15 +129,17 @@ const getRecentChats = (req, res) => { // get all recent rooms of user
   if (validator(req, res)) {
     return;
   }
+  // return res.status(401).json({ success: false, data: 'test' });
   const params = req.params;
   const msgLimit = req.query.msgLimit || 30;
   Room.find({ members: params.userName }, { messages: { $slice: -msgLimit } }).sort('-updatedAt').limit(20).then(recentRooms => {
     for (let i = 0; i < recentRooms.length; i++) {
-      const members = recentRooms[i].members;
+      const { members } = recentRooms[i];
       const index = members.indexOf(params.userName);
       members.splice(index, 1);
       recentRooms[i].members = members;
     }
+    recentRooms.sort(sortByDate('lastMessage', 'createdAt'));
     return res.status(200).json({ success: true, data: recentRooms });
   }, err => {
     console.error(err);
