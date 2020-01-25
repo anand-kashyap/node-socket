@@ -1,25 +1,34 @@
-const webpush = require('web-push'), users = [], onlineUsers = {}, { User } = require('./api/models/user');
+const webpush = require('web-push'), users = {}, onlineUsers = {}, { User } = require('./api/models/user');
 
 const addUser = ({ socketId, username, room }) => {
-  const eid = findUserIndex(username, room, true);
-  console.log('users', users);
-  if (eid !== -1) {
-    // connect to previous chat
-    users[eid].tabs.push(socketId);
-  } else {
-    const user = { username, room, tabs: [socketId] };
-    users.push(user);
-    if (onlineUsers[room]) {
-      onlineUsers[room].push(user.username);
+  // const eid = findUserIndex(username, room, true);
+  let join = true;
+  if (users[room]) {
+    const f = users[room].indexOf(username);
+    if (f === -1) {
+      users[room].push(username);
     } else {
-      onlineUsers[room] = [user.username];
+      join = false;
     }
+  } else {
+    users[room] = [username];
   }
-  return { user: { socketId, username, room }, onlineUsers: onlineUsers[room] };
+  console.log('users', users);
+  return { user: { socketId, username, room, join }/* , onlineUsers: onlineUsers[room] */ };
 }
 
+const addOnline = (username, socketId) => {
+  if (onlineUsers[username]) {
+    onlineUsers[username].push(socketId);
+  } else {
+    onlineUsers[username] = [socketId];
+  }
+  console.log('online added: ', onlineUsers, username);
+  return { onlineUsers: Object.keys(onlineUsers), username };
+};
+
 const removeUser = ({ socketId, username, room }) => { // todo: add removing user of particular session
-  const eid = findUserIndex(username, room);
+  /* const eid = findUserIndex(username, room);
   if (eid === -1) {
     return {
       error: 'User not present for deletion'
@@ -36,7 +45,7 @@ const removeUser = ({ socketId, username, room }) => { // todo: add removing use
       }
     }
   }
-  return users.splice(eid, 1)[0].username;
+  return users.splice(eid, 1)[0].username; */
 }
 
 const updateLastSeen = async (username) => {
@@ -48,17 +57,26 @@ const updateLastSeen = async (username) => {
     },
   });
 }
-const removeOnline = (user) => {
-  updateLastSeen(user.username);
-  // console.log('updated user: ', res);
-  if (onlineUsers[user.room]) {
-    const f = onlineUsers[user.room].indexOf(user.username);
-    if (f !== -1) {
-      onlineUsers[user.room].splice(f, 1);
+
+const removeOnline = (username) => {
+  if (onlineUsers[username].length === 1) {
+    delete onlineUsers[username];
+    for (const room in users) {
+      if (users.hasOwnProperty(room)) {
+        const roomArr = users[room];
+        const f = roomArr.indexOf(username);
+        if (f !== -1) {
+          users[room].splice(f, 1);
+        }
+      }
     }
-    return { left: user.username, onlineUsers: onlineUsers[user.room] };
+    updateLastSeen(username);
+  } else {
+    const f = onlineUsers[username].indexOf(username);
+    onlineUsers[username].splice(f, 1);
   }
-  return { left: user.username, onlineUsers: [] };
+  console.log('removed online', username, onlineUsers);
+  return { left: username, onlineUsers: Object.keys(onlineUsers) };
 }
 
 const findUserIndex = (username, room, online = false) => {
@@ -168,5 +186,5 @@ const notify = (room) => { // members to notify
 };
 
 module.exports = {
-  addUser, removeUser, findUserIndex, findUsers, getUsers, removeOnline, notify
+  addUser, removeUser, findUserIndex, addOnline, findUsers, getUsers, removeOnline, onlineUsers, notify
 }

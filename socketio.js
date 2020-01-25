@@ -1,4 +1,4 @@
-const { addUser, removeUser, getUsers, removeOnline, notify } = require('./users');
+const { addUser, removeUser, getUsers, onlineUsers, removeOnline, addOnline, notify } = require('./users');
 const { Room, makeId } = require('./api/models/room');
 
 /** On New Message Method
@@ -6,13 +6,15 @@ const { Room, makeId } = require('./api/models/room');
  * @param  {object} io: Socket io instance
  * TODO: better jsdoc
  */
-const onNewMessage = (user, io) => {
+const onNewMessage = (user, io, socket) => {
   return (msg, prod) => {
     const message = {
       msg,
       username: user.username
     };
-    console.log('msgObj', message);
+    console.log('msgObj', message, socket.id);
+    const clients = io.sockets.adapter.rooms[user.room].sockets;
+    console.log('list f clients', clients);
     Room.findByIdAndUpdate({ _id: user.room }, {
       $push: {
         messages: message
@@ -85,23 +87,45 @@ const onSocketDisconnect = (user, io) => {
   return () => {
     const delUser = removeUser(user);
     console.log('after remove', getUsers());
-    if (!delUser.tabs) {
-      io.to(user.room).emit('clientLeft', removeOnline(user));
-    }
+    /* if (!delUser.tabs) {
+      io.emit('clientLeft', removeOnline(user.username, true));
+    } */
+  };
+}
+
+/** On removeWithOutRoom
+ * @param  {object} username: Username
+ * @param  {object} io: Socket io instance
+ * TODO: better jsdoc
+ */
+const removeWithOutRoom = (username, io) => {
+  return () => {
+    io.emit('clientLeft', removeOnline(username));
   };
 }
 const socketHandle = (io) => {
   io.on('connection', (socket) => {
+    const { username } = socket.handshake.query;
+    console.log('new user: ', username);
+
+    // add to online
+    io.emit('connected', username);
+    io.emit('newClient', addOnline(username, socket.id));
+    socket.on('disconnect', removeWithOutRoom(username, io));
+
     socket.on('join', (options, callback) => {
       // const sessionId = socket.handshake.session.id;
-      const { user, onlineUsers } = addUser({ socketId: socket.id, ...options });
+      const { user, join } = addUser({ socketId: socket.id, ...options });
       // console.log('sessionId', sessionId) // same value on every connection
+      // console.log('new joinee', socket.id);
+      console.log('in rooms', options);
       socket.join(user.room);
+      // }
 
-      console.log('after join', getUsers());
-      socket.broadcast.to(user.room).emit('newClient', { username: user.username, onlineUsers });
+      // console.log('after join', getUsers());
+      // if (join) {
 
-      socket.on('newMessage', onNewMessage(user, io));
+      socket.on('newMessage', onNewMessage(user, io, socket));
       socket.on('deleteMessage', onDeleteMessage(user, io));
 
       socket.on('loadMsgs', onloadMsgs(user, socket));
@@ -114,12 +138,11 @@ const socketHandle = (io) => {
       });
 
       socket.on('logout', () => {
-        socket.disconnect();
       });
+      // }
+      // socket.on('disconnect', onSocketDisconnect(user, io));
 
-      socket.on('disconnect', onSocketDisconnect(user, io));
-
-      callback(onlineUsers);
+      callback();
     });
 
   });
