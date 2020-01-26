@@ -1,5 +1,8 @@
 const sortByDate = (property, subP) => {
   return function (a, b) {
+    if (!a[property] || !b[property]) {
+      return 0;
+    }
     const aDate = a[property][subP];
     const bDate = b[property][subP];
     if (aDate < bDate)
