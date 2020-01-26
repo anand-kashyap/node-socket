@@ -4,44 +4,21 @@
 
 ### TODO
 
-## high
-
-- add fallback to cache for api request in ngsw
-- splash screen adding when loading of app directly
-
-## mid
-
-- send by enter on desktop; give option in setting?
-- local notifications without fcm
-- retry send message on network error (acknowledgements)
 - improve push notification; auto apply to new notification on expire
-- send message after request accept; create room after accept only
 - show number of new messages when in mid chat
-- send image option
-- check angular cdk for improvements
-
-## low
-
-- add animation in sending msg (clock or tick); status of sent messages progress by icon
+- add animation in sending msg
 - notification snooze/mute
+- send message after request accept
 - on delete msg prevent list update
+- common socket id for all rooms
+- status of sent messages progress by icon
 - add notification popup for error and success messages
-- fix local observable for recent chat on delete message; ask opinion
+- keep socket connected for all rooms as long as window open
 - theme - dark and light
 - integrate ng-rxform and improve it
 - make models on angular side for message, room and user
 
-## complex
-
-- custom pull to refresh add
-
 # Changelog
-
-## [V2.2.0] - 2020-01-25
-
-### Added
-
-- common socket id for all rooms; keep socket connected for all rooms as long as window open
 
 ## [V2.1.2] - 2020-01-20
 
