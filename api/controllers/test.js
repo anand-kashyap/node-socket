@@ -1,6 +1,25 @@
 const webpush = require('web-push');
 const { User } = require('../models/user');
+
 const { Room } = require('../models/room');
+const Resize = require('../utils/resizeImage');
+const { existsSync, mkdirSync } = require('fs');
+
+const upload = async (req, res) => {
+  // console.log(req.file);
+  const imagePath = process.env.ROOT + '/uploads/test/efer';
+  if (!existsSync(imagePath)) mkdirSync(imagePath, { recursive: true });
+  const fileUpload = new Resize(imagePath);
+  if (!req.file) {
+    res.status(422).json({ error: 'Please provide an image' });
+  }
+  const filename = await fileUpload.save(req.file.buffer).catch(
+    () => res.status(422)
+      .json({ message: "file upload error" })
+  );
+  res.status(200)
+    .json({ message: "file uploaded successfully", name: filename })
+};
 
 const getRooms = (req, res) => {
 
@@ -130,9 +149,10 @@ const clearOtps = (req, res) => {
 
 };
 
+
 module.exports = {
   getRooms,
   deleteUser,
   getRecentChatsNew,
-  addProperty, sendnotify, getOlder, clearOtps
+  addProperty, sendnotify, upload, getOlder, clearOtps
 };

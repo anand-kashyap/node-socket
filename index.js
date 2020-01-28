@@ -27,7 +27,7 @@ const corsOptions = {
 
 const port = process.env.PORT || 3000;
 const publicDirPath = path.join(__dirname, 'public');
-
+process.env.ROOT = __dirname;
 //imports
 const mongoose = require('./config/dbconnection');
 
