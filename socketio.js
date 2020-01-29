@@ -9,10 +9,10 @@ const { Room, makeId } = require('./api/models/room');
 const onNewMessage = (user, io) => {
   return (msg, prod) => {
     const message = {
-      msg,
+      ...msg,
       username: user.username
     };
-    console.log('msgObj', message);
+    // console.log('msgObj', message);
     Room.findByIdAndUpdate({ _id: user.room }, {
       $push: {
         messages: message

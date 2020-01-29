@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const messageSchema = Schema({
   msg: String,
+  image: String,
   username: String
 }, { timestamps: true });
 

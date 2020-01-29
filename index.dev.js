@@ -35,6 +35,7 @@ const mongoose = require('./config/dbconnection');
 
 //routes
 const test = require('./api/routes/test');
+const files = require('./api/routes/files');
 const user = require('./api/routes/user');
 const room = require('./api/routes/room');
 
@@ -70,6 +71,7 @@ app.use('/*', function (req, res, next) {
 });
 
 app.use('/test', test);
+app.use('/files', files);
 app.use('/user', user);
 app.use('/room', room);
 

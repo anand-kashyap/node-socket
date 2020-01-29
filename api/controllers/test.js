@@ -3,12 +3,10 @@ const { User } = require('../models/user');
 
 const { Room } = require('../models/room');
 const Resize = require('../utils/resizeImage');
-const { existsSync, mkdirSync } = require('fs');
 
 const upload = async (req, res) => {
   // console.log(req.file);
-  const imagePath = process.env.ROOT + '/uploads/test/efer';
-  if (!existsSync(imagePath)) mkdirSync(imagePath, { recursive: true });
+  const imagePath = process.env.ROOT + '/uploads';
   const fileUpload = new Resize(imagePath);
   if (!req.file) {
     res.status(422).json({ error: 'Please provide an image' });
@@ -18,7 +16,7 @@ const upload = async (req, res) => {
       .json({ message: "file upload error" })
   );
   res.status(200)
-    .json({ message: "file uploaded successfully", name: filename })
+    .json({ message: "file uploaded successfully", filename })
 };
 
 const getRooms = (req, res) => {
