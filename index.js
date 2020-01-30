@@ -45,22 +45,22 @@ app.use(enforce.HTTPS({ trustProtoHeader: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(compression());
-app.use(cors());
+// app.use();
 
-app.use('/uploads', express.static(publicDirPath));
+app.use('/uploads', cors(), express.static(publicDirPath));
 //test db connection
-app.use('/*', function (req, res, next) {
+/* app.use('/*', cors(), function (req, res, next) {
   // console.log(mongoose.connection.readyState);
   if (mongoose.connection.readyState !== 1) {
     return res.status(500)
       .json({ success: false, message: 'Unable to connect to database' });
   }
   next();
-});
+}); */
 
-app.use('/files', files);
-app.use('/user', user);
-app.use('/room', room);
+app.use('/files', cors(), files);
+app.use('/user', cors(), user);
+app.use('/room', cors(), room);
 
 /* app.all("/*", function (req, res, next) {
   res.sendFile("index.html", { root: __dirname + "/public" });
