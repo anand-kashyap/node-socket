@@ -62,7 +62,7 @@ app.use('/files', files);
 app.use('/user', user);
 app.use('/room', room);
 
-app.all("/*", function (req, res, next) {
+/* app.all("/*", function (req, res, next) {
   res.sendFile("index.html", { root: __dirname + "/public" });
-});
+}); */
 server.listen(port, () => console.log(`listening on http://localhost:${port}`));
