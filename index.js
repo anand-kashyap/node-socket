@@ -45,7 +45,7 @@ app.use(enforce.HTTPS({ trustProtoHeader: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(compression());
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use('/uploads', express.static(publicDirPath));
 //test db connection
