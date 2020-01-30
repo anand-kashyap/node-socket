@@ -1,5 +1,5 @@
 const checkValidation = require("../../services/expressValidation");
-const { readFileSync, statSync } = require('fs');
+const { readFileSync, existsSync } = require('fs');
 const Resize = require('../utils/resizeImage');
 
 const getFile = (req, res, next) => {
@@ -7,7 +7,7 @@ const getFile = (req, res, next) => {
 
   const filename = req.params.fileName;
   const fPath = process.env.ROOT + '/uploads/' + filename
-  if (!statSync(fPath)) {
+  if (!existsSync(fPath)) {
     return res.status(404).json({ message: 'file not found' });
   }
   const imgFile = readFileSync(fPath);

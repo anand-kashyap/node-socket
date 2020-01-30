@@ -1,6 +1,6 @@
 const { addUser, removeUser, getUsers, removeOnline, notify } = require('./users');
 const { Room, makeId } = require('./api/models/room');
-const { statSync, unlinkSync } = require('fs');
+const { existsSync, unlinkSync } = require('fs');
 
 /** On New Message Method
  * @param  {object} user: User Object
@@ -41,9 +41,9 @@ const onNewMessage = (user, io) => {
 const onDeleteMessage = (user, io) => {
   return (msg) => {
     console.log('msgObj to be del', msg);
-    if (msg.image !== '') {
+    if (msg.image && msg.image !== '') {
       const fPath = process.env.ROOT + '/uploads/' + msg.image;
-      if (statSync(fPath)) {
+      if (existsSync(fPath)) {
         unlinkSync(fPath);
       }
     }
