@@ -1,5 +1,6 @@
 const { addUser, removeUser, getUsers, removeOnline, notify } = require('./users');
 const { Room, makeId } = require('./api/models/room');
+const { statSync, unlinkSync } = require('fs');
 
 /** On New Message Method
  * @param  {object} user: User Object
@@ -40,6 +41,12 @@ const onNewMessage = (user, io) => {
 const onDeleteMessage = (user, io) => {
   return (msg) => {
     console.log('msgObj to be del', msg);
+    if (msg.image !== '') {
+      const fPath = process.env.ROOT + '/uploads/' + msg.image;
+      if (statSync(fPath)) {
+        unlinkSync(fPath);
+      }
+    }
     console.log('userObj', user);
     Room.findByIdAndUpdate({ _id: user.room }, { $pull: { messages: { _id: msg._id } } }).then(delMessage => {
       io.to(user.room).emit('deleteMessage', msg);

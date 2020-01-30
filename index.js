@@ -26,7 +26,7 @@ const corsOptions = {
 };
 
 const port = process.env.PORT || 3000;
-const publicDirPath = path.join(__dirname, 'public');
+const publicDirPath = path.join(__dirname, 'uploads');
 process.env.ROOT = __dirname;
 //imports
 const mongoose = require('./config/dbconnection');
@@ -47,7 +47,7 @@ app.use(bodyParser.json());
 app.use(compression());
 app.use(cors(corsOptions));
 
-app.use(express.static(publicDirPath));
+app.use('/uploads', express.static(publicDirPath));
 //test db connection
 app.use('/*', function (req, res, next) {
   // console.log(mongoose.connection.readyState);
