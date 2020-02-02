@@ -76,7 +76,7 @@ const onloadMsgs = (user, socket) => {
       const las = older.messages.length - skip;
       const ret = older.messages.slice(0, las);
       // console.log('ranged msgs: ', ret);
-      socket.emit('loadMsgs', { olderMsgs: ret, count: count.num - last });
+      socket.emit('loadMsgs', { olderMsgs: ret, count: count[0].num - last });
     }).catch(err =>
       console.error('err ocurred', err)
     );
