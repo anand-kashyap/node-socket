@@ -1,5 +1,7 @@
 const { Room } = require('../models/room');
 const validator = require('../../services/expressValidation');
+const { sortByDate } = require('../utils/common');
+
 
 const findCreateRoom = (req, res, next) => {
   console.log(req.body);
@@ -17,7 +19,9 @@ const findCreateRoom = (req, res, next) => {
     __v: 0
   };
   return res.status(200).json({ success: true, data: room }); */
-  const directMessage = body.userNameArr.length === 2 ? true : false;
+  const currentUser = body.currentUser;
+  const directMessage = body.userNameArr.length === 1 ? true : false;
+  body.userNameArr.push(currentUser);
   const initMsgs = body.initMsgs || 50;
   Room.findOne(
     {
@@ -27,18 +31,30 @@ const findCreateRoom = (req, res, next) => {
     { messages: { $slice: -initMsgs } }).then(room => {
       console.log('room', room)
       if (room) {
+        if (currentUser) {
+          const ind = room.members.indexOf(currentUser);
+          if (ind != -1) {
+            room.members.splice(ind, 1);
+          }
+        }
         return res.status(200).json({ success: true, data: room });
       } else {
         const newRoom = new Room({
           members: body.userNameArr,
           directMessage
         });
-        newRoom.save().then((newRoom, err) => {
-          console.log('newRoom', newRoom);
+        newRoom.save().then((newRoomDoc, err) => {
+          console.log('newRoom', newRoomDoc);
           if (err) {
             console.error(err);
           }
-          return res.status(201).json({ success: true, data: newRoom });
+          if (currentUser) {
+            const ind = newRoomDoc.members.indexOf(currentUser);
+            if (ind != -1) {
+              newRoomDoc.members.splice(ind, 1);
+            }
+          }
+          return res.status(201).json({ success: true, data: newRoomDoc });
         });
       }
     }
@@ -113,15 +129,17 @@ const getRecentChats = (req, res) => { // get all recent rooms of user
   if (validator(req, res)) {
     return;
   }
+  // return res.status(401).json({ success: false, data: 'test' });
   const params = req.params;
   const msgLimit = req.query.msgLimit || 30;
   Room.find({ members: params.userName }, { messages: { $slice: -msgLimit } }).sort('-updatedAt').limit(20).then(recentRooms => {
     for (let i = 0; i < recentRooms.length; i++) {
-      const members = recentRooms[i].members;
+      const { members } = recentRooms[i];
       const index = members.indexOf(params.userName);
       members.splice(index, 1);
       recentRooms[i].members = members;
     }
+    recentRooms.sort(sortByDate('lastMessage', 'createdAt'));
     return res.status(200).json({ success: true, data: recentRooms });
   }, err => {
     console.error(err);

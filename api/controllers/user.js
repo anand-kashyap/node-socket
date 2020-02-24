@@ -40,12 +40,36 @@ const getUserDetails = (req, res, next) => {
   );
 };
 
+const getByUsername = (req, res, next) => {
+  if (checkValidation(req, res)) return;
+  // return res.status(200).json({ users: "test" });
+  User.findOne({ username: req.query.uname.trim() }).then(
+    user => {
+      // console.log(user);
+      if (user) {
+        return res
+          .status(200)
+          .json({ success: true, message: "User details found", data: user });
+      }
+      return res
+        .status(404)
+        .json({ success: true, message: "User not found", data: {} });
+    },
+    err => {
+      console.log(err);
+      return res
+        .status(400)
+        .json({ success: false, message: err.message, data: {} });
+    }
+  );
+};
+
 const checkUserName = (req, res, next) => {
   if (checkValidation(req, res)) return;
   console.log("req.query", req.query);
   const userInput = req.query.userinput.trim();
   const email = req.query.email.toLowerCase();
-  user.findOne({ username: userInput }).then(
+  User.findOne({ username: userInput }).then(
     resp => {
       console.log(resp);
       if (resp && resp.email !== email) {
@@ -251,6 +275,7 @@ module.exports = {
   checkUserName,
   searchUser,
   getUserDetails,
+  getByUsername,
   registerUser,
   authUser,
   updateProfile,

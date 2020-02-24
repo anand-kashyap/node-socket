@@ -1,6 +1,23 @@
 const webpush = require('web-push');
 const { User } = require('../models/user');
+
 const { Room } = require('../models/room');
+const Resize = require('../utils/resizeImage');
+
+const upload = async (req, res) => {
+  // console.log(req.file);
+  const imagePath = process.env.ROOT + '/uploads';
+  const fileUpload = new Resize(imagePath);
+  if (!req.file) {
+    res.status(422).json({ error: 'Please provide an image' });
+  }
+  const filename = await fileUpload.save(req.file.buffer).catch(
+    () => res.status(422)
+      .json({ message: "file upload error" })
+  );
+  res.status(200)
+    .json({ message: "file uploaded successfully", filename })
+};
 
 const getRooms = (req, res) => {
 
@@ -8,7 +25,7 @@ const getRooms = (req, res) => {
 }
 
 const addProperty = (req, res) => {
-  User.updateMany({}, { $set: { notificationSub: null } }, { upsert: true }).then(resp =>
+  User.updateMany({}, { $set: { lastSeen: null } }, { upsert: true }).then(resp =>
     res.status(200).json({ success: true, resp })
     , err =>
       res.status(406).json({ success: false, err })
@@ -94,9 +111,46 @@ const getRecentChatsNew = (req, res) => { // get all recent rooms of user
   })
 };
 
+const getOlder = (req, res) => {
+  /* Room.aggregate([
+    { $match: { _id: mongoose.Types.ObjectId('5dac17d7bc01681dd8d34cf4') } },
+    {
+      $project: {
+        // count: { $size: "$messages" },
+        messages: { $slice: ["$messages", 0, { $subtract: [{ $size: "$messages" }, 30] }] }
+      }
+    }
+  ]).then(resp =>
+    res.status(200).json(resp)
+  ) */
+  /* Room.findOne({ _id: '5dac17d7bc01681dd8d34cf4' }, { messages: { $slice: [-31, 3] } }).then(older => {
+    res.status(200).json(older.messages);
+    // socket.emit('loadMsgs', older.messages);
+  }).catch(err => {
+    res.status(400).json(err);
+    console.error('err ocurred', err)
+  }
+  ); */
+}
+
+const clearOtps = (req, res) => {
+  const { userId } = req.params;
+  if (!userId) {
+    return res.status(422).json({ success: false, message: 'UserId not sent' });
+  }
+
+  User.findByIdAndUpdate(userId, { otps: [] }).then(resp => {
+    // console.log(resp);
+    res.status(200).json({ message: `cleared OTP for ${resp.fullName}` });
+  },
+    err => res.status(400).json(err));
+
+};
+
+
 module.exports = {
   getRooms,
   deleteUser,
   getRecentChatsNew,
-  addProperty, sendnotify
+  addProperty, sendnotify, upload, getOlder, clearOtps
 };

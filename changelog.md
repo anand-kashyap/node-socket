@@ -4,24 +4,45 @@
 
 ### TODO
 
-- improve push notifcation
-- serve icon files
-- load older messages on scroll up
-- typing status show to other
+- improve push notification; auto apply to new notification on expire
+- show number of new messages when in mid chat
+- add animation in sending msg
+- notification snooze/mute
+- send message after request accept
 - on delete msg prevent list update
 - common socket id for all rooms
-- case insensitive email login or user login
-- logo for app by combining font awesome icons
-- remember me function
 - status of sent messages progress by icon
 - add notification popup for error and success messages
 - keep socket connected for all rooms as long as window open
 - theme - dark and light
-- send message after request accept
 - integrate ng-rxform and improve it
 - make models on angular side for message, room and user
 
 # Changelog
+
+## [V2.1.2] - 2020-01-20
+
+### Fixed
+
+- fix search popdown for user search
+
+## [V2.1.1] - 2020-01-11
+
+### Added
+
+- long press context menu on mobile
+- refactor chatroom into smaller components
+
+### Fixed
+
+- last seen not saved
+
+## [V2.1.0] - 2020-01-09
+
+### Added
+
+- Fetch older messages
+- last seen at feature
 
 ## [V2.0.0] - 2019-12-30
 
@@ -29,6 +50,9 @@
 
 - Notication push
 - custom icon added
+- typing status show to other
+- case insensitive email login or user login
+- remember me function
 
 ## [V1.1.0] - 2019-12-30
 

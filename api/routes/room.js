@@ -8,9 +8,10 @@ const { findCreateRoom, getRooms, deleteRoom, deleteSingleMessage, clearMsgs, ge
 
 router.put('/', [
   // middleware.checkToken,
+  check('currentUser').exists().withMessage('is required'),
   check('userNameArr').isArray().withMessage('must be an array').custom((userArr, { req }) => {
-    if (userArr.length < 2) {
-      throw new Error('must have at least 2 users');
+    if (userArr.length < 1) {
+      throw new Error('must have at least 1 users');
     }
     for (const user of userArr) {
       if (typeof user !== 'string' || user === '') {

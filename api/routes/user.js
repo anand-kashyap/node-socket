@@ -26,6 +26,7 @@ router.post('/authenticate', [
 router.get('/check-username', [middleware.checkToken, ...queryValidations], user.checkUserName);
 router.post('/search-user', [/* middleware.checkToken, */ queryValidations[1]], user.searchUser);
 router.get('/user-details', [middleware.checkToken], user.getUserDetails);
+router.get('/getbyUsername', [middleware.checkToken], user.getByUsername);
 router.patch('/update-profile', [middleware.checkToken], user.updateProfile);
 
 router.post('/register', [

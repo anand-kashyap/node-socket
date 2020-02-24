@@ -28,13 +28,14 @@ const corsOptions = {
 };
 
 const port = process.env.PORT || 3000;
-const publicDirPath = path.join(__dirname, 'public');
-
+const publicDirPath = path.join(__dirname, 'uploads');
+process.env.ROOT = __dirname;
 //imports
 const mongoose = require('./config/dbconnection');
 
 //routes
 const test = require('./api/routes/test');
+const files = require('./api/routes/files');
 const user = require('./api/routes/user');
 const room = require('./api/routes/room');
 
@@ -58,7 +59,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(compression());
 
-app.use(express.static(publicDirPath));
+app.use('/uploads', express.static(publicDirPath));
 //test db connection
 app.use('/*', function (req, res, next) {
   // console.log(mongoose.connection.readyState);
@@ -70,10 +71,11 @@ app.use('/*', function (req, res, next) {
 });
 
 app.use('/test', test);
+app.use('/files', files);
 app.use('/user', user);
 app.use('/room', room);
 
-app.all("/*", function (req, res, next) {
+/* app.all("/*", function (req, res, next) {
   res.sendFile("index.html", { root: __dirname + "/public" });
-});
+}); */
 server.listen(port, () => console.log(`listening on http://localhost:${port}`));

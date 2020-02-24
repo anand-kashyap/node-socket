@@ -39,7 +39,18 @@ const removeUser = ({ socketId, username, room }) => { // todo: add removing use
   return users.splice(eid, 1)[0].username;
 }
 
+const updateLastSeen = async (username) => {
+  console.log('updating last seen');
+
+  await User.findOneAndUpdate({ username }, {
+    $currentDate: {
+      lastSeen: true
+    },
+  });
+}
 const removeOnline = (user) => {
+  updateLastSeen(user.username);
+  // console.log('updated user: ', res);
   if (onlineUsers[user.room]) {
     const f = onlineUsers[user.room].indexOf(user.username);
     if (f !== -1) {
@@ -111,12 +122,9 @@ const notify = (room) => { // members to notify
               badge: '/assets/icons/badge-72x72.png',
               data: {
                 dateOfArrival: Date.now(),
-                primaryKey: 1
-              },
-              actions: [{
-                action: 'explore',
-                title: 'Go to the site'
-              }]
+                primaryKey: 1,
+                url: '/user/chat/' + room._id
+              }
             }
           };
 
