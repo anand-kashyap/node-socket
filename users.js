@@ -1,7 +1,7 @@
-const webpush = require('web-push'), users = [], onlineUsers = {}, { User } = require('./api/models/user');
+const webpush = require('web-push'), users = [], activeUsers = {}, onlineUsers = {}, { User } = require('./api/models/user');
 
 const addUser = ({ socketId, username, room }) => {
-  const eid = findUserIndex(username, room, true);
+  /* const eid = findUserIndex(username, room, true);
   console.log('users', users);
   if (eid !== -1) {
     // connect to previous chat
@@ -15,7 +15,8 @@ const addUser = ({ socketId, username, room }) => {
       onlineUsers[room] = [user.username];
     }
   }
-  return { user: { socketId, username, room }, onlineUsers: onlineUsers[room] };
+  return { user: { socketId, username, room }, onlineUsers: onlineUsers[room] };*/
+  return { user: { socketId, username, room }, onlineUsers: getActive() };
 }
 
 const removeUser = ({ socketId, username, room }) => { // todo: add removing user of particular session
@@ -60,6 +61,11 @@ const removeOnline = (user) => {
   }
   return { left: user.username, onlineUsers: [] };
 }
+
+const removeOnlineNew = (username) => {
+  updateLastSeen(username);
+  return getActive();
+};
 
 const findUserIndex = (username, room, online = false) => {
   if (online) {
@@ -167,6 +173,30 @@ const notify = (room) => { // members to notify
     ); */
 };
 
+const addActive = (username) => {
+  if (activeUsers[username]) {
+    activeUsers[username]++;
+  } else {
+    activeUsers[username] = 1;
+  }
+  console.log('onlin', activeUsers)
+  return getActive();
+}
+
+const removeActive = (username) => {
+  const torem = activeUsers[username];
+  if (torem && torem > 1) {
+    activeUsers[username]--;
+  } else {
+    delete activeUsers[username];
+  }
+  return activeUsers[username];
+};
+
+const getActive = () => {
+  return Object.keys(activeUsers);
+}
+
 module.exports = {
-  addUser, removeUser, findUserIndex, findUsers, getUsers, removeOnline, notify
+  addUser, removeUser, findUserIndex, getActive, findUsers, getUsers, removeOnline, notify, addActive, removeActive, removeOnlineNew
 }

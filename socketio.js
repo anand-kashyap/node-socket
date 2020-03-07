@@ -1,5 +1,5 @@
-const { addUser, removeUser, getUsers, removeOnline, notify } = require('./users');
-const { Room, makeId } = require('./api/models/room');
+const { addUser, removeOnlineNew, notify, addActive, removeActive, getActive } = require('./users');
+const { Room } = require('./api/models/room');
 const { existsSync, unlinkSync } = require('fs');
 
 /** On New Message Method
@@ -90,45 +90,60 @@ const onloadMsgs = (user, io) => {
  * @param  {object} io: Socket io instance
  * TODO: better jsdoc
  */
-const onSocketDisconnect = (user, io) => {
-  return () => {
-    const delUser = removeUser(user);
-    console.log('after remove', getUsers());
-    if (!delUser.tabs) {
-      io.to(user.room).emit('clientLeft', removeOnline(user));
-    }
-  };
+const onSocketDisconnect = (username, io) => {
+  // return () => {
+  const delUser = removeActive(username);
+  console.log('deleted', delUser);
+  if (!delUser) {
+    io.emit('active', removeOnlineNew(username));
+  }
+  /* const delUser = removeUser(user);
+  console.log('after remove', getUsers());
+  if (!delUser.tabs) {
+    io.to(user.room).emit('clientLeft', removeOnline(user));
+  } */
+  // };
 }
 const socketHandle = (io) => {
   io.on('connection', (socket) => {
-    socket.on('join', (options, callback) => {
+    socket.on('active', (username, cb) => {
+      console.log('options', username);
+      io.emit('active', addActive(username));
+
+      socket.on('disconnect', () => {
+        console.log(username, 'uhu');
+        onSocketDisconnect(username, io);
+      });
+    });
+    socket.on('join', (options, cb) => {
       // const sessionId = socket.handshake.session.id;
-      const { user, onlineUsers } = addUser({ socketId: socket.id, ...options });
-      // console.log('sessionId', sessionId) // same value on every connection
-      socket.join(user.room);
+      if (!socket.user) {
+        const { user } = addUser({ socketId: socket.id, ...options });
+        // console.log('sessionId', sessionId) // same value on every connection
+        socket.join(user.room);
+        socket.user = user;
 
-      console.log('after join', getUsers());
-      socket.broadcast.to(user.room).emit('newClient', { username: user.username, onlineUsers });
+        console.log('join called');
+        // socket.broadcast.to(user.room).emit('newClient', { username: user.username, onlineUsers });
+        socket.on('newMessage', onNewMessage(user, io));
+        socket.on('deleteMessage', onDeleteMessage(user, io));
 
-      socket.on('newMessage', onNewMessage(user, io));
-      socket.on('deleteMessage', onDeleteMessage(user, io));
+        socket.on('loadMsgs', onloadMsgs(user, io));
+        socket.on('typing', () => {
+          socket.broadcast.to(user.room).emit('typing', user.username);
+        });
+        socket.on('sendLocation', (data) => {
+          socket.broadcast.to(user.room).emit('newMessage', `<a target='_blank' href='https://www.google.com/maps?q=${data.lat},${data.long}'>Location</a>`, user.username, new Date());
+        });
+      }
 
-      socket.on('loadMsgs', onloadMsgs(user, io));
 
-      socket.on('typing', () => {
-        socket.broadcast.to(user.room).emit('typing', user.username);
-      });
-      socket.on('sendLocation', (data) => {
-        socket.broadcast.to(user.room).emit('newMessage', `<a target='_blank' href='https://www.google.com/maps?q=${data.lat},${data.long}'>Location</a>`, user.username, new Date());
-      });
+      // socket.on('logout', () => {
+      //   socket.disconnect();
+      // });
 
-      socket.on('logout', () => {
-        socket.disconnect();
-      });
-
-      socket.on('disconnect', onSocketDisconnect(user, io));
-
-      callback(onlineUsers);
+      // socket.on('disconnect', onSocketDisconnect(user, io));
+      cb(getActive());
     });
 
   });
