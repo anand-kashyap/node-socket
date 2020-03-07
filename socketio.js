@@ -58,15 +58,16 @@ const onDeleteMessage = (user, io) => {
 
 /** On load older messages
  * @param  {object} user: User Object
- * @param  {object} socket: Socket io instance
+ * @param  {object} io: io instance
  * TODO: better jsdoc
  */
-const onloadMsgs = (user, socket) => {
+const onloadMsgs = (user, io) => {
   return ({ skip, limit }) => {
     console.log('msgs to skip from last', skip);
     // console.log('userObj', user);
     const last = skip + limit;
-    Room.findById({ _id: user.room }, { messages: { $slice: -last } }).then(async older => {
+    const { username, room } = user;
+    Room.findById({ _id: room }, { messages: { $slice: -last } }).then(async older => {
       const count = await Room.aggregate([
         { $match: { _id: older._id } },
         { $project: { num: { $size: '$messages' } } }
@@ -76,7 +77,8 @@ const onloadMsgs = (user, socket) => {
       const las = older.messages.length - skip;
       const ret = older.messages.slice(0, las);
       // console.log('ranged msgs: ', ret);
-      socket.emit('loadMsgs', { olderMsgs: ret, count: count[0].num - last });
+      // socket.emit('loadMsgs', { olderMsgs: ret, count: count[0].num - last });
+      io.to(room).emit('loadMsgs', { olderMsgs: ret, count: count[0].num - last, username });
     }).catch(err =>
       console.error('err ocurred', err)
     );
@@ -111,7 +113,7 @@ const socketHandle = (io) => {
       socket.on('newMessage', onNewMessage(user, io));
       socket.on('deleteMessage', onDeleteMessage(user, io));
 
-      socket.on('loadMsgs', onloadMsgs(user, socket));
+      socket.on('loadMsgs', onloadMsgs(user, io));
 
       socket.on('typing', () => {
         socket.broadcast.to(user.room).emit('typing', user.username);
