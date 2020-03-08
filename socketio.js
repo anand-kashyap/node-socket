@@ -117,31 +117,28 @@ const socketHandle = (io) => {
     });
     socket.on('join', (options, cb) => {
       // const sessionId = socket.handshake.session.id;
-      if (!socket.user) {
-        const { user } = addUser({ socketId: socket.id, ...options });
-        // console.log('sessionId', sessionId) // same value on every connection
-        socket.join(user.room);
-        socket.user = user;
+      const { user } = addUser({ socketId: socket.id, ...options });
+      socket.join(user.room);
+      console.log('joined', user.room, user)
+      // console.log('sessionId', sessionId) // same value on every connection
 
-        console.log('join called');
-        // socket.broadcast.to(user.room).emit('newClient', { username: user.username, onlineUsers });
-        socket.on('newMessage', onNewMessage(user, io));
-        socket.on('deleteMessage', onDeleteMessage(user, io));
+      console.log('join called');
+      // socket.broadcast.to(user.room).emit('newClient', { username: user.username, onlineUsers });
+      const listers = pushLists();
+      socket.on('newMessage', listers({ event: 'newMessage', fn: onNewMessage(user, io) }));
 
-        socket.on('loadMsgs', onloadMsgs(user, io));
-        socket.on('typing', () => {
-          socket.broadcast.to(user.room).emit('typing', user.username);
-        });
-        socket.on('sendLocation', (data) => {
-          socket.broadcast.to(user.room).emit('newMessage', `<a target='_blank' href='https://www.google.com/maps?q=${data.lat},${data.long}'>Location</a>`, user.username, new Date());
-        });
-      }
+      socket.on('deleteMessage', listers({ event: 'newMessage', fn: onDeleteMessage(user, io) }));
 
-
-      // socket.on('logout', () => {
-      //   socket.disconnect();
-      // });
-
+      socket.on('loadMsgs', listers({ event: 'newMessage', fn: onloadMsgs(user, io) }));
+      socket.on('typing', listers({ event: 'newMessage', fn: onTyping(socket, user) }));
+      socket.on('sendLocation', listers({ event: 'newMessage', fn: onLocation(socket, user) }));
+      socket.on('leave', () => {
+        const larr = listers();
+        for (const l of larr) {
+          socket.removeListener(l.event, l.fn);
+        }
+        socket.leave(user.room);
+      });
       // socket.on('disconnect', onSocketDisconnect(user, io));
       cb(getActive());
     });
@@ -149,5 +146,28 @@ const socketHandle = (io) => {
   });
 }
 
+const pushLists = () => {
+  const lists = [];
+
+  return (obj = null) => {
+    if (obj) {
+      lists.push(obj);
+      return obj.fn;
+    }
+    return lists;
+  }
+}
 module.exports = socketHandle;
+
+function onLocation(socket, user) {
+  return (data) => {
+    socket.broadcast.to(user.room).emit('newMessage', `<a target='_blank' href='https://www.google.com/maps?q=${data.lat},${data.long}'>Location</a>`, user.username, new Date());
+  };
+}
+
+function onTyping(socket, user) {
+  return () => {
+    socket.broadcast.to(user.room).emit('typing', user.username);
+  };
+}
 
