@@ -1,6 +1,7 @@
 const { addUser, removeOnlineNew, notify, addActive, removeActive, getActive } = require('./users');
 const { Room } = require('./api/models/room');
 const { existsSync, unlinkSync } = require('fs');
+const { Observable } = require('rxjs')
 
 /** On New Message Method
  * @param  {object} user: User Object
@@ -104,39 +105,42 @@ const onSocketDisconnect = (username, io) => {
   } */
   // };
 }
+
+const socketEvent$ = (socket, eventName) => {
+  return new Observable((observ) => {
+    const cb = (msg, prod) => {
+      observ.next(msg, prod)
+    }
+    socket.on(eventName, cb);
+
+    return () => socket.removeListener(eventName, cb);
+  })
+};
 const socketHandle = (io) => {
   io.on('connection', (socket) => {
     socket.on('active', (username, cb) => {
-      console.log('options', username);
       io.emit('active', addActive(username));
 
       socket.on('disconnect', () => {
-        console.log(username, 'uhu');
         onSocketDisconnect(username, io);
       });
     });
     socket.on('join', (options, cb) => {
-      // const sessionId = socket.handshake.session.id;
       const { user } = addUser({ socketId: socket.id, ...options });
       socket.join(user.room);
-      console.log('joined', user.room, user)
-      // console.log('sessionId', sessionId) // same value on every connection
-
-      console.log('join called');
-      // socket.broadcast.to(user.room).emit('newClient', { username: user.username, onlineUsers });
-      const listers = pushLists();
-      socket.on('newMessage', listers({ event: 'newMessage', fn: onNewMessage(user, io) }));
-
-      socket.on('deleteMessage', listers({ event: 'newMessage', fn: onDeleteMessage(user, io) }));
-
-      socket.on('loadMsgs', listers({ event: 'newMessage', fn: onloadMsgs(user, io) }));
-      socket.on('typing', listers({ event: 'newMessage', fn: onTyping(socket, user) }));
-      socket.on('sendLocation', listers({ event: 'newMessage', fn: onLocation(socket, user) }));
-      socket.on('leave', () => {
-        const larr = listers();
-        for (const l of larr) {
-          socket.removeListener(l.event, l.fn);
+      const subs = [
+        socketEvent$(socket, 'newMessage').subscribe(onNewMessage(user, io)),
+        socketEvent$(socket, 'deleteMessage').subscribe(onDeleteMessage(user, io)),
+        socketEvent$(socket, 'loadMsgs').subscribe(onloadMsgs(user, io)),
+        socketEvent$(socket, 'typing').subscribe(onTyping(socket, user)),
+        socketEvent$(socket, 'sendLocation').subscribe(onLocation(socket, user))
+      ];
+      // console.log('before ev', socket._events, socket.eventNames());
+      socket.on('left', () => {
+        for (const sub of subs) {
+          sub.unsubscribe();
         }
+        // console.log('after ev', socket._events, socket.eventNames());
         socket.leave(user.room);
       });
       // socket.on('disconnect', onSocketDisconnect(user, io));
@@ -146,17 +150,6 @@ const socketHandle = (io) => {
   });
 }
 
-const pushLists = () => {
-  const lists = [];
-
-  return (obj = null) => {
-    if (obj) {
-      lists.push(obj);
-      return obj.fn;
-    }
-    return lists;
-  }
-}
 module.exports = socketHandle;
 
 function onLocation(socket, user) {
