@@ -1,24 +1,5 @@
 const webpush = require('web-push'), users = [], activeUsers = {}, onlineUsers = {}, { User } = require('./api/models/user');
 
-const addUser = ({ socketId, username, room }) => {
-  /* const eid = findUserIndex(username, room, true);
-  console.log('users', users);
-  if (eid !== -1) {
-    // connect to previous chat
-    users[eid].tabs.push(socketId);
-  } else {
-    const user = { username, room, tabs: [socketId] };
-    users.push(user);
-    if (onlineUsers[room]) {
-      onlineUsers[room].push(user.username);
-    } else {
-      onlineUsers[room] = [user.username];
-    }
-  }
-  return { user: { socketId, username, room }, onlineUsers: onlineUsers[room] };*/
-  return { user: { socketId, username, room }, onlineUsers: getActive() };
-}
-
 const removeUser = ({ socketId, username, room }) => { // todo: add removing user of particular session
   const eid = findUserIndex(username, room);
   if (eid === -1) {
@@ -198,5 +179,5 @@ const getActive = () => {
 }
 
 module.exports = {
-  addUser, removeUser, findUserIndex, getActive, findUsers, getUsers, removeOnline, notify, addActive, removeActive, removeOnlineNew
+  removeUser, findUserIndex, getActive, findUsers, getUsers, removeOnline, notify, addActive, removeActive, removeOnlineNew
 }
