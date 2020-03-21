@@ -1,7 +1,7 @@
 const { addUser, removeOnlineNew, notify, addActive, removeActive, getActive } = require('./users');
 const { Room } = require('./api/models/room');
 const { existsSync, unlinkSync } = require('fs');
-const { Observable } = require('rxjs')
+const { Observable } = require('rxjs');
 
 /** On New Message Method
  * @param  {object} user: User Object
@@ -14,7 +14,7 @@ const onNewMessage = (user, io) => {
       ...msg,
       username: user.username
     };
-    // console.log('msgObj', message);
+    // console.log('msgObj', message); return
     Room.findByIdAndUpdate({ _id: user.room }, {
       $push: {
         messages: message
@@ -86,27 +86,35 @@ const onloadMsgs = (user, io) => {
   };
 }
 
+const onLocation = (socket, user) => {
+  return (data) => {
+    socket.broadcast.to(user.room).emit('newMessage', `<a target='_blank' href='https://www.google.com/maps?q=${data.lat},${data.long}'>Location</a>`, user.username, new Date());
+  };
+}
+
+const onTyping = (socket, user) => {
+  return () => {
+    // console.log('type', user.username, user.room);
+    socket.broadcast.to(user.room).emit('typing', user.username);
+  };
+}
+
 /** On Socket Disconnect
  * @param  {object} user: User Object
  * @param  {object} io: Socket io instance
  * TODO: better jsdoc
  */
 const onSocketDisconnect = (username, io) => {
-  // return () => {
-  const delUser = removeActive(username);
-  console.log('deleted', delUser);
-  if (!delUser) {
-    io.emit('active', removeOnlineNew(username));
-  }
-  /* const delUser = removeUser(user);
-  console.log('after remove', getUsers());
-  if (!delUser.tabs) {
-    io.to(user.room).emit('clientLeft', removeOnline(user));
-  } */
-  // };
+  return () => {
+    const delUser = removeActive(username);
+    console.log('deleted', delUser);
+    if (!delUser) {
+      io.emit('active', removeOnlineNew(username));
+    }
+  };
 }
 
-const socketEvent$ = (socket, eventName) => {
+const socEvt$ = (socket, eventName) => {
   return new Observable((observ) => {
     const cb = (msg, prod) => {
       observ.next(msg, prod)
@@ -117,26 +125,23 @@ const socketEvent$ = (socket, eventName) => {
   })
 };
 const socketHandle = (io) => {
-  io.on('connection', (socket) => {
-    socket.on('active', (username, cb) => {
+  socEvt$(io, 'connection').subscribe(socket => {
+    socEvt$(socket, 'active').subscribe((username) => {
       io.emit('active', addActive(username));
-
-      socket.on('disconnect', () => {
-        onSocketDisconnect(username, io);
-      });
+      socEvt$(socket, 'disconnect').subscribe(onSocketDisconnect(username, io));
     });
-    socket.on('join', (options, cb) => {
+    socket.on('join', (options, cb) => { // ! find way to use callbacks in observable
+      console.log('cb', cb);
       const { user } = addUser({ socketId: socket.id, ...options });
       socket.join(user.room);
       const subs = [
-        socketEvent$(socket, 'newMessage').subscribe(onNewMessage(user, io)),
-        socketEvent$(socket, 'deleteMessage').subscribe(onDeleteMessage(user, io)),
-        socketEvent$(socket, 'loadMsgs').subscribe(onloadMsgs(user, io)),
-        socketEvent$(socket, 'typing').subscribe(onTyping(socket, user)),
-        socketEvent$(socket, 'sendLocation').subscribe(onLocation(socket, user))
+        socEvt$(socket, 'newMessage').subscribe(onNewMessage(user, io)),
+        socEvt$(socket, 'deleteMessage').subscribe(onDeleteMessage(user, io)),
+        socEvt$(socket, 'loadMsgs').subscribe(onloadMsgs(user, io)),
+        socEvt$(socket, 'typing').subscribe(onTyping(socket, user)),
+        socEvt$(socket, 'sendLocation').subscribe(onLocation(socket, user))
       ];
-      // console.log('before ev', socket._events, socket.eventNames());
-      socket.on('left', () => {
+      socEvt$(socket, 'left').subscribe(() => {
         for (const sub of subs) {
           sub.unsubscribe();
         }
@@ -151,16 +156,3 @@ const socketHandle = (io) => {
 }
 
 module.exports = socketHandle;
-
-function onLocation(socket, user) {
-  return (data) => {
-    socket.broadcast.to(user.room).emit('newMessage', `<a target='_blank' href='https://www.google.com/maps?q=${data.lat},${data.long}'>Location</a>`, user.username, new Date());
-  };
-}
-
-function onTyping(socket, user) {
-  return () => {
-    socket.broadcast.to(user.room).emit('typing', user.username);
-  };
-}
-
