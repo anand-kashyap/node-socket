@@ -1,4 +1,4 @@
-const webpush = require('web-push'), users = [], activeUsers = {}, onlineUsers = {}, { User } = require('./api/models/user');
+const webpush = require('web-push'), users = [], activeUsers = {}, onlineUsers = {}, { User } = require('../api/models/user');
 
 const removeUser = ({ socketId, username, room }) => { // todo: add removing user of particular session
   const eid = findUserIndex(username, room);

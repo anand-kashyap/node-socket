@@ -36,7 +36,7 @@ const files = require('./api/routes/files');
 const user = require('./api/routes/user');
 const room = require('./api/routes/room');
 
-const socketHandle = require('./socketio');
+const socketHandle = require('./socket/main');
 socketHandle(io);
 
 app.use(enforce.HTTPS({ trustProtoHeader: true }));
