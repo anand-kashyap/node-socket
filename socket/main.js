@@ -1,4 +1,4 @@
-const { removeOnlineNew, addActive, removeActive } = require('./users');
+const { updateLastSeen, addActive, removeActive, joinRoom } = require('./users');
 const { onNewMessage, onDeleteMessage, onloadMsgs, onLocation } = require('./message');
 const { socEvt$, sockUEvent$ } = require('./helper');
 
@@ -12,12 +12,12 @@ const onTyping = (socket) => {
  * @param  {object} io: Socket io instance
  * TODO: better jsdoc
  */
-const onSocketDisconnect = (username, io) => {
+const onSocketDisconnect = (username, io, sid) => {
   return () => {
-    const delUser = removeActive(username);
-    console.log('deleted', delUser);
-    if (!delUser) {
-      io.emit('active', removeOnlineNew(username));
+    const remUser = removeActive(username, sid);
+    remUser.length && console.log('remaining ids of user', remUser.length);
+    if (!remUser) {
+      io.emit('active', updateLastSeen(username));
     }
   };
 }
@@ -26,14 +26,15 @@ const socketHandle = (io) => {
   socEvt$(io, 'connection').subscribe(socket => {
     let user;
     socEvt$(socket, 'active').subscribe((username) => {
-      io.emit('active', addActive(username));
-      socEvt$(socket, 'disconnect').subscribe(onSocketDisconnect(username, io));
+      io.emit('active', addActive(username, socket));
+      socEvt$(socket, 'disconnect').subscribe(onSocketDisconnect(username, io, socket.id));
     });
-    socEvt$(socket, 'join').subscribe(({ username, room }) => {
+    socEvt$(socket, 'join').subscribe(({ username, room, otherUsernames }) => {
       console.log('sId', socket.id);
       user = { username, room };
       socket.user = user; // saving in socket prop
-      socket.join(room);
+      joinRoom([username, ...otherUsernames], room);
+      // socket.join(room);
       /* socEvt$(socket, 'left').subscribe(() => {
         // console.log('after ev', socket._events, socket.eventNames());
         socket.leave(room);

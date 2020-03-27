@@ -9,24 +9,24 @@ const { notify } = require('./users');
  */
 const onNewMessage = (user, io, msg, prod) => {
   // return (msg, prod) => {
-  const message = {
+  const toMessage = {
     ...msg,
     username: user.username
   };
   // console.log('msgObj', message); return
   Room.findByIdAndUpdate({ _id: user.room }, {
     $push: {
-      messages: message
+      messages: toMessage
     }
   }, { new: true }).lean().then(savedMessage => {
     const room = { ...savedMessage };
-    const nMessage = room.messages[room.messages.length - 1]; // last message
+    const message = room.messages[room.messages.length - 1]; // last message
     if (prod) { // send notification in prod mode only
       room.members.splice(room.members.indexOf(user.username), 1);
-      room.messages = [nMessage];
+      room.messages = [message];
       notify(room); // send push notify to all members except self
     }
-    io.to(user.room).emit('newMessage', nMessage); // has msg date also
+    io.to(user.room).emit('newMessage', { message, roomId: user.room }); // has msg date also
   }).catch(err =>
     console.error('err ocurred', err)
   );
@@ -38,18 +38,19 @@ const onNewMessage = (user, io, msg, prod) => {
  * @param  {object} io: Socket io instance
  * TODO: better jsdoc
  */
-const onDeleteMessage = (user, io, msg) => {
+const onDeleteMessage = (user, io, message) => {
   // return (msg) => {
-  console.log('msgObj to be del', msg);
-  if (msg.image && msg.image !== '') {
-    const fPath = process.env.ROOT + '/uploads/' + msg.image;
+  console.log('msgObj to be del', message);
+  if (message.image && message.image !== '') {
+    const fPath = process.env.ROOT + '/uploads/' + message.image;
     if (existsSync(fPath)) {
       unlinkSync(fPath);
     }
   }
   console.log('userObj', user);
-  Room.findByIdAndUpdate({ _id: user.room }, { $pull: { messages: { _id: msg._id } } }).then(delMessage => {
-    io.to(user.room).emit('deleteMessage', msg);
+  Room.findByIdAndUpdate({ _id: user.room }, { $pull: { messages: { _id: message._id } } }).then(delMessage => {
+    const { room } = user;
+    io.to(room).emit('deleteMessage', { message, roomId: room });
   }).catch(err =>
     console.error('err ocurred', err)
   );
@@ -78,7 +79,7 @@ const onloadMsgs = (user, io, { skip, limit }) => {
     const ret = older.messages.slice(0, las);
     // console.log('ranged msgs: ', ret);
     // socket.emit('loadMsgs', { olderMsgs: ret, count: count[0].num - last });
-    io.to(room).emit('loadMsgs', { olderMsgs: ret, count: count[0].num - last, username });
+    io.to(room).emit('loadMsgs', { roomId: room, olderMsgs: ret, count: count[0].num - last, username });
   }).catch(err =>
     console.error('err ocurred', err)
   );
@@ -88,7 +89,8 @@ const onloadMsgs = (user, io, { skip, limit }) => {
 const onLocation = (socket, data) => {
   // return (data) => {
   const { user: { room, username } } = socket;
-  socket.broadcast.to(room).emit('newMessage', `<a target='_blank' href='https://www.google.com/maps?q=${data.lat},${data.long}'>Location</a>`, username, new Date());
+  // ! need to send params in on arg
+  socket.broadcast.to(room).emit('newMessage', `<a target='_blank' href='https://www.google.com/maps?q=${data.lat},${data.long}'>Location</a>`, username, new Date(), room);
   // };
 }
 

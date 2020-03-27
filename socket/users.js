@@ -1,87 +1,14 @@
-const webpush = require('web-push'), users = [], activeUsers = {}, onlineUsers = {}, { User } = require('../api/models/user');
+const webpush = require('web-push'), activeUsers = {}, { User } = require('../api/models/user');
 
-const removeUser = ({ socketId, username, room }) => { // todo: add removing user of particular session
-  const eid = findUserIndex(username, room);
-  if (eid === -1) {
-    return {
-      error: 'User not present for deletion'
-    }
-  }
-  if (users[eid].tabs.length > 1) {
-    const sId = findSocketIndex(eid, socketId);
-    if (sId !== -1) { // socket found
-      users[eid].tabs.splice(sId, 1);
-      return users[eid];
-    } else {
-      return {
-        message: 'Socket to delete not found'
-      }
-    }
-  }
-  return users.splice(eid, 1)[0].username;
-}
-
-const updateLastSeen = async (username) => {
+const updateLastSeen = (username) => {
   console.log('updating last seen');
-
-  await User.findOneAndUpdate({ username }, {
+  User.findOneAndUpdate({ username }, {
     $currentDate: {
       lastSeen: true
     },
-  });
-}
-const removeOnline = (user) => {
-  updateLastSeen(user.username);
-  // console.log('updated user: ', res);
-  if (onlineUsers[user.room]) {
-    const f = onlineUsers[user.room].indexOf(user.username);
-    if (f !== -1) {
-      onlineUsers[user.room].splice(f, 1);
-    }
-    return { left: user.username, onlineUsers: onlineUsers[user.room] };
-  }
-  return { left: user.username, onlineUsers: [] };
-}
-
-const removeOnlineNew = (username) => {
-  updateLastSeen(username);
+  }).then(() => console.log('done up'));
   return getActive();
-};
-
-const findUserIndex = (username, room, online = false) => {
-  if (online) {
-    let found = -1;
-    for (let i = 0; i < users.length; i++) {
-      const user = users[i];
-      if (user.room === room) {
-        if (user.username === username) {
-          found = i;
-        } else {  // online users
-          if (onlineUsers[room]) {
-            const aPresent = onlineUsers[room].indexOf(user.username);
-            if (aPresent === -1) {
-              onlineUsers[room].push(user.username);
-            }
-          } else {
-            onlineUsers[room] = [user.username];
-          }
-        }
-      }
-    }
-    return found;
-  }
-  return users.findIndex(user => user.username === username && user.room === room);
 }
-
-const findSocketIndex = (eid, socketId) => {
-  return users[eid].tabs.findIndex(id => id === socketId);
-}
-
-const findUsers = (room) => {
-  return users.filter(user => user.room === room);
-}
-
-const getUsers = () => users;
 
 const notify = (room) => { // members to notify
   console.log('notify called');
@@ -154,30 +81,37 @@ const notify = (room) => { // members to notify
     ); */
 };
 
-const addActive = (username) => {
+const addActive = (username, socketObj) => {
   if (activeUsers[username]) {
-    activeUsers[username]++;
+    activeUsers[username].push(socketObj);
   } else {
-    activeUsers[username] = 1;
+    activeUsers[username] = [socketObj];
   }
-  console.log('onlin', activeUsers)
   return getActive();
 }
 
-const removeActive = (username) => {
+const removeActive = (username, remSid) => {
   const torem = activeUsers[username];
-  if (torem && torem > 1) {
-    activeUsers[username]--;
-  } else {
+  const id = torem.findIndex(s => s.id === remSid);
+  torem.splice(id, 1);
+  if (torem.length === 0) {
     delete activeUsers[username];
+    return false;
   }
-  return activeUsers[username];
+  return torem;
 };
 
+const joinRoom = (usernames, roomId) => usernames.forEach(u => {
+  if (activeUsers[u]) {
+    activeUsers[u].forEach(s => s.join(roomId)); // all sockets of that room join it
+  }
+});
 const getActive = () => {
-  return Object.keys(activeUsers);
+  const online = Object.keys(activeUsers);
+  console.log('onlin', online)
+  return online;
 }
 
 module.exports = {
-  removeUser, findUserIndex, getActive, findUsers, getUsers, removeOnline, notify, addActive, removeActive, removeOnlineNew
+  getActive, notify, addActive, removeActive, updateLastSeen, joinRoom
 }
