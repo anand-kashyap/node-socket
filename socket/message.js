@@ -59,10 +59,10 @@ const onDeleteMessage = (user, io, message) => {
 
 /** On load older messages
  * @param  {object} user: User Object
- * @param  {object} io: io instance
+ * @param  {object} socket: socket instance
  * TODO: better jsdoc
  */
-const onloadMsgs = (user, io, { skip, limit }) => {
+const onloadMsgs = (user, socket, { skip, limit }) => {
   // return ({ skip, limit }) => {
   console.log('msgs to skip from last', skip);
   // console.log('userObj', user);
@@ -77,9 +77,7 @@ const onloadMsgs = (user, io, { skip, limit }) => {
 
     const las = older.messages.length - skip;
     const ret = older.messages.slice(0, las);
-    // console.log('ranged msgs: ', ret);
-    // socket.emit('loadMsgs', { olderMsgs: ret, count: count[0].num - last });
-    io.to(room).emit('loadMsgs', { roomId: room, olderMsgs: ret, count: count[0].num - last, username });
+    socket.emit('loadMsgs', { roomId: room, olderMsgs: ret, count: count[0].num - last });
   }).catch(err =>
     console.error('err ocurred', err)
   );

@@ -42,7 +42,7 @@ const socketHandle = (io) => {
     });
     sockUEvent$(socket, 'newMessage').subscribe((...args) => onNewMessage(user, io, ...args));
     sockUEvent$(socket, 'deleteMessage').subscribe((msg) => onDeleteMessage(user, io, msg));
-    sockUEvent$(socket, 'loadMsgs').subscribe(pageObj => onloadMsgs(user, io, pageObj));
+    sockUEvent$(socket, 'loadMsgs').subscribe(pageObj => onloadMsgs(user, socket, pageObj));
     sockUEvent$(socket, 'typing').subscribe(() => onTyping(socket));
     sockUEvent$(socket, 'sendLocation').subscribe((data) => onLocation(socket, data));
 
