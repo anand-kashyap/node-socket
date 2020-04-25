@@ -6,7 +6,7 @@ const updateLastSeen = (username) => {
     $currentDate: {
       lastSeen: true
     },
-  }).then(() => console.log('done up'));
+  }).lean().then(() => console.log('done up'));
   return getActive();
 }
 
@@ -21,7 +21,7 @@ const notify = (room) => { // members to notify
   const memLen = members.length;
   for (let i = 0; i < memLen; i++) {
     const username = members[i];
-    User.findOne({ username }).then(
+    User.findOne({ username }).lean().then(
       user => {
         const notifSub = user.notificationSub;
         if (notifSub !== null) {

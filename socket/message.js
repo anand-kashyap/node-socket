@@ -48,7 +48,7 @@ const onDeleteMessage = (user, io, message) => {
     }
   }
   console.log('userObj', user);
-  Room.findByIdAndUpdate({ _id: user.room }, { $pull: { messages: { _id: message._id } } }).then(delMessage => {
+  Room.findByIdAndUpdate({ _id: user.room }, { $pull: { messages: { _id: message._id } } }).lean().then(delMessage => {
     const { room } = user;
     io.to(room).emit('deleteMessage', { message, roomId: room });
   }).catch(err =>
@@ -68,7 +68,7 @@ const onloadMsgs = (user, socket, { skip, limit }) => {
   // console.log('userObj', user);
   const last = skip + limit;
   const { username, room } = user;
-  Room.findById({ _id: room }, { messages: { $slice: -last } }).then(async older => {
+  Room.findById({ _id: room }, { messages: { $slice: -last } }).lean().then(async older => {
     const count = await Room.aggregate([
       { $match: { _id: older._id } },
       { $project: { num: { $size: '$messages' } } }

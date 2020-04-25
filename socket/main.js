@@ -30,7 +30,7 @@ const socketHandle = (io) => {
       socEvt$(socket, 'disconnect').subscribe(onSocketDisconnect(username, io, socket.id));
     });
     socEvt$(socket, 'join').subscribe(({ username, room, otherUsernames }) => {
-      console.log('sId', socket.id);
+      // console.log('sId', socket.id);
       user = { username, room };
       socket.user = user; // saving in socket prop
       joinRoom([username, ...otherUsernames], room);

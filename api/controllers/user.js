@@ -7,7 +7,7 @@ const { User } = require("../models/user");
 
 const getUsers = (req, res, next) => {
   // return res.status(200).json({ users: "test" });
-  User.find({ isAdmin: false }).then((users) => {
+  User.find({ isAdmin: false }).lean().then((users) => {
     console.log(users);
     return res.status(200).json(users);
   }, err => {
@@ -19,7 +19,7 @@ const getUsers = (req, res, next) => {
 const getUserDetails = (req, res, next) => {
   if (checkValidation(req, res)) return;
   // return res.status(200).json({ users: "test" });
-  User.findOne({ email: req.query.email.trim() }).then(
+  User.findOne({ email: req.query.email.trim() }).lean().then(
     user => {
       console.log(user);
       if (user) {
@@ -43,7 +43,7 @@ const getUserDetails = (req, res, next) => {
 const getByUsername = (req, res, next) => {
   if (checkValidation(req, res)) return;
   // return res.status(200).json({ users: "test" });
-  User.findOne({ username: req.query.uname.trim() }).then(
+  User.findOne({ username: req.query.uname.trim() }).lean().then(
     user => {
       // console.log(user);
       if (user) {
@@ -69,7 +69,7 @@ const checkUserName = (req, res, next) => {
   console.log("req.query", req.query);
   const userInput = req.query.userinput.trim();
   const email = req.query.email.toLowerCase();
-  User.findOne({ username: userInput }).then(
+  User.findOne({ username: userInput }).lean().then(
     resp => {
       console.log(resp);
       if (resp && resp.email !== email) {
@@ -95,7 +95,7 @@ const searchUser = (req, res, next) => {
         { email: { $regex: userInput, $options: 'i', $ne: cUser.email } },
         { fullName: { $regex: `.*${userInput}.*`, $options: 'i', $ne: cUser.fullName } },
       ]
-    }).limit(20).then(
+    }).limit(20).lean().then(
       resp => {
         return res.status(200).json({ success: true, data: resp });
       },
@@ -129,7 +129,7 @@ const registerUser = (req, res, next) => {
   if (checkValidation(req, res)) return;
   body = req.body;
   body.email = body.email.toLowerCase();
-  User.findOne({ email: body.email }).then(oldUser => {
+  User.findOne({ email: body.email }).lean().then(oldUser => {
     if (!oldUser) {
       const hashPassword = bcrypt.hashSync(body.password, process.env.salt);
       if (!body.isAdmin) {
@@ -147,7 +147,7 @@ const registerUser = (req, res, next) => {
         active: true,
         password: hashPassword
       });
-      newUser.save().then((newUserDoc, err) => {
+      newUser.save().lean().then((newUserDoc, err) => {
         if (err) {
           console.log(err);
         }
@@ -185,7 +185,7 @@ const authUser = (req, res, next) => {
       { username: body.email },
       { email: body.email },
     ]
-  }).then(oldUser => {
+  }).lean().then(oldUser => {
     if (oldUser) {
       // console.log(oldUser);
       const isCorrect = bcrypt.compareSync(body.password, oldUser.password);
@@ -226,10 +226,10 @@ const updateProfile = (req, res, next) => {
     lastName: body.lastName
   };
   body.email = body.email.toLowerCase();
-  User.findOne({ email: body.email }).then(oldUser => {
+  User.findOne({ email: body.email }).lean().then(oldUser => {
     if (oldUser) {
       console.log(oldUser);
-      User.findOneAndUpdate({ email: body.email }, updateJson, { new: true }).then(
+      User.findOneAndUpdate({ email: body.email }, updateJson, { new: true }).lean().then(
         updatedUser => {
           return res
             .status(200)
@@ -257,7 +257,7 @@ const storeNotif = (req, res, next) => {
   if (userId === 'null' || userId === 'undefined') {
     return res.status(400).json({ success: false, message: 'UserId cannot be null/empty' });
   }
-  User.findByIdAndUpdate(userId, { notificationSub: req.body.data }, { new: true }).then((updated) => {
+  User.findByIdAndUpdate(userId, { notificationSub: req.body.data }, { new: true }).lean().then((updated) => {
     console.log(updated);
     return res.status(200).json({
       success: true,
