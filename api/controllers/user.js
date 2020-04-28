@@ -8,7 +8,7 @@ const { User } = require("../models/user");
 const getUsers = (req, res, next) => {
   // return res.status(200).json({ users: "test" });
   User.find({ isAdmin: false }).lean().then((users) => {
-    console.log(users);
+    // console.log(users);
     return res.status(200).json(users);
   }, err => {
     console.log(err);
