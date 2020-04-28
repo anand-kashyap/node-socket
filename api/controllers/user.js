@@ -95,7 +95,7 @@ const searchUser = (req, res, next) => {
         { email: { $regex: userInput, $options: 'i', $ne: cUser.email } },
         { fullName: { $regex: `.*${userInput}.*`, $options: 'i', $ne: cUser.fullName } },
       ]
-    }).limit(20).lean().then(
+    }).limit(20).then(
       resp => {
         return res.status(200).json({ success: true, data: resp });
       },
