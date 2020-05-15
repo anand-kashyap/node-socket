@@ -1,16 +1,16 @@
 const dotenv = require('dotenv').config(), //for getting env file variables
-  path = require('path'),
+  { join } = require('path'),
   cors = require('cors'),
   compression = require('compression'),
   express = require('express'),
-  http = require('http'),
-  bodyParser = require('body-parser'),
+  { createServer } = require('http'),
+  { urlencoded, json } = require('body-parser'),
   socketio = require('socket.io');
 
-const app = express();
-const server = http.createServer(app);
-const io = socketio(server);
-const whitelist = ['https://angular-socket.back4app.io'];
+const app = express(),
+  server = createServer(app),
+  io = socketio(server),
+  whitelist = ['https://angular-socket.back4app.io'];
 
 
 const corsOptions = {
@@ -25,22 +25,22 @@ const corsOptions = {
 };
 
 const port = 2000;
-const publicDirPath = path.join(__dirname, 'uploads');
+const publicDirPath = join(__dirname, 'uploads');
 process.env.ROOT = __dirname;
 //imports
 const mongoose = require('./config/dbconnection');
 
 //routes
-const files = require('./api/routes/files');
-const user = require('./api/routes/user');
-const room = require('./api/routes/room');
+const files = require('./api/routes/files'),
+  user = require('./api/routes/user'),
+  room = require('./api/routes/room');
 
 const socketHandle = require('./socket/main');
 socketHandle(io);
 
 //body-parser
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(urlencoded({ extended: true }));
+app.use(json());
 app.use(compression());
 app.use(cors(corsOptions));
 
