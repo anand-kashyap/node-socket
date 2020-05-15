@@ -1,5 +1,5 @@
 const express = require('express');
-const { check } = require('express-validator');
+const { check, query } = require('express-validator');
 
 const router = express.Router();
 
@@ -14,8 +14,8 @@ const validationArray = [
 ];
 
 const queryValidations = [
-  check('email').exists().withMessage('Email is a required value').isEmail().withMessage('Email must be valid'),
-  check('userinput').exists().withMessage('Userinput is a required value').isLength({ min: 3 }).withMessage('Userinput must be at least 3 chars long')
+  query('email').exists().withMessage('Email is a required value').isEmail().withMessage('Email must be valid'),
+  query('userinput').exists().withMessage('Userinput is a required value').isLength({ min: 3 }).withMessage('Userinput must be at least 3 chars long')
 ];
 
 router.get('/', user.getUsers);
@@ -28,7 +28,7 @@ router.post('/authenticate', [
     ]
   )
 ], user.authUser);
-router.get('/check-username', [checkToken, validate(queryValidations)], user.checkUserName);
+router.get('/check-username', [checkToken, validate([queryValidations[1]])], user.checkUserName);
 router.post('/search-user', [/* checkToken, */ validate([queryValidations[1]])], user.searchUser);
 router.get('/user-details', [checkToken], user.getUserDetails);
 router.get('/getbyUsername', [checkToken], user.getByUsername);

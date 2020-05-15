@@ -7,6 +7,7 @@ process.stdin.resume();
 // whitelisted only home and office IPs
 
 const uri = `mongodb+srv://${process.env.CLOUD_MONGO_USER}:${process.env.CLOUD_MONGO_PSW}@cluster0-yu8za.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+// console.log('uri', uri)
 
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }).catch(err => console.error('Error in connecting', err));
 

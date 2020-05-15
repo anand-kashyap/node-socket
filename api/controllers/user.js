@@ -65,13 +65,13 @@ const getByUsername = (req, res, next) => {
 
 const checkUserName = (req, res, next) => {
 
-  console.log("req.query", req.query);
+  console.log('req.query', req.query);
   const userInput = req.query.userinput.trim();
-  const email = req.query.email.toLowerCase();
+  // const email = req.query.email.toLowerCase();
   User.findOne({ username: userInput }).lean().then(
     resp => {
       console.log(resp);
-      if (resp && resp.email !== email) {
+      if (resp) {
         return res.status(200).json({ success: true, exists: true });
       }
       return res.status(200).json({ success: true, exists: false });
@@ -85,14 +85,15 @@ const checkUserName = (req, res, next) => {
 
 const searchUser = (req, res, next) => {
 
-  const userInput = req.query.userinput.trim();
-  const cUser = req.body.user;
+  const userInput = req.query.userinput.trim(),
+    { user = {} } = req.body,
+    { username = '', email = '', fullName = '' } = user;
   User.find(
     {
       $or: [
-        { username: { $regex: `.*${userInput}.*`, $options: 'i', $ne: cUser.username } },
-        { email: { $regex: userInput, $options: 'i', $ne: cUser.email } },
-        { fullName: { $regex: `.*${userInput}.*`, $options: 'i', $ne: cUser.fullName } },
+        { username: { $regex: `.*${userInput}.*`, $options: 'i', $ne: username } },
+        { email: { $regex: userInput, $options: 'i', $ne: email } },
+        { fullName: { $regex: `.*${userInput}.*`, $options: 'i', $ne: fullName } },
       ]
     }).limit(20).then(
       resp => {
