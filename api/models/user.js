@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const { Schema, model } = require('mongoose');
 
 const otpSchema = Schema({ otp: String }, { timestamps: true });
 
@@ -9,7 +8,6 @@ const userSchema = Schema({
   lastName: String,
   notificationSub: { type: Schema.Types.Mixed, default: null }, // for storing push notify subscription
   isAdmin: { type: Boolean, default: false },
-  session: String,
   lastSeen: { type: Date, default: null },
   email: { type: String, unique: true, required: true },
   phone: String,
@@ -34,7 +32,7 @@ userSchema.virtual('fullName').get(function () {
   return this.firstName + ' ' + this.lastName;
 });
 
-const User = mongoose.model('users', userSchema);
+const User = model('users', userSchema);
 
 module.exports = {
   User

@@ -1,3 +1,5 @@
+const { validationResult } = require('express-validator');
+
 const sortByDate = (property, subP) => {
   return function (a, b) {
     if (!a[property] || !b[property]) {
@@ -14,4 +16,17 @@ const sortByDate = (property, subP) => {
   }
 }
 
-module.exports = { sortByDate };
+
+const validate = validations => {
+  return async (req, res, next) => {
+    await Promise.all(validations.map(v => v.run(req)));
+
+    const errors = validationResult(req);
+    if (errors.isEmpty()) {
+      return next();
+    }
+    res.status(422).json({ errors: errors.array() });
+  };
+};
+
+module.exports = { sortByDate, validate };

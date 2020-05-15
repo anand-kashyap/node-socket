@@ -1,9 +1,8 @@
-const checkValidation = require("../../services/expressValidation");
 const { readFileSync, existsSync } = require('fs');
 const Resize = require('../utils/resizeImage');
 
 const getFile = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
 
   const filename = req.params.fileName;
   const fPath = process.env.ROOT + '/uploads/' + filename

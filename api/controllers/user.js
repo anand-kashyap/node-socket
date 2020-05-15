@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const mail = require("../../services/sendmail");
-const checkValidation = require("../../services/expressValidation");
 
 const { User } = require("../models/user");
 
@@ -17,7 +16,7 @@ const getUsers = (req, res, next) => {
 };
 
 const getUserDetails = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   // return res.status(200).json({ users: "test" });
   User.findOne({ email: req.query.email.trim() }).lean().then(
     user => {
@@ -41,7 +40,7 @@ const getUserDetails = (req, res, next) => {
 };
 
 const getByUsername = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   // return res.status(200).json({ users: "test" });
   User.findOne({ username: req.query.uname.trim() }).lean().then(
     user => {
@@ -65,7 +64,7 @@ const getByUsername = (req, res, next) => {
 };
 
 const checkUserName = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   console.log("req.query", req.query);
   const userInput = req.query.userinput.trim();
   const email = req.query.email.toLowerCase();
@@ -85,7 +84,7 @@ const checkUserName = (req, res, next) => {
 };
 
 const searchUser = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   const userInput = req.query.userinput.trim();
   const cUser = req.body.user;
   User.find(
@@ -126,7 +125,7 @@ const userToken = (oldUser, remember = false) => { // remember me expires after 
 };
 
 const registerUser = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   body = req.body;
   body.email = body.email.toLowerCase();
   User.findOne({ email: body.email }).lean().then(oldUser => {
@@ -147,7 +146,7 @@ const registerUser = (req, res, next) => {
         active: true,
         password: hashPassword
       });
-      newUser.save().lean().then((newUserDoc, err) => {
+      newUser.save().then((newUserDoc, err) => {
         if (err) {
           console.log(err);
         }
@@ -173,7 +172,7 @@ const registerUser = (req, res, next) => {
 };
 
 const authUser = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   body = req.body;
   const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
   const isMail = emailRegex.test(body.email);
@@ -218,7 +217,7 @@ const authUser = (req, res, next) => {
 };
 
 const updateProfile = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   body = req.body;
   const updateJson = {
     username: body.username,
@@ -252,7 +251,7 @@ const updateProfile = (req, res, next) => {
 };
 
 const storeNotif = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   const { userId } = req.params;
   if (userId === 'null' || userId === 'undefined') {
     return res.status(400).json({ success: false, message: 'UserId cannot be null/empty' });
