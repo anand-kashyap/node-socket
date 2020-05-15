@@ -24,7 +24,7 @@ const corsOptions = {
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
-const port = 2000;
+const port = 2500;
 const publicDirPath = join(__dirname, 'uploads');
 process.env.ROOT = __dirname;
 //imports
