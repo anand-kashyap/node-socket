@@ -10,7 +10,7 @@ const dotenv = require('dotenv').config(), //for getting env file variables
 const app = express(),
   server = createServer(app),
   io = socketio(server),
-  whitelist = ['https://angular-socket.back4app.io'];
+  whitelist = ['https://ng-socket.jsclub.dev'];
 
 
 const corsOptions = {
@@ -59,7 +59,7 @@ app.use('/files', files);
 app.use('/user', user);
 app.use('/room', room);
 
-/* app.all("/*", function (req, res, next) {
-  res.sendFile("index.html", { root: __dirname + "/public" });
-}); */
+app.all('/*', function (req, res, next) {
+  res.sendFile('index.html', { root: __dirname + '/public' });
+});
 server.listen(port, () => console.log(`listening on http://localhost:${port}`));
