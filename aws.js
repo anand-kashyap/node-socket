@@ -9,20 +9,7 @@ const dotenv = require('dotenv').config(), //for getting env file variables
 
 const app = express(),
   server = createServer(app),
-  io = socketio(server),
-  whitelist = ['https://ng-socket.jsclub.dev'];
-
-
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  },
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
+  io = socketio(server);
 
 const port = 2500;
 const publicDirPath = join(__dirname, 'uploads');
@@ -42,25 +29,25 @@ socketHandle(io);
 app.use(urlencoded({ extended: true }));
 app.use(json());
 app.use(compression());
-app.use(cors({origin: true}));
+app.use(cors({ origin: true }));
 
 app.use('/uploads', express.static(publicDirPath));
 //test db connection
-/*app.use('/*', function (req, res, next) {
+app.use('/*', function (req, res, next) {
   // console.log(mongoose.connection.readyState);
   if (mongoose.connection.readyState !== 1) {
     return res.status(500)
       .json({ success: false, message: 'Unable to connect to database' });
   }
   next();
-});*/
+});
 
 app.use('/files', files);
 app.use('/user', user);
 app.use('/room', room);
 
-app.use(express.static('./public'));
+/* app.use(express.static('./public'));
 app.get('/*', function (req, res, next) {
   res.sendFile('index.html', { root: __dirname + '/public' });
-});
+}); */
 server.listen(port, () => console.log(`listening on http://localhost:${port}`));
