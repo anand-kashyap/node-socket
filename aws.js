@@ -31,9 +31,9 @@ app.use(json());
 app.use(compression());
 app.use(cors({ origin: true }));
 
-app.use('/uploads', express.static(publicDirPath));
+app.use('/api/uploads', express.static(publicDirPath));
 //test db connection
-app.use('/*', function (req, res, next) {
+app.use('/api/*', function (req, res, next) {
   // console.log(mongoose.connection.readyState);
   if (mongoose.connection.readyState !== 1) {
     return res.status(500)
@@ -42,12 +42,12 @@ app.use('/*', function (req, res, next) {
   next();
 });
 
-app.use('/files', files);
-app.use('/user', user);
-app.use('/room', room);
+app.use('/api/files', files);
+app.use('/api/user', user);
+app.use('/api/room', room);
 
-/* app.use(express.static('./public'));
+app.use(express.static('./public'));
 app.get('/*', function (req, res, next) {
   res.sendFile('index.html', { root: __dirname + '/public' });
-}); */
+});
 server.listen(port, () => console.log(`listening on http://localhost:${port}`));

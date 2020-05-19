@@ -23,6 +23,7 @@ const onSocketDisconnect = (username, io, sid) => {
 }
 
 const socketHandle = (io) => {
+  io = io.of('/api');
   socEvt$(io, 'connection').subscribe(socket => {
     let user;
     socEvt$(socket, 'active').subscribe((username) => {
