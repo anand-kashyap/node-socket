@@ -26,7 +26,8 @@ const onNewMessage = (user, io, msg, prod) => {
       room.messages = [message];
       notify(room); // send push notify to all members except self
     }
-    io.to(user.room).emit('newMessage', { message, roomId: user.room }); // has msg date also
+    const { directMessage, members } = room;
+    io.to(user.room).emit('newMessage', { message, roomId: user.room, directMessage, members }); // has msg date also
   }).catch(err =>
     console.error('err ocurred', err)
   );
