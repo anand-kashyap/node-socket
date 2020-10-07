@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.dev.js",
-    "deploy": "heroku builds:create -a node-socket-pwa",
+    "deploy": "heroku builds:create -a node-socket-ak",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
