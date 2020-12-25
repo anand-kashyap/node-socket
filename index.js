@@ -9,19 +9,10 @@ const dotenv = require('dotenv').config(), //for getting env file variables
   socketio = require('socket.io');
 
 const frontUrl = process.env.ALLOWED_CORS_URL_PROD;
-const app = express(),
-  server = createServer(app),
-  io = socketio(server, {
-    origins: [frontUrl],
-    handlePreflightRequest: (req, res) => {
-      res.writeHead(200, {
-        "Access-Control-Allow-Origin": frontUrl,
-        "Access-Control-Allow-Methods": "GET,POST",
-        "Access-Control-Allow-Credentials": true
-      });
-      res.end();
-    }
-  });
+const app = express();
+app.use(cors({ origin: frontUrl, credentials: true }));
+const server = createServer(app),
+  io = socketio(server);
 
 const port = process.env.PORT || 3000,
   publicDirPath = join(__dirname, 'uploads');
@@ -43,7 +34,6 @@ socketHandle(io);
 app.use(urlencoded({ extended: true }));
 app.use(json());
 app.use(compression());
-app.use(cors({ origin: frontUrl, credentials: true }));
 
 app.use('/uploads', express.static(publicDirPath));
 //test db connection
