@@ -8,11 +8,12 @@ const dotenv = require('dotenv').config(), //for getting env file variables
   { urlencoded, json } = require('body-parser'),
   socketio = require('socket.io');
 
-const frontUrl = process.env.ALLOWED_CORS_URL_PROD;
 const app = express();
-app.use(cors({ origin: frontUrl, credentials: true }));
 const server = createServer(app),
   io = socketio(server);
+
+// * prod enabled
+process.env.PROD = true;
 
 const port = process.env.PORT || 3000,
   publicDirPath = join(__dirname, 'uploads');
@@ -29,6 +30,7 @@ const socketHandle = require('./socket/main');
 socketHandle(io);
 
 // app.use(HTTPS({ trustProtoHeader: true }));
+app.use(cors());
 
 //body-parser
 app.use(urlencoded({ extended: true }));
