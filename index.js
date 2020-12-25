@@ -32,7 +32,7 @@ app.use(HTTPS({ trustProtoHeader: true }));
 app.use(urlencoded({ extended: true }));
 app.use(json());
 app.use(compression());
-app.use(cors());
+app.use(cors({ origin: process.env.ALLOWED_CORS_URL_PROD, credentials: true }));
 
 app.use('/uploads', express.static(publicDirPath));
 //test db connection
