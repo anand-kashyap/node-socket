@@ -1,11 +1,9 @@
 const { Room } = require('../models/room');
-const validator = require('../../services/expressValidation');
 const { sortByDate } = require('../utils/common');
 
 
 const findCreateRoom = (req, res, next) => {
   console.log(req.body);
-  if (validator(req, res)) return;
   const body = req.body;
   // return res.status(200).json({ test: 'success', d: -req.body.initMsgs });
   /* const room = {
@@ -75,7 +73,6 @@ const getRooms = (req, res) => {
 };
 
 const deleteRoom = (req, res) => {
-  if (validator(req, res)) return;
 
   Room.findByIdAndDelete(req.params.roomId).then(deletedRoom => {
     return res.status(200).json({ success: true, deletedRoom });
@@ -89,7 +86,6 @@ const deleteRoom = (req, res) => {
 };
 
 const getRoomById = (req, res) => {
-  if (validator(req, res)) return;
 
   const { msgLimit = 30, currentUser } = req.query;
   console.log('qsss', req.query);
@@ -126,9 +122,6 @@ const deleteSingleMessage = (req, res) => {
 };
 
 const getRecentChats = (req, res) => { // get all recent rooms of user
-  if (validator(req, res)) {
-    return;
-  }
   // return res.status(401).json({ success: false, data: 'test' });
   const params = req.params;
   const msgLimit = req.query.msgLimit || 30;
@@ -148,7 +141,6 @@ const getRecentChats = (req, res) => { // get all recent rooms of user
 };
 
 const clearMsgs = (req, res) => {
-  if (validator(req, res)) return;
 
   Room.findByIdAndUpdate(req.params.roomId, { messages: [] }, { new: true }).then(updatedRoom => {
     return res.status(200).json({ success: true, updatedRoom });

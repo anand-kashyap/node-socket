@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const { Schema, model, Types: { ObjectId } } = require('mongoose');
 
 const messageSchema = Schema({
   msg: String,
@@ -14,18 +13,9 @@ const roomSchema = Schema({
   messages: [messageSchema]
 }, { timestamps: true }); // creates updated on and created on fields
 
-roomSchema.virtual('lastMessage').get(function () {
-  return this.messages[this.messages.length - 1];
-});
+const Room = model('rooms', roomSchema);
 
-roomSchema.set('toJSON', {
-  virtuals: true
-});
-const Room = mongoose.model('rooms', roomSchema);
-
-const makeId = (id) => {
-  return mongoose.Types.ObjectId(id);
-}
+const makeId = id => ObjectId(id);
 
 module.exports = {
   Room, makeId

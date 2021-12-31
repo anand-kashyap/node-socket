@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const checkValidation = require("../../services/expressValidation");
 const userModel = require("../models/user");
 const mail = require("../../services/sendmail");
 
@@ -16,7 +15,7 @@ const generateOTP = () => {
 };
 
 const forgotPassword = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   user = userModel.User;
   user.findOne({ email: req.body.email }).then(
     userDoc => {
@@ -100,7 +99,7 @@ const emptyOtps = email => {
 };
 
 const sendOtp = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   // console.log('sendOtp');
   user = userModel.User;
   user.findOne({ email: req.body.email }).then(
@@ -151,7 +150,7 @@ const sendOtp = (req, res, next) => {
 };
 
 const confirmOtp = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   user = userModel.User;
   user.findOne({ email: req.body.email }).then(
     userDoc => {
@@ -191,7 +190,7 @@ const confirmOtp = (req, res, next) => {
 };
 
 const resetPassword = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   return jwt.verify(req.body.token, 'secretkey', (err, decoded) => {
     // Error handling
     if (err)
@@ -246,7 +245,7 @@ const resetPassword = (req, res, next) => {
 };
 
 const updatePassword = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   body = req.body;
   User = userModel.User;
   User.findOne({ email: body.email }).then(oldUser => {

@@ -4,6 +4,9 @@
 
 ### TODO
 
+- use rxjs on node side?
+- integrate cloudinary to persist images instead of cache
+- use indexed db
 - improve push notification; auto apply to new notification on expire
 - show number of new messages when in mid chat
 - add animation in sending msg

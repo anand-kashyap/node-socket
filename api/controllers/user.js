@@ -1,14 +1,13 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const mail = require("../../services/sendmail");
-const checkValidation = require("../../services/expressValidation");
 
 const { User } = require("../models/user");
 
 const getUsers = (req, res, next) => {
   // return res.status(200).json({ users: "test" });
-  User.find({ isAdmin: false }).then((users) => {
-    console.log(users);
+  User.find({ isAdmin: false }).lean().then((users) => {
+    // console.log(users);
     return res.status(200).json(users);
   }, err => {
     console.log(err);
@@ -17,9 +16,9 @@ const getUsers = (req, res, next) => {
 };
 
 const getUserDetails = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   // return res.status(200).json({ users: "test" });
-  User.findOne({ email: req.query.email.trim() }).then(
+  User.findOne({ email: req.query.email.trim() }).lean().then(
     user => {
       console.log(user);
       if (user) {
@@ -41,9 +40,9 @@ const getUserDetails = (req, res, next) => {
 };
 
 const getByUsername = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   // return res.status(200).json({ users: "test" });
-  User.findOne({ username: req.query.uname.trim() }).then(
+  User.findOne({ username: req.query.uname.trim() }).lean().then(
     user => {
       // console.log(user);
       if (user) {
@@ -65,14 +64,14 @@ const getByUsername = (req, res, next) => {
 };
 
 const checkUserName = (req, res, next) => {
-  if (checkValidation(req, res)) return;
-  console.log("req.query", req.query);
+
+  console.log('req.query', req.query);
   const userInput = req.query.userinput.trim();
-  const email = req.query.email.toLowerCase();
-  User.findOne({ username: userInput }).then(
+  // const email = req.query.email.toLowerCase();
+  User.findOne({ username: userInput }).lean().then(
     resp => {
       console.log(resp);
-      if (resp && resp.email !== email) {
+      if (resp) {
         return res.status(200).json({ success: true, exists: true });
       }
       return res.status(200).json({ success: true, exists: false });
@@ -85,15 +84,16 @@ const checkUserName = (req, res, next) => {
 };
 
 const searchUser = (req, res, next) => {
-  if (checkValidation(req, res)) return;
-  const userInput = req.query.userinput.trim();
-  const cUser = req.body.user;
+
+  const userInput = req.query.userinput.trim(),
+    { user = {} } = req.body,
+    { username = '', email = '', fullName = '' } = user;
   User.find(
     {
       $or: [
-        { username: { $regex: `.*${userInput}.*`, $options: 'i', $ne: cUser.username } },
-        { email: { $regex: userInput, $options: 'i', $ne: cUser.email } },
-        { fullName: { $regex: `.*${userInput}.*`, $options: 'i', $ne: cUser.fullName } },
+        { username: { $regex: `.*${userInput}.*`, $options: 'i', $ne: username } },
+        { email: { $regex: userInput, $options: 'i', $ne: email } },
+        { fullName: { $regex: `.*${userInput}.*`, $options: 'i', $ne: fullName } },
       ]
     }).limit(20).then(
       resp => {
@@ -126,10 +126,10 @@ const userToken = (oldUser, remember = false) => { // remember me expires after 
 };
 
 const registerUser = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   body = req.body;
   body.email = body.email.toLowerCase();
-  User.findOne({ email: body.email }).then(oldUser => {
+  User.findOne({ email: body.email }).lean().then(oldUser => {
     if (!oldUser) {
       const hashPassword = bcrypt.hashSync(body.password, process.env.salt);
       if (!body.isAdmin) {
@@ -173,7 +173,7 @@ const registerUser = (req, res, next) => {
 };
 
 const authUser = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   body = req.body;
   const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
   const isMail = emailRegex.test(body.email);
@@ -185,7 +185,7 @@ const authUser = (req, res, next) => {
       { username: body.email },
       { email: body.email },
     ]
-  }).then(oldUser => {
+  }).lean().then(oldUser => {
     if (oldUser) {
       // console.log(oldUser);
       const isCorrect = bcrypt.compareSync(body.password, oldUser.password);
@@ -218,7 +218,7 @@ const authUser = (req, res, next) => {
 };
 
 const updateProfile = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   body = req.body;
   const updateJson = {
     username: body.username,
@@ -226,10 +226,10 @@ const updateProfile = (req, res, next) => {
     lastName: body.lastName
   };
   body.email = body.email.toLowerCase();
-  User.findOne({ email: body.email }).then(oldUser => {
+  User.findOne({ email: body.email }).lean().then(oldUser => {
     if (oldUser) {
       console.log(oldUser);
-      User.findOneAndUpdate({ email: body.email }, updateJson, { new: true }).then(
+      User.findOneAndUpdate({ email: body.email }, updateJson, { new: true }).lean().then(
         updatedUser => {
           return res
             .status(200)
@@ -252,12 +252,12 @@ const updateProfile = (req, res, next) => {
 };
 
 const storeNotif = (req, res, next) => {
-  if (checkValidation(req, res)) return;
+
   const { userId } = req.params;
   if (userId === 'null' || userId === 'undefined') {
     return res.status(400).json({ success: false, message: 'UserId cannot be null/empty' });
   }
-  User.findByIdAndUpdate(userId, { notificationSub: req.body.data }, { new: true }).then((updated) => {
+  User.findByIdAndUpdate(userId, { notificationSub: req.body.data }, { new: true }).lean().then((updated) => {
     console.log(updated);
     return res.status(200).json({
       success: true,

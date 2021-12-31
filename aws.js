@@ -11,28 +11,25 @@ const app = express(),
   server = createServer(app),
   io = socketio(server);
 
-const port = process.env.PORT || 3000,
-  publicDirPath = join(__dirname, 'uploads');
-
+const port = 2500;
+const publicDirPath = join(__dirname, 'uploads');
 process.env.ROOT = __dirname;
 //imports
 const mongoose = require('./config/dbconnection');
 
 //routes
-const test = require('./api/routes/test'),
-  files = require('./api/routes/files'),
+const files = require('./api/routes/files'),
   user = require('./api/routes/user'),
   room = require('./api/routes/room');
 
 const socketHandle = require('./socket/main');
 socketHandle(io);
 
-app.use(cors());
-
 //body-parser
 app.use(urlencoded({ extended: true }));
 app.use(json());
 app.use(compression());
+app.use(cors({ origin: true }));
 
 app.use('/api/uploads', express.static(publicDirPath));
 //test db connection
@@ -45,9 +42,12 @@ app.use('/api/*', function (req, res, next) {
   next();
 });
 
-app.use('/api/test', test);
 app.use('/api/files', files);
 app.use('/api/user', user);
 app.use('/api/room', room);
 
+app.use(express.static('./public'));
+app.get('/*', function (req, res, next) {
+  res.sendFile('index.html', { root: __dirname + '/public' });
+});
 server.listen(port, () => console.log(`listening on http://localhost:${port}`));

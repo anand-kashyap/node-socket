@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.dev.js",
+    "deploy": "heroku builds:create -a node-socket-ak",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
@@ -27,7 +28,8 @@
     "mongoose": "^5.9.1",
     "multer": "^1.4.2",
     "nodemailer": "^6.4.2",
-    "sharp": "^0.24.0",
+    "rxjs": "^6.5.4",
+    "sharp": "^0.29.3",
     "socket.io": "^2.3.0",
     "uuid": "^3.4.0",
     "web-push": "^3.4.3"
